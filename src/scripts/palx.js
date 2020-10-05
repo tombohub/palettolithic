@@ -1,0 +1,169 @@
+"use strict";
+
+const chroma = require("chroma-js");
+
+const names = [
+  "red", // 0
+  "orange", // 30
+  "yellow", // 60
+  "lime", // 90
+  "green", // 120
+  "teal", // 150
+  "cyan", // 180
+  "blue", // 210
+  "indigo", // 240
+  "violet", // 270
+  "fuschia", // 300
+  "pink", // 330
+  "red", // 360
+];
+
+/**
+ * Get the hue color name from hue number value
+ * @param {Number} hue hue value of a color {0..360}
+ * @returns {String} name of the color
+ */
+const hueName = hue => {
+  const i = Math.round((hue - 2) / 30);
+  const name = names[i];
+  return name;
+};
+
+/**
+ * Creates an Array of luminance values, for each color shade.
+ * Currently 10 shades
+ */
+const lums = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+  .map(n => n + 0.5)
+  .map(n => n / 10);
+
+/**
+ * Creates an array of integers from 0 to {length} we want
+ * @param {Number} length length of array you want to create
+ */
+const createArray = length => {
+  const arr = [];
+  for (let i = 0; i < length; i++) {
+    arr.push(i);
+  }
+  return arr;
+};
+
+/**
+ * Creates the Array of hues (colors) starting from base hue and going
+ * through the whole hue circle
+ * @param {Number} length number of hues we want to get
+ * @returns {function} function ti create array of hues
+ * @returns {array} list of hues to match the base hue
+ */
+const createHues = length => {
+  const hueStep = 360 / length;
+
+  return base => {
+    const hues = createArray(length).map(n =>
+      Math.floor((base + n * hueStep) % 360)
+    );
+
+    return hues;
+  };
+};
+
+/**
+ * Modifies the saturation of a given hex color
+ * @param {float} newSaturation new saturation value {0..1}
+ * @returns {object} color with new saturation level
+ */
+const desat = newSaturation => hex => {
+  const [h, s, l] = chroma(hex).hsl();
+  return chroma.hsl(h, newSaturation, l).hex();
+};
+
+/**
+ * Creates a darkest gray color in pallete from the base color.
+ * First desaturate to {1/8} of base color saturation then returns it with {0.05} luminance.
+ * Those values we can change later on.
+ * @param {string} hex hex value of color
+ * @returns {string} hex value of the darkest gray in palette
+ */
+const createBlack = hex => {
+  const black = desat(1 / 8)(hex);
+  return chroma(black).luminance(0.05).hex();
+};
+
+/**
+ * Creates shades of single color. Using luminance values.
+ * @param {string} hex hex value of color
+ * @returns {Array} shade hex values for given color
+ */
+const createShades = hex => {
+  return lums.map(lum => {
+    return chroma(hex).luminance(lum).hex();
+  });
+};
+
+/**
+ * Gets the color name from hex value
+ * @param {string} hex color hex value
+ * @returns {string} color name {yellow, blue, etc..}
+ */
+const keyword = hex => {
+  const [hue, saturation] = chroma(hex).hsl();
+  // if (saturation < 0.5) {
+  //   return "gray";
+  // }
+  const colorName = hueName(hue);
+  return colorName;
+};
+
+// Reducer
+const toObj = (a, color) => {
+  const key = a[color.key] ? color.key + "2" : color.key;
+  a[key] = color.value;
+  return a;
+};
+
+/**
+ * Creates the whole palette according to one base color
+ * @param {string} hex base color hex value
+ * @returns {object} 12 hues with 10 shades each in object
+ */
+function createPalette(hex) {
+  const color = chroma(hex);
+  const colors = [];
+  const [hue, sat, lte] = color.hsl();
+
+  const hues = createHues(12)(hue);
+
+  // add darkest color to colors[]
+  colors.push({
+    key: "black",
+    value: createBlack("" + color.hex()),
+  });
+
+  // add shades of gray to colors[]
+  colors.push({
+    key: "gray",
+    value: createShades(desat(1 / 8)("" + color.hex())),
+  });
+
+  //add shades of hues to colors[]
+  hues.forEach(hue => {
+    const color = chroma.hsl(hue, sat, lte);
+    const key = keyword(color);
+    colors.push({
+      key,
+      value: createShades("" + color.hex()),
+    });
+  });
+
+  const obj = Object.assign(
+    {
+      base: hex,
+    },
+    colors.reduce(toObj, {})
+  );
+
+  return obj;
+}
+
+module.exports = createPalette;
