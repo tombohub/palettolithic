@@ -134,16 +134,16 @@ function createPalette(hex) {
 
   const hues = createHues(12)(hue);
 
-  // add darkest color to colors[]
-  colors.push({
-    key: "black",
-    value: createBlack("" + color.hex()),
-  });
+  // // add darkest color to colors[]
+  // colors.push({
+  //   key: "black",
+  //   value: createBlack("" + color.hex()),
+  // });
 
   // add shades of gray to colors[]
   colors.push({
     key: "gray",
-    value: createShades(desat(1 / 8)("" + color.hex())),
+    value: createShades(desat(1 / 1000)("" + color.hex())),
   });
 
   //add shades of hues to colors[]
@@ -156,14 +156,13 @@ function createPalette(hex) {
     });
   });
 
-  const obj = Object.assign(
-    {
-      base: hex,
-    },
-    colors.reduce(toObj, {})
-  );
+  const obj = colors.reduce(toObj, {});
 
   return obj;
 }
 
-module.exports = createPalette;
+module.exports = { createPalette, names };
+
+const palette = createPalette("#07c");
+
+console.log(palette);
