@@ -143,7 +143,7 @@ function createPalette(hex) {
   // add shades of gray to colors[]
   colors.push({
     key: "gray",
-    value: createShades(desat(1 / 1000)("" + color.hex())),
+    value: createShades(desat(1 / 25)("" + color.hex())),
   });
 
   //add shades of hues to colors[]
