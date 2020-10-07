@@ -13,7 +13,7 @@ const names = [
   "blue", // 210
   "indigo", // 240
   "violet", // 270
-  "fuschia", // 300
+  "fuchsia", // 300
   "pink", // 330
   "red", // 360
 ];
@@ -24,10 +24,12 @@ const names = [
  * @returns {String} name of the color
  */
 const hueName = hue => {
-  const i = Math.round((hue - 2) / 30);
+  const i = Math.round(hue / 30);
   const name = names[i];
   return name;
 };
+
+console.log(hueName(105));
 
 /**
  * Creates an Array of luminance values, for each color shade.
@@ -162,7 +164,3 @@ function createPalette(hex) {
 }
 
 module.exports = { createPalette, names };
-
-const palette = createPalette("#07c");
-
-console.log(palette);
