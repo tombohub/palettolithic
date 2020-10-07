@@ -23,7 +23,7 @@ function Form(props) {
   return (
     <form
       action=""
-      className="mt-8 h-14 flex justify-center"
+      className="mt-16 h-14 flex justify-center"
       onSubmit={handleSubmit}
     >
       {/* box to show current color. gets value from baseColor current state */}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "./components/Form";
 import Header from "./components/Header";
 import Palette from "./components/Palette";
@@ -11,15 +11,26 @@ function App() {
    */
   const [palette, setPalette] = useState({});
 
+  /**
+   * WHAT: renders the initial demo pallete on first page visit
+   * WHY: so user can immediately see an example
+   */
+  useEffect(() => {
+    const initialPallete = createPalette("#07c");
+    setPalette(initialPallete);
+  }, []);
+
   return (
-    <div className="text-center text-gray-800 container mx-auto">
-      <Header />
+    <div className="text-center text-gray-900 bg-gray-100">
+      <div className="container mx-auto">
+        <Header />
 
-      {/* When form is submitted we use the createPallete() function 
+        {/* When form is submitted we use the createPallete() function 
       to create palette and set it as a state */}
-      <Form onSubmit={value => setPalette(createPalette(value))} />
+        <Form onSubmit={value => setPalette(createPalette(value))} />
 
-      <Palette palette={palette} />
+        <Palette palette={palette} />
+      </div>
     </div>
   );
 }
