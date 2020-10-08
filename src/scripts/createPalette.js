@@ -19,7 +19,8 @@ const names = [
 ];
 
 /**
- * Get the hue color name from hue number value
+ * What: Get the hue color name from hue number value.
+ * Why: to connect the color code with the appropriate color name
  * @param {Number} hue hue value of a color {0..360}
  * @returns {String} name of the color
  */
@@ -29,15 +30,13 @@ const hueName = hue => {
   return name;
 };
 
-console.log(hueName(105));
-
 /**
  * Creates an Array of luminance values, for each color shade.
  * Currently 10 shades
  */
-const lums = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+const lums = [8, 7, 6, 5, 4, 3, 2, 1, 0]
   .map(n => n + 0.5)
-  .map(n => n / 10);
+  .map(n => n / 9);
 
 /**
  * Creates an array of integers from 0 to {length} we want
@@ -61,9 +60,9 @@ const createArray = length => {
 const createHues = length => {
   const hueStep = 360 / length;
 
-  return base => {
+  return baseHue => {
     const hues = createArray(length).map(n =>
-      Math.floor((base + n * hueStep) % 360)
+      Math.floor((baseHue + n * hueStep) % 360)
     );
 
     return hues;
@@ -124,6 +123,8 @@ const toObj = (a, color) => {
   return a;
 };
 
+/* ------------------------------ Main Function ----------------------------- */
+
 /**
  * Creates the whole palette according to one base color
  * @param {string} hex base color hex value
@@ -164,3 +165,8 @@ function createPalette(hex) {
 }
 
 module.exports = { createPalette, names };
+
+const color = chroma("#07c");
+console.log(color);
+console.log(color.hex());
+console.log(color.hsl());
