@@ -1,5 +1,6 @@
 import React from "react";
 import Color from "./Color";
+import DownloadBox from "./DownloadBox";
 
 /**
  * Hold the complete Palette. Which consists of Colors, inside Colors are Shades
@@ -13,6 +14,7 @@ function Palette(props) {
   // list of Shade component
   return (
     <div className="my-10 flex flex-col items-center">
+      <DownloadBox palette={props.palette} />
       {colors.map((color, i) => (
         <Color key={i} shades={props.palette[color]} color={color} />
       ))}

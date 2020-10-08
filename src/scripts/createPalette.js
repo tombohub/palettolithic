@@ -31,12 +31,10 @@ const hueName = hue => {
 };
 
 /**
- * Creates an Array of luminance values, for each color shade.
- * Currently 10 shades
+ * WHAT: Array of lightness values, for each color shade.
+ * WHY: Lighntess value is use to create shades. From lighter to darker
  */
-const lums = [8, 7, 6, 5, 4, 3, 2, 1, 0]
-  .map(n => n + 0.5)
-  .map(n => n / 9);
+const lights = [0.95, 0.86, 0.78, 0.69, 0.6, 0.51, 0.43, 0.34, 0.25];
 
 /**
  * Creates an array of integers from 0 to {length} we want
@@ -97,8 +95,9 @@ const createBlack = hex => {
  * @returns {Array} shade hex values for given color
  */
 const createShades = hex => {
-  return lums.map(lum => {
-    return chroma(hex).luminance(lum).hex();
+  const [hue, saturation, lightness] = chroma(hex).hsl();
+  return lights.map(light => {
+    return chroma.hsl(hue, saturation, light).hex();
   });
 };
 
@@ -164,9 +163,31 @@ function createPalette(hex) {
   return obj;
 }
 
-module.exports = { createPalette, names };
+/**
+ *WHAT: generates Tailwindcss code to put inside tailwind config file
+ *WHY: original palette code is different than tailwind config.
+ * @param {object} palette color pallete like: {color:[hex,...]}
+ */
+function generateTailwindcss(palette) {
+  const colors = Object.keys(palette);
 
-const color = chroma("#07c");
-console.log(color);
-console.log(color.hex());
-console.log(color.hsl());
+  // to assign 100, 200 ... to each shade
+  const assignShades = color => {
+    let i = 100;
+    let shades = {};
+    for (const key of palette[color]) {
+      shades[i] = key;
+      i += 100;
+    }
+    return shades;
+  };
+
+  let tailwind = {};
+  for (const color of colors) {
+    tailwind[color] = assignShades(color);
+  }
+
+  return tailwind;
+}
+
+module.exports = { createPalette, generateTailwindcss };
