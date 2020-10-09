@@ -175,8 +175,8 @@ function generateTailwindcss(palette) {
   const assignShades = color => {
     let i = 100;
     let shades = {};
-    for (const key of palette[color]) {
-      shades[i] = key;
+    for (const shade of palette[color]) {
+      shades[parseInt(i)] = shade;
       i += 100;
     }
     return shades;

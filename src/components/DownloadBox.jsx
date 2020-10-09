@@ -1,10 +1,15 @@
 import React from "react";
-import { generateTailwindcss } from "../scripts/createPalette";
+
+import _ from "lodash";
+import { Link } from "react-router-dom";
 
 function DownloadBox(props) {
-  console.log("palette", props.palette);
-  if (!props.palette) return "Loading";
-  return props.palette.red;
+  if (_.isEmpty(props.palette)) return "lokoko";
+  return (
+    <div>
+      <Link to="/tailwindcss">Tailwindcss</Link>
+    </div>
+  );
 }
 
 export default DownloadBox;

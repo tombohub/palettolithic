@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Form from "./components/Form";
-import Header from "./components/Header";
-import Palette from "./components/Palette";
 import { createPalette } from "./scripts/createPalette";
+import Tailwindcss from "./components/Tailwindcss";
+import { Switch, Route } from "react-router-dom";
+import Main from "./components/Main";
 
 function App() {
   /**
@@ -20,18 +20,24 @@ function App() {
     setPalette(initialPallete);
   }, []);
 
+  /**
+   * Routes are here because I wanted the routes for download be clear pages
+   * with only code displayed
+   */
   return (
-    <div className="text-center text-gray-900 bg-gray-100">
-      <div className="container mx-auto">
-        <Header />
-
-        {/* When form is submitted we use the createPallete() function 
-      to create palette and set it as a state */}
-        <Form onSubmit={value => setPalette(createPalette(value))} />
-
-        <Palette palette={palette} />
-      </div>
-    </div>
+    <>
+      <Switch>
+        <Route exact path="/">
+          <Main
+            palette={palette}
+            onSubmit={v => setPalette(createPalette(v))}
+          />
+        </Route>
+        <Route path="/tailwindcss">
+          <Tailwindcss palette={palette} />
+        </Route>
+      </Switch>
+    </>
   );
 }
 
