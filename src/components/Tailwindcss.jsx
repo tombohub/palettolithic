@@ -1,14 +1,16 @@
 import React from "react";
 import { generateTailwindcss } from "../scripts/createPalette";
+import stringifyObject from "stringify-object";
 
 function Tailwindcss(props) {
   const tailwindcss = generateTailwindcss(props.palette);
-  const ko = util.inspect(tailwindcss);
 
   return (
     <pre>
-      {/* {JSON.stringify(tailwindcss, null, 2).slice(1, -1).trim()} */}
-      {ko}
+      {JSON.stringify(tailwindcss, null, 2)
+        .slice(1, -1)
+        .trim()
+        .replace(/"([^"]+)":/g, "$1:")}
     </pre>
   );
 }

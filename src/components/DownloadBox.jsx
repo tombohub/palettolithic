@@ -7,7 +7,11 @@ function DownloadBox(props) {
   if (_.isEmpty(props.palette)) return "lokoko";
   return (
     <div>
-      <Link to="/tailwindcss">Tailwindcss</Link>
+      <Link to="/tailwindcss">
+        <button className="hover:font-semibold text-lg">
+          Download for Tailwindcss
+        </button>
+      </Link>
     </div>
   );
 }
