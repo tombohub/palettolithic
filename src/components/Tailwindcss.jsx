@@ -1,6 +1,5 @@
 import React from "react";
 import { generateTailwindcss } from "../scripts/createPalette";
-import stringifyObject from "stringify-object";
 
 function Tailwindcss(props) {
   const tailwindcss = generateTailwindcss(props.palette);

@@ -28,11 +28,14 @@ function Main(props) {
   useEffect(() => {
     const initialPallete = createPalette(color);
     setPalette(initialPallete);
-  }, []);
+  }, [color]);
 
   return (
     <div className="text-gray-900 bg-white p-4 h-screen w-screen flex">
-      <Menu color={color} onChange={v => setColor(v)} />
+      <Menu
+        color={color}
+        onChange={v => setPalette(createPalette(v))}
+      />
       <Code />
       <Palette palette={palette} />
 
