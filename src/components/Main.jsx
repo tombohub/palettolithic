@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "./Header";
 import Form from "./Form";
 import Palette from "./Palette";
 import Menu from "./Menu";
@@ -10,7 +9,7 @@ import Menu from "./Menu";
  */
 function Main(props) {
   return (
-    <div className="text-gray-900 bg-gray-100 p-4">
+    <div className="text-gray-900 bg-gray-100 p-4 flex">
       <div className="container mx-auto">
         <Menu />
 
