@@ -13,11 +13,22 @@ function Palette(props) {
   // pass the shades as props to the Color component, which it will use it to render
   // list of Shade component
   return (
-    <div className="my-10 flex flex-col items-center">
-      <DownloadBox palette={props.palette} />
-      {colors.map((color, i) => (
-        <Color key={i} shades={props.palette[color]} color={color} />
-      ))}
+    <div
+      id="palette-outer"
+      className="flex-auto bg-white rounded ml-2 p-1 pl-2 shadow"
+    >
+      <div
+        id="palette-inner"
+        className="flex flex-col justify-between h-full rounded overflow-hidden"
+      >
+        {colors.map((color, i) => (
+          <Color
+            key={i}
+            shades={props.palette[color]}
+            color={color}
+          />
+        ))}
+      </div>
     </div>
   );
 }

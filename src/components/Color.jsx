@@ -9,11 +9,12 @@ import Shade from "./Shade";
 function Color(props) {
   if (!Array.isArray(props.shades)) return false;
   return (
-    <div className="mt-10">
-      <h3 className="text-lg font-bold">
-        {props.color.toUpperCase()}
-      </h3>
-      <div className="grid grid-cols-9 mt-4">
+    <div className="flex-1 rounded" data-name="color-outer">
+      <div
+        className="grid grid-cols-10 h-full rounded"
+        data-name="color-inner"
+      >
+        <span className="my-auto">{props.color.toUpperCase()}</span>
         {props.shades.map((shade, i) => (
           <Shade key={i} shade={shade} />
         ))}
