@@ -36,7 +36,7 @@ function Main(props) {
         color={color}
         onChange={v => setPalette(createPalette(v))}
       />
-      <Code />
+      <Code palette={palette} />
       <Palette palette={palette} />
 
       {/* passing onSubmit from App to Form */}
