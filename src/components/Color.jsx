@@ -13,7 +13,7 @@ function Color(props) {
       <h3 className="text-lg font-bold">
         {props.color.toUpperCase()}
       </h3>
-      <div className="grid grid-cols-10 mt-4">
+      <div className="grid grid-cols-9 mt-4">
         {props.shades.map((shade, i) => (
           <Shade key={i} shade={shade} />
         ))}

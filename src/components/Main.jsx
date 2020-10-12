@@ -9,7 +9,7 @@ import Palette from "./Palette";
  */
 function Main(props) {
   return (
-    <div className="text-center text-gray-900 bg-gray-100">
+    <div className="text-gray-900 bg-gray-100 p-4">
       <div className="container mx-auto">
         <Header />
 

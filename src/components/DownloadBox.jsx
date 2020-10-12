@@ -8,7 +8,7 @@ function DownloadBox(props) {
   return (
     <div>
       <Link to="/tailwindcss">
-        <button className="hover:font-semibold text-lg">
+        <button className="hover:font-semibold text-lg text-gray-800">
           Download for Tailwindcss
         </button>
       </Link>

@@ -13,7 +13,7 @@ const names = [
   "blue", // 210
   "indigo", // 240
   "violet", // 270
-  "fuchsia", // 300
+  "purple", // 300
   "pink", // 330
   "red", // 360
 ];
@@ -35,6 +35,24 @@ const hueName = hue => {
  * WHY: Lighntess value is use to create shades. From lighter to darker
  */
 const lights = [0.95, 0.86, 0.78, 0.69, 0.6, 0.51, 0.43, 0.34, 0.25];
+
+// const lums = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+//   .map(n => n + 0.5)
+//   .map(n => n / 10);
+
+// console.log(lums);
+const lums = [
+  0.95,
+  0.85,
+  0.75,
+  0.65,
+  0.55,
+  0.45,
+  0.35,
+  0.25,
+  0.15,
+  0.05,
+];
 
 /**
  * Creates an array of integers from 0 to {length} we want
@@ -100,6 +118,18 @@ const createShades = hex => {
     return chroma.hsl(hue, saturation, light).hex();
   });
 };
+
+/**
+ * WHAT: Creates shades of a single color. Using luminosity.
+ * WHY: We need shades to create palette.
+ * NOTE: Original code from palx package.
+ * @param {string} hex color hex cod
+ */
+// const createShades = hex => {
+//   return lums.map(lum => {
+//     return chroma(hex).luminance(lum).hex();
+//   });
+// };
 
 /**
  * Gets the color name from hex value
