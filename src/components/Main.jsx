@@ -15,6 +15,7 @@ function Main(props) {
    *WHY: we need it to create palette from. It's in Main so it can be passed to Palette
    */
   const [color, setColor] = useState("#aabbcc");
+
   /**
    * Palette is the collection of shades for each color. Curently 12 colors with 10 shades each.
    * {color:[shades],....}. createPalette function is used to create a collection after form submit
@@ -30,12 +31,14 @@ function Main(props) {
     setPalette(initialPallete);
   }, [color]);
 
+  function handleOnChange(color) {
+    setColor(color);
+    setPalette(createPalette(color));
+  }
+
   return (
     <div className="text-gray-900 bg-white p-4 h-screen w-screen flex">
-      <Menu
-        color={color}
-        onChange={v => setPalette(createPalette(v))}
-      />
+      <Menu color={color} onChange={handleOnChange} />
       <Code palette={palette} />
       <Palette palette={palette} />
 

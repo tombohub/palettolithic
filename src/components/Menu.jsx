@@ -9,6 +9,7 @@ function Menu(props) {
       <Header />
       <HexColorPicker color={props.color} onChange={props.onChange} />
       <HexColorInput
+        placeholder={"soks"}
         color={props.color}
         onChange={props.onChange}
         className="bg-gray-400"
