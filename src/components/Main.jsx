@@ -31,6 +31,11 @@ function Main(props) {
     setPalette(initialPallete);
   }, [color]);
 
+  /**
+   * WHAT: handles the onChange of color picker.
+   * WHY: theres no e.target.value because color pickier component passes color immediately
+   * @param {string} color color hex code
+   */
   function handleOnChange(color) {
     setColor(color);
     setPalette(createPalette(color));
