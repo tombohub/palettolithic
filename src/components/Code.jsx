@@ -15,7 +15,7 @@ function Code(props) {
   return (
     <div
       id="code-area"
-      className="col-span-2 bg-gray-900 text-sm text-gray-100 p-2 rounded shadow overflow-y-scroll"
+      className="col-span-2 row-span-8 bg-gray-900 text-sm text-gray-100 p-2 rounded shadow overflow-y-scroll"
     >
       {renderCode(props.activeFramework)}
     </div>

@@ -6,7 +6,7 @@ import FrameworkList from "./FrameworkList";
 
 function Menu(props) {
   return (
-    <div className="col-span-2">
+    <div className="col-span-2 row-span-8">
       <HexColorPicker
         color={props.color}
         onChange={props.onColorChange}

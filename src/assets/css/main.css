@@ -20448,6 +20448,10 @@ video {
   grid-row: span 6 / span 6;
 }
 
+.row-span-7 {
+  grid-row: span 7 / span 7;
+}
+
 .row-span-8 {
   grid-row: span 8 / span 8;
 }
@@ -42251,6 +42255,10 @@ video {
     grid-row: span 6 / span 6;
   }
 
+  .sm\:row-span-7 {
+    grid-row: span 7 / span 7;
+  }
+
   .sm\:row-span-8 {
     grid-row: span 8 / span 8;
   }
@@ -63987,6 +63995,10 @@ video {
 
   .md\:row-span-6 {
     grid-row: span 6 / span 6;
+  }
+
+  .md\:row-span-7 {
+    grid-row: span 7 / span 7;
   }
 
   .md\:row-span-8 {
@@ -85727,6 +85739,10 @@ video {
     grid-row: span 6 / span 6;
   }
 
+  .lg\:row-span-7 {
+    grid-row: span 7 / span 7;
+  }
+
   .lg\:row-span-8 {
     grid-row: span 8 / span 8;
   }
@@ -107463,6 +107479,10 @@ video {
 
   .xl\:row-span-6 {
     grid-row: span 6 / span 6;
+  }
+
+  .xl\:row-span-7 {
+    grid-row: span 7 / span 7;
   }
 
   .xl\:row-span-8 {
