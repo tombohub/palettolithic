@@ -15,7 +15,7 @@ function Palette(props) {
   return (
     <div
       id="palette-outer"
-      className="flex-auto bg-white rounded ml-2 p-1 pl-2 shadow"
+      className="col-span-8 row-span-8 flex-auto bg-white rounded ml-2 p-1 pl-2 shadow"
     >
       <div
         id="palette-inner"

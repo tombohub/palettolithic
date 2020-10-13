@@ -550,6 +550,7 @@ module.exports = {
       4: "repeat(4, minmax(0, 1fr))",
       5: "repeat(5, minmax(0, 1fr))",
       6: "repeat(6, minmax(0, 1fr))",
+      8: "repeat(8, minmax(0, 1fr))",
     },
     gridRow: {
       auto: "auto",
@@ -559,6 +560,7 @@ module.exports = {
       "span-4": "span 4 / span 4",
       "span-5": "span 5 / span 5",
       "span-6": "span 6 / span 6",
+      "span-8": "span 8 / span 8",
     },
     gridRowStart: {
       auto: "auto",
