@@ -8,14 +8,20 @@ function Menu(props) {
   return (
     <div className="w-1/6 h-full">
       <Header />
-      <HexColorPicker color={props.color} onChange={props.onChange} />
+      <HexColorPicker
+        color={props.color}
+        onChange={props.onColorChange}
+      />
       <HexColorInput
         placeholder={"HEX code"}
         color={props.color}
-        onChange={props.onChange}
+        onChange={props.onColorChange}
         className="bg-gray-200 rounded p-2 border "
       />
-      <FrameworkList setActiveFramework={props.setActiveFramework} />
+      <FrameworkList
+        activeFramework={props.activeFramework}
+        setActiveFramework={props.setActiveFramework}
+      />
     </div>
   );
 }

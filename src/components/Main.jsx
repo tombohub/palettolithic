@@ -51,7 +51,8 @@ function Main(props) {
     <div className="text-gray-900 bg-white p-4 h-screen w-screen flex">
       <Menu
         color={color}
-        onChange={handleOnChange}
+        onColorChange={handleOnChange}
+        activeFramework={activeFramework}
         setActiveFramework={setActiveFramework}
       />
       <Code palette={palette} activeFramework={activeFramework} />
