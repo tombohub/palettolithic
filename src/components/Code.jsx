@@ -1,5 +1,7 @@
 import React from "react";
 import Tailwindcss from "./Tailwindcss";
+import "react-perfect-scrollbar/dist/css/styles.css";
+import PerfectScrollbar from "react-perfect-scrollbar";
 
 function Code(props) {
   function renderCode(activeFramework) {
@@ -15,9 +17,11 @@ function Code(props) {
   return (
     <div
       id="code-area"
-      className="col-span-2 row-span-8 bg-gray-900 text-sm text-gray-100 p-2 rounded shadow overflow-y-scroll"
+      className="col-span-2 row-span-7 bg-gray-900 text-sm text-gray-100 p-2 rounded shadow"
     >
-      {renderCode(props.activeFramework)}
+      <PerfectScrollbar>
+        {renderCode(props.activeFramework)}
+      </PerfectScrollbar>
     </div>
   );
 }

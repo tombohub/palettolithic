@@ -3,10 +3,11 @@ import Header from "./Header";
 import { HexColorPicker, HexColorInput } from "react-colorful";
 import "react-colorful/dist/index.css";
 import FrameworkList from "./FrameworkList";
+import "./menu.css";
 
 function Menu(props) {
   return (
-    <div className="col-span-2 row-span-8">
+    <div className="col-span-2 row-span-7">
       <HexColorPicker
         color={props.color}
         onChange={props.onColorChange}

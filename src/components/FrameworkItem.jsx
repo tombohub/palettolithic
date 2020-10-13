@@ -8,9 +8,9 @@ import React, { useState } from "react";
 function FrameworkItem(props) {
   return (
     <li
-      className={`cursor-pointer p-2 capitalize text-lg ${
+      className={`cursor-pointer p-2 capitalize text-lg hover:underline ${
         props.activeFramework === props.framework
-          ? "text-gray-100 bg-gray-900 rounded-l"
+          ? "text-gray-100 bg-gray-700 rounded"
           : ""
       }`}
       onClick={() => props.setActiveFramework(props.framework)}

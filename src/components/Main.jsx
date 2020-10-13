@@ -50,7 +50,7 @@ function Main(props) {
 
   return (
     <>
-      <div className="text-gray-900 bg-white p-4 h-screen w-screen grid grid-cols-12 grid-rows-8">
+      <div className="text-gray-900 bg-white p-4 h-screen w-screen grid grid-cols-12 grid-rows-8 gap-2">
         <Header />
         <Palette palette={palette} />
         <Menu
