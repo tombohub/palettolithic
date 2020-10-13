@@ -3,7 +3,7 @@ import { createPalette } from "../scripts/createPalette";
 
 import Palette from "./Palette";
 import Menu from "./Menu";
-import Code from "./Code";
+import CodeBox from "./CodeBox";
 import Header from "./Header";
 
 /**
@@ -25,7 +25,7 @@ function Main(props) {
 
   /**
    * WHAT: framework selected in the menu
-   * WHY: code will be displayed in Code based on active framework
+   * WHY: code will be displayed in CodeBox based on active framework
    */
   const [activeFramework, setActiveFramework] = useState("tailwind");
 
@@ -59,7 +59,10 @@ function Main(props) {
           activeFramework={activeFramework}
           setActiveFramework={setActiveFramework}
         />
-        <Code palette={palette} activeFramework={activeFramework} />
+        <CodeBox
+          palette={palette}
+          activeFramework={activeFramework}
+        />
 
         {/* passing onSubmit from App to Form */}
         {/* <Form onSubmit={props.onSubmit} /> */}

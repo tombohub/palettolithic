@@ -157,7 +157,7 @@ const toObj = (a, color) => {
 /**
  * Creates the whole palette according to one base color
  * @param {string} hex base color hex value
- * @returns {object} 12 hues with 10 shades each in object
+ * @returns {object} 12 hues with 10 shades each in object {color:[hex,...]}
  */
 function createPalette(hex) {
   const color = chroma(hex);

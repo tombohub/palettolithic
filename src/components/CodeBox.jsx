@@ -3,7 +3,7 @@ import Tailwindcss from "./Tailwindcss";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import PerfectScrollbar from "react-perfect-scrollbar";
 
-function Code(props) {
+function CodeBox(props) {
   function renderCode(activeFramework) {
     switch (activeFramework) {
       case "tailwind":
@@ -26,4 +26,4 @@ function Code(props) {
   );
 }
 
-export default Code;
+export default CodeBox;
