@@ -14,13 +14,19 @@ function Main(props) {
    *WHAT: current color from color picker, or input field
    *WHY: we need it to create palette from. It's in Main so it can be passed to Palette
    */
-  const [color, setColor] = useState("#aabbcc");
+  const [color, setColor] = useState("#07c");
 
   /**
    * Palette is the collection of shades for each color. Curently 12 colors with 10 shades each.
    * {color:[shades],....}. createPalette function is used to create a collection after form submit
    */
   const [palette, setPalette] = useState({});
+
+  /**
+   * WHAT: framework selected in the menu
+   * WHY: code will be displayed in Code based on active framework
+   */
+  const [activeFramework, setActiveFramework] = useState("tailwind");
 
   /**
    * WHAT: renders the initial demo pallete on first page visit
@@ -43,8 +49,12 @@ function Main(props) {
 
   return (
     <div className="text-gray-900 bg-white p-4 h-screen w-screen flex">
-      <Menu color={color} onChange={handleOnChange} />
-      <Code palette={palette} />
+      <Menu
+        color={color}
+        onChange={handleOnChange}
+        setActiveFramework={setActiveFramework}
+      />
+      <Code palette={palette} activeFramework={activeFramework} />
       <Palette palette={palette} />
 
       {/* passing onSubmit from App to Form */}

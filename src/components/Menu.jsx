@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from "./Header";
 import { HexColorPicker, HexColorInput } from "react-colorful";
 import "react-colorful/dist/index.css";
+import FrameworkList from "./FrameworkList";
 
 function Menu(props) {
   return (
@@ -9,13 +10,12 @@ function Menu(props) {
       <Header />
       <HexColorPicker color={props.color} onChange={props.onChange} />
       <HexColorInput
-        placeholder={"soks"}
+        placeholder={"HEX code"}
         color={props.color}
         onChange={props.onChange}
-        className="bg-gray-400"
+        className="bg-gray-200 rounded p-2 border "
       />
-      Color picker<br></br>
-      FrameworkList
+      <FrameworkList setActiveFramework={props.setActiveFramework} />
     </div>
   );
 }
