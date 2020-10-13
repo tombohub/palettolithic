@@ -5,7 +5,7 @@ function Code(props) {
   function renderCode(activeFramework) {
     switch (activeFramework) {
       case "tailwind":
-        return "tailwind";
+        return <Tailwindcss palette={props.palette} />;
       case "bootstrap":
         return "bootstrap";
       default:
@@ -18,7 +18,6 @@ function Code(props) {
       className="w-1/6 h-full bg-gray-900 text-sm text-gray-100 p-2 rounded shadow overflow-y-scroll"
     >
       {renderCode(props.activeFramework)}
-      <Tailwindcss palette={props.palette} />
     </div>
   );
 }

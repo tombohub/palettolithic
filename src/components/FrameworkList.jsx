@@ -3,10 +3,16 @@ import React, { useState } from "react";
 function FrameworkList(props) {
   return (
     <>
-      <li onClick={() => props.setActiveFramework("tailwind")}>
+      <li
+        className="cursor-pointer"
+        onClick={() => props.setActiveFramework("tailwind")}
+      >
         tailwind
       </li>
-      <li onClick={() => props.setActiveFramework("bootstrap")}>
+      <li
+        className="cursor-pointer"
+        onClick={() => props.setActiveFramework("bootstrap")}
+      >
         bootstrap
       </li>
     </>
