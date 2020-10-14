@@ -1,4 +1,4 @@
-import { generateFrameworkObject } from "./createPalette";
+const { generateFrameworkObject } = require("./createPalette");
 
 function generateTailwind(palette) {
   const frameworkObject = generateFrameworkObject(palette);
