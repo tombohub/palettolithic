@@ -194,11 +194,11 @@ function createPalette(hex) {
 }
 
 /**
- *WHAT: generates Tailwindcss code to put inside tailwind config file
- *WHY: original palette code is different than tailwind config.
+ *WHAT: generates JS object as {color:{100:hex,200:hex...}..}
+ *WHY: we will use it to generate framework specific code.
  * @param {object} palette color pallete like: {color:[hex,...]}
  */
-function generateTailwindcss(palette) {
+function generateFrameworkObject(palette) {
   const colors = Object.keys(palette);
 
   // to assign 100, 200 ... to each shade
@@ -220,4 +220,4 @@ function generateTailwindcss(palette) {
   return tailwind;
 }
 
-module.exports = { createPalette, generateTailwindcss };
+module.exports = { createPalette, generateFrameworkObject };

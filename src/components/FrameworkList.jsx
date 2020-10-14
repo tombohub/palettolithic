@@ -8,7 +8,7 @@ import FrameworkItem from "./FrameworkItem";
  */
 function FrameworkList(props) {
   return (
-    <ul className="pl-6 pt-12">
+    <ul className="pt-12">
       <FrameworkItem
         framework="tailwind"
         activeFramework={props.activeFramework}
