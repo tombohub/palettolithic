@@ -1,5 +1,8 @@
 import React from "react";
 
+/**
+ * WHAT: holds the title of the website
+ */
 function Header() {
   return (
     <header className="col-span-4">

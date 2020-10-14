@@ -195,7 +195,7 @@ function createPalette(hex) {
 
 /**
  *WHAT: generates JS object as {color:{100:hex,200:hex...}..}
- *WHY: we will use it to generate framework specific code.
+ *WHY: we will use it to generate framework specific code. It's more friendly
  * @param {object} palette color pallete like: {color:[hex,...]}
  */
 function generateFrameworkObject(palette) {

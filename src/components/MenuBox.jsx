@@ -1,11 +1,20 @@
 import React, { useState } from "react";
-import Header from "./Header";
+
+// components
+import FrameworkList from "./FrameworkList";
+
+// packages
 import { HexColorPicker, HexColorInput } from "react-colorful";
 import "react-colorful/dist/index.css";
-import FrameworkList from "./FrameworkList";
+
+// custom css for color picker
 import "./menu.css";
 
-function Menu(props) {
+/**
+ * WHAT: menu box to hold color picker and frameworks menu items
+ * @param {*} props
+ */
+function MenuBox(props) {
   return (
     <div className="col-span-2 row-span-7">
       <HexColorPicker
@@ -26,4 +35,4 @@ function Menu(props) {
   );
 }
 
-export default Menu;
+export default MenuBox;

@@ -1,5 +1,9 @@
 import React from "react";
+
+// components
 import CodeContent from "./CodeContent";
+
+//packages
 import "react-perfect-scrollbar/dist/css/styles.css";
 import PerfectScrollbar from "react-perfect-scrollbar";
 

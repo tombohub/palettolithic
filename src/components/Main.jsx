@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { createPalette } from "../scripts/createPalette";
 
+// components
 import Palette from "./Palette";
-import Menu from "./Menu";
+import MenuBox from "./MenuBox";
 import CodeBox from "./CodeBox";
 import Header from "./Header";
+
+// scripts
+import { createPalette } from "../scripts/createPalette";
 
 /**
  * Main component that displays the first page with form and palette
@@ -50,10 +53,13 @@ function Main(props) {
 
   return (
     <>
-      <div className="text-gray-900 bg-white p-4 h-screen w-screen grid grid-cols-12 grid-rows-8 gap-2">
+      <div
+        className="text-gray-900 bg-white p-4 h-screen w-screen grid 
+                    grid-cols-12 grid-rows-8 gap-2"
+      >
         <Header />
         <Palette palette={palette} />
-        <Menu
+        <MenuBox
           color={color}
           onColorChange={handleOnChange}
           activeFramework={activeFramework}
@@ -63,9 +69,6 @@ function Main(props) {
           palette={palette}
           activeFramework={activeFramework}
         />
-
-        {/* passing onSubmit from App to Form */}
-        {/* <Form onSubmit={props.onSubmit} /> */}
       </div>
     </>
   );

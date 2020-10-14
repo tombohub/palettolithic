@@ -1,10 +1,13 @@
 import React from "react";
+
+// scripts
 import generateTailwind from "../scripts/generateTailwind";
 import generateBootstrap from "../scripts/generateBootstrap";
+
+// packages
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
 import js from "react-syntax-highlighter/dist/esm/languages/hljs/javascript";
 import scss from "react-syntax-highlighter/dist/esm/languages/hljs/scss";
-
 import { tomorrowNight } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 /**

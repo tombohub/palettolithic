@@ -7,8 +7,6 @@ const {
   createPalette,
 } = require("./createPalette");
 
-const palette = createPalette("#07c");
-
 /**
  * WHAT: generates color variables for bootstrap
  * WHY: it's part of the bootstrap theming
@@ -38,6 +36,11 @@ function generateCssColors(obj) {
   return variables;
 }
 
+/**
+ * WHAT: generates scss theme-colors() map
+ * WHY: bootstrap generates classes names from this map
+ * @param {frameworkObject} obj frameworks friendly object derived from palette object
+ */
 function generateThemeMap(obj) {
   let colors = "";
 
@@ -51,6 +54,13 @@ function generateThemeMap(obj) {
   return map;
 }
 
+/* ------------------------------ Main Function ----------------------------- */
+
+/**
+ * WHAT: generates complete custom code for Bootstrap
+ * WHY: user can copy paste code to theme Bootstrap
+ * @param {object} palette palette object as {color:[hex1, hex2,...]}
+ */
 function generateBootstrap(palette) {
   const frameworkObject = generateFrameworkObject(palette);
 
