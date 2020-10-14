@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-//components
+// components
 import FrameworkItem from "./FrameworkItem";
 
 /**
