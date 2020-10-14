@@ -14,7 +14,7 @@ function Color(props) {
         className="grid grid-cols-10 gap-1 h-full rounded"
         data-name="color-inner"
       >
-        <span className="my-auto">{props.color.toUpperCase()}</span>
+        <span className="my-auto">{props.color.toUpperCase()}:</span>
         {props.shades.map((shade, i) => (
           <Shade key={i} shade={shade} />
         ))}
