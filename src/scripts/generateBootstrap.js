@@ -33,7 +33,7 @@ function generateColorVariables(obj) {
 function generateCssColors(obj) {
   let variables = "";
   for (const color in obj) {
-    variables += `$${color}: ${color}-600;\n`;
+    variables += `$${color}: $${color}-600;\n`;
   }
   return variables;
 }
@@ -51,7 +51,7 @@ function generateThemeMap(obj) {
   return map;
 }
 
-function generateBootstrapCode(palette) {
+function generateBootstrap(palette) {
   const frameworkObject = generateFrameworkObject(palette);
 
   const variables = generateColorVariables(frameworkObject);
@@ -63,4 +63,4 @@ function generateBootstrapCode(palette) {
   return bootstrapCode;
 }
 
-console.log(generateBootstrapCode(palette));
+module.exports = generateBootstrap;
