@@ -25,7 +25,7 @@ function MenuBox(props) {
         placeholder={"HEX code"}
         color={props.color}
         onChange={props.onColorChange}
-        className="bg-gray-200 rounded p-2 border "
+        className="bg-gray-200 rounded p-2 border w-full "
       />
       <FrameworkList
         activeFramework={props.activeFramework}
