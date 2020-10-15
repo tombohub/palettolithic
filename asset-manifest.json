@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.348d9bf0.chunk.css",
+    "main.js": "/static/js/main.f108dfa4.chunk.js",
+    "main.js.map": "/static/js/main.f108dfa4.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.1465be04.js",
+    "runtime-main.js.map": "/static/js/runtime-main.1465be04.js.map",
+    "static/css/2.63d8dba5.chunk.css": "/static/css/2.63d8dba5.chunk.css",
+    "static/js/2.38cdf493.chunk.js": "/static/js/2.38cdf493.chunk.js",
+    "static/js/2.38cdf493.chunk.js.map": "/static/js/2.38cdf493.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.8e0a837ada04a724c8b059fbfa26a2b4.js": "/precache-manifest.8e0a837ada04a724c8b059fbfa26a2b4.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.63d8dba5.chunk.css.map": "/static/css/2.63d8dba5.chunk.css.map",
+    "static/css/main.348d9bf0.chunk.css.map": "/static/css/main.348d9bf0.chunk.css.map",
+    "static/js/2.38cdf493.chunk.js.LICENSE.txt": "/static/js/2.38cdf493.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/static/media/schoolbell-latin-400-normal.1c69d182.woff2"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1465be04.js",
+    "static/css/2.63d8dba5.chunk.css",
+    "static/js/2.38cdf493.chunk.js",
+    "static/css/main.348d9bf0.chunk.css",
+    "static/js/main.f108dfa4.chunk.js"
+  ]
+}
