@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.348d9bf0.chunk.css",
+    "main.css": "/static/css/main.5fab282e.chunk.css",
     "main.js": "/static/js/main.f108dfa4.chunk.js",
     "main.js.map": "/static/js/main.f108dfa4.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.1465be04.js",
@@ -9,10 +9,10 @@
     "static/js/2.38cdf493.chunk.js": "/static/js/2.38cdf493.chunk.js",
     "static/js/2.38cdf493.chunk.js.map": "/static/js/2.38cdf493.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.774220ed81d8bade22a13c5900885ed2.js": "/precache-manifest.774220ed81d8bade22a13c5900885ed2.js",
+    "precache-manifest.d97c8d899ee0be78c53c9f57602b4349.js": "/precache-manifest.d97c8d899ee0be78c53c9f57602b4349.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.63d8dba5.chunk.css.map": "/static/css/2.63d8dba5.chunk.css.map",
-    "static/css/main.348d9bf0.chunk.css.map": "/static/css/main.348d9bf0.chunk.css.map",
+    "static/css/main.5fab282e.chunk.css.map": "/static/css/main.5fab282e.chunk.css.map",
     "static/js/2.38cdf493.chunk.js.LICENSE.txt": "/static/js/2.38cdf493.chunk.js.LICENSE.txt",
     "static/media/index.css": "/static/media/schoolbell-latin-400-normal.1c69d182.woff2"
   },
@@ -20,7 +20,7 @@
     "static/js/runtime-main.1465be04.js",
     "static/css/2.63d8dba5.chunk.css",
     "static/js/2.38cdf493.chunk.js",
-    "static/css/main.348d9bf0.chunk.css",
+    "static/css/main.5fab282e.chunk.css",
     "static/js/main.f108dfa4.chunk.js"
   ]
 }
