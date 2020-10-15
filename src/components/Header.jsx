@@ -5,9 +5,13 @@ import React from "react";
  */
 function Header() {
   return (
-    <header className="col-span-4">
-      <h1 className="text-4xl font-frijole">Palettolithic</h1>
-      <span className="">So easy caveman can do it.</span>
+    <header className="col-span-4 rounded shadow">
+      <h1 className="text-4xl text-gray-900 font-frijole">
+        Palettolithic
+      </h1>
+      <span className="font-schoolbell text-2xl text-gray-800">
+        So easy caveman can do it.
+      </span>
     </header>
   );
 }

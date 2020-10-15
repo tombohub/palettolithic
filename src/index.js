@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./assets/css/main.css";
-import "fontsource-amatic-sc";
-import "fontsource-special-elite";
+import "fontsource-frijole";
+import "fontsource-schoolbell";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
