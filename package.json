@@ -23,11 +23,11 @@
   "scripts": {
     "build:tailwind": "tailwindcss build src/assets/css/tailwind.css -o src/assets/css/main.css",
     "prestart": "npm run build:tailwind",
-    "prebuild": "npm run build:tailwind",
+    "prebuild": "NODE_ENV=production npm run build:tailwind",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
-    "build": "NODE_ENV=production react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
