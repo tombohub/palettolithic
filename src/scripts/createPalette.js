@@ -1,5 +1,3 @@
-"use strict";
-
 const chroma = require("chroma-js");
 
 const names = [
@@ -220,4 +218,4 @@ function generateFrameworkObject(palette) {
   return tailwind;
 }
 
-module.exports = { createPalette, generateFrameworkObject };
+export { createPalette, generateFrameworkObject };

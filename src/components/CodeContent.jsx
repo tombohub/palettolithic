@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 // scripts
-import generateTailwind from "../scripts/generateTailwind";
-import generateBootstrap from "../scripts/generateBootstrap";
+import { generateTailwind } from "../scripts/generateTailwind";
+import { generateBootstrap } from "../scripts/generateBootstrap";
 
 // packages
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -21,7 +21,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 function CodeContent(props) {
   //
   /**
-   * WHAT: copy status to display if code is copied.
+   * WHAT: state if code is copied.
    * WHY: so the user gets feedback if code is copied to clipboard.
    * It uses useEffect to change back to 'Copy' anytime the palette or active framework changes.
    * When user clicks on "Copy" span button then the handleOnClick sets the state to "Copied"

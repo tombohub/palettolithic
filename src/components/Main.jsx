@@ -7,7 +7,7 @@ import CodeBox from "./CodeBox";
 import Header from "./Header";
 
 // scripts
-import { createPalette } from "../scripts/createPalette";
+import { createPalette } from "../scripts/createPalette.js";
 
 /**
  * Main component that displays the first page with form and palette

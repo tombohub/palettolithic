@@ -2,10 +2,7 @@
 /*                 Generating Bootstrap custom code for theming                 */
 /* -------------------------------------------------------------------------- */
 
-const {
-  generateFrameworkObject,
-  createPalette,
-} = require("./createPalette");
+import { generateFrameworkObject } from "./createPalette.js";
 
 /**
  * WHAT: generates color variables for bootstrap
@@ -73,4 +70,4 @@ function generateBootstrap(palette) {
   return bootstrapCode;
 }
 
-module.exports = generateBootstrap;
+export { generateBootstrap };

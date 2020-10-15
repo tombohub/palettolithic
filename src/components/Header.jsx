@@ -9,9 +9,9 @@ function Header() {
       <h1 className="text-4xl text-gray-900 font-frijole">
         Palettolithic
       </h1>
-      <span className="font-schoolbell text-2xl text-gray-800">
+      <h6 className="font-schoolbell text-2xl text-gray-800">
         So easy caveman can do it.
-      </span>
+      </h6>
     </header>
   );
 }
