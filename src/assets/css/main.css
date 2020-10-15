@@ -10437,6 +10437,34 @@ video {
   font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+.font-title {
+  font-family: Amatic SC;
+}
+
+.font-special {
+  font-family: Special Elite;
+}
+
+.font-sister {
+  font-family: Love Ya Like A Sister;
+}
+
+.font-cabin {
+  font-family: Cabin Sketch;
+}
+
+.font-schoolbell {
+  font-family: Schoolbell;
+}
+
+.font-frijole {
+  font-family: Frijole;
+}
+
+.font-barrio {
+  font-family: Barrio;
+}
+
 .font-hairline {
   font-weight: 100;
 }
@@ -32484,6 +32512,34 @@ video {
     font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
+  .sm\:font-title {
+    font-family: Amatic SC;
+  }
+
+  .sm\:font-special {
+    font-family: Special Elite;
+  }
+
+  .sm\:font-sister {
+    font-family: Love Ya Like A Sister;
+  }
+
+  .sm\:font-cabin {
+    font-family: Cabin Sketch;
+  }
+
+  .sm\:font-schoolbell {
+    font-family: Schoolbell;
+  }
+
+  .sm\:font-frijole {
+    font-family: Frijole;
+  }
+
+  .sm\:font-barrio {
+    font-family: Barrio;
+  }
+
   .sm\:font-hairline {
     font-weight: 100;
   }
@@ -54464,6 +54520,34 @@ video {
 
   .md\:font-mono {
     font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  .md\:font-title {
+    font-family: Amatic SC;
+  }
+
+  .md\:font-special {
+    font-family: Special Elite;
+  }
+
+  .md\:font-sister {
+    font-family: Love Ya Like A Sister;
+  }
+
+  .md\:font-cabin {
+    font-family: Cabin Sketch;
+  }
+
+  .md\:font-schoolbell {
+    font-family: Schoolbell;
+  }
+
+  .md\:font-frijole {
+    font-family: Frijole;
+  }
+
+  .md\:font-barrio {
+    font-family: Barrio;
   }
 
   .md\:font-hairline {
@@ -76448,6 +76532,34 @@ video {
     font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
+  .lg\:font-title {
+    font-family: Amatic SC;
+  }
+
+  .lg\:font-special {
+    font-family: Special Elite;
+  }
+
+  .lg\:font-sister {
+    font-family: Love Ya Like A Sister;
+  }
+
+  .lg\:font-cabin {
+    font-family: Cabin Sketch;
+  }
+
+  .lg\:font-schoolbell {
+    font-family: Schoolbell;
+  }
+
+  .lg\:font-frijole {
+    font-family: Frijole;
+  }
+
+  .lg\:font-barrio {
+    font-family: Barrio;
+  }
+
   .lg\:font-hairline {
     font-weight: 100;
   }
@@ -98428,6 +98540,34 @@ video {
 
   .xl\:font-mono {
     font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  .xl\:font-title {
+    font-family: Amatic SC;
+  }
+
+  .xl\:font-special {
+    font-family: Special Elite;
+  }
+
+  .xl\:font-sister {
+    font-family: Love Ya Like A Sister;
+  }
+
+  .xl\:font-cabin {
+    font-family: Cabin Sketch;
+  }
+
+  .xl\:font-schoolbell {
+    font-family: Schoolbell;
+  }
+
+  .xl\:font-frijole {
+    font-family: Frijole;
+  }
+
+  .xl\:font-barrio {
+    font-family: Barrio;
   }
 
   .xl\:font-hairline {

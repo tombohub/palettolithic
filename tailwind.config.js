@@ -289,6 +289,13 @@ module.exports = {
         '"Courier New"',
         "monospace",
       ],
+      title: ["Amatic SC"],
+      special: ["Special Elite"],
+      sister: ["Love Ya Like A Sister"],
+      cabin: ["Cabin Sketch"],
+      schoolbell: ["Schoolbell"],
+      frijole: ["Frijole"],
+      barrio: ["Barrio"],
     },
     fontSize: {
       xs: "0.75rem",
