@@ -31,6 +31,7 @@ function MenuBox(props) {
         activeFramework={props.activeFramework}
         setActiveFramework={props.setActiveFramework}
       />
+      <a href="https://github.com/tombohub/palettolithic">Github</a>
     </div>
   );
 }
