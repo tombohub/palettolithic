@@ -16,7 +16,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 /**
  * Actual code of chosen framework. All the frameworks will render here because we
  * want to use syntax highlighter in one place.
- * @param {*} props
+ *
  */
 function CodeContent(props) {
   //

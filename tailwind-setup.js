@@ -1,6 +1,4 @@
 const { execSync } = require("child_process");
-const { css } = require("chroma-js");
-const { exception } = require("console");
 const fs = require("fs");
 
 const cssDirectory = "src/assets/css";

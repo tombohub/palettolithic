@@ -5,7 +5,7 @@ import CodeContent from "./CodeContent";
 
 /**
  * Box in which we will render the code of chosen framework
- * @param {*} props
+ *
  */
 function CodeBox(props) {
   return (
