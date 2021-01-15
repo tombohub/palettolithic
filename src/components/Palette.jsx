@@ -1,6 +1,5 @@
 import React from "react";
 import Color from "./Color";
-import DownloadBox from "./DownloadBox";
 
 /**
  * Hold the complete Palette. Which consists of Colors, inside Colors are Shades
@@ -22,11 +21,7 @@ function Palette(props) {
         className="flex flex-col justify-between h-full rounded overflow-hidden"
       >
         {colors.map((color, i) => (
-          <Color
-            key={i}
-            shades={props.palette[color]}
-            color={color}
-          />
+          <Color key={i} shades={props.palette[color]} color={color} />
         ))}
       </div>
     </div>
