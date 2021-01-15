@@ -2,7 +2,7 @@ import { tail } from "lodash";
 import React, { useState } from "react";
 
 /**
- * WHAT: Item in framework menu. Parent is FrameworkList
+ * WHAT: Menu Item in framework menu. Parent is FrameworkList
  * WHY: There's more than one framework user can chose so it deserves component
  * @param {*} props
  */

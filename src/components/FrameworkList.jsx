@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import FrameworkItem from "./FrameworkItem";
 
 /**
- * WHAT: list of frameworks to choose from.
+ * WHAT: Menu list of frameworks to choose from.
  * The code will display based on active framework
  * @param {*} props
  */
