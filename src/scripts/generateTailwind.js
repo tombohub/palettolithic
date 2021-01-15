@@ -11,6 +11,8 @@ function generateTailwind(palette) {
 module.exports = {
   theme: {
     colors: {
+      transparent: "transparent",
+      current: "currentColor",
     ${colorObjects}
     }
   }
