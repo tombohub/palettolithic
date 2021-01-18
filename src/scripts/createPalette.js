@@ -39,18 +39,7 @@ const lights = [0.95, 0.86, 0.78, 0.69, 0.6, 0.51, 0.43, 0.34, 0.25];
 //   .map(n => n / 10);
 
 // console.log(lums);
-const lums = [
-  0.95,
-  0.85,
-  0.75,
-  0.65,
-  0.55,
-  0.45,
-  0.35,
-  0.25,
-  0.15,
-  0.05,
-];
+const lums = [0.95, 0.85, 0.75, 0.65, 0.55, 0.45, 0.35, 0.25, 0.15, 0.05];
 
 /**
  * Creates an array of integers from 0 to {length} we want
@@ -161,6 +150,7 @@ function createPalette(hex) {
   const color = chroma(hex);
   const colors = [];
   const [hue, sat, lte] = color.hsl();
+  console.log("hue is ", hue);
 
   const hues = createHues(12)(hue);
 
@@ -177,14 +167,18 @@ function createPalette(hex) {
   });
 
   //add shades of hues to colors[]
-  hues.forEach(hue => {
-    const color = chroma.hsl(hue, sat, lte);
-    const key = keyword(color);
-    colors.push({
-      key,
-      value: createShades("" + color.hex()),
+  // temporary fix in case hue is NaN it will go trough list here and on
+  // the website only gray will be shown
+  if (!isNaN(hue)) {
+    hues.forEach(hue => {
+      const color = chroma.hsl(hue, sat, lte);
+      const key = keyword(color);
+      colors.push({
+        key,
+        value: createShades("" + color.hex()),
+      });
     });
-  });
+  }
 
   const obj = colors.reduce(toObj, {});
 
