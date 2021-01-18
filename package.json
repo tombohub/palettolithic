@@ -3,14 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@tailwindcss/postcss7-compat": "^2.0.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "autoprefixer": "^9.8.6",
     "chroma-js": "^2.1.0",
     "fontsource-frijole": "^3.0.5",
     "fontsource-schoolbell": "^3.0.3",
     "gh-pages": "^3.1.0",
     "lodash": "^4.17.20",
+    "postcss": "^7.0.35",
     "react": "^16.13.1",
     "react-colorful": "^4.1.4",
     "react-copy-to-clipboard": "^5.0.2",
@@ -18,7 +21,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-syntax-highlighter": "^15.2.1",
-    "tailwindcss": "^1.8.10"
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2"
   },
   "scripts": {
     "build:tailwind": "tailwindcss build src/assets/css/tailwind.css -o src/assets/css/main.css",
