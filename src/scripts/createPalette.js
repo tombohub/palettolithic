@@ -150,7 +150,6 @@ function createPalette(hex) {
   const color = chroma(hex);
   const colors = [];
   const [hue, sat, lte] = color.hsl();
-  console.log("hue is ", hue);
 
   const hues = createHues(12)(hue);
 
