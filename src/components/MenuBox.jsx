@@ -9,6 +9,7 @@ import "react-colorful/dist/index.css";
 
 // custom css for color picker
 import "./menu.css";
+import MenuBottom from "./MenuBottom";
 
 /**
  * WHAT: menu box to hold color picker and frameworks menu items
@@ -16,23 +17,25 @@ import "./menu.css";
  */
 function MenuBox(props) {
   return (
-    <div className="col-span-2 row-span-7">
-      <HexColorPicker
-        color={props.color}
-        onChange={props.onColorChange}
-      />
-      <HexColorInput
-        placeholder={"HEX code"}
-        color={props.color}
-        onChange={props.onColorChange}
-        className="bg-gray-200 rounded p-2 border w-full "
-      />
-      <FrameworkList
-        activeFramework={props.activeFramework}
-        setActiveFramework={props.setActiveFramework}
-      />
-      <a href="https://github.com/tombohub/palettolithic">Github</a>
-    </div>
+    <>
+      <div className="col-span-2 row-span-7">
+        <HexColorPicker color={props.color} onChange={props.onColorChange} />
+        <HexColorInput
+          placeholder={"HEX code"}
+          color={props.color}
+          onChange={props.onColorChange}
+          className="bg-gray-200 rounded p-2 border w-full "
+        />
+        <FrameworkList
+          activeFramework={props.activeFramework}
+          setActiveFramework={props.setActiveFramework}
+        />
+
+        <div className="mt-48">
+          <MenuBottom />
+        </div>
+      </div>
+    </>
   );
 }
 
