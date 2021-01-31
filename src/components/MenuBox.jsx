@@ -31,7 +31,7 @@ function MenuBox(props) {
           setActiveFramework={props.setActiveFramework}
         />
 
-        <div className="mt-48">
+        <div className="mt-32">
           <MenuBottom />
         </div>
       </div>
