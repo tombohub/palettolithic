@@ -30,6 +30,13 @@ function FrameworkItem(props) {
         "hover:bg-purple-400 hover:rounded border-purple-400 transition duration-200",
     };
 
+    // bootstrap item classes
+    const css = {
+      active: "bg-orange-400 border-orange-400 rounded ",
+      nonActive:
+        "hover:bg-orange-400 hover:rounded border-orange-400 transition duration-200",
+    };
+
     const classes = classes => {
       if (activeFramework === framework) {
         return classes.active;
@@ -43,6 +50,8 @@ function FrameworkItem(props) {
         return classes(tailwind);
       case "bootstrap":
         return classes(bootstrap);
+      case "css":
+        return classes(css);
       default:
         return "";
     }

@@ -5,11 +5,13 @@ import { useState } from "react";
 // scripts
 import { generateTailwind } from "../scripts/generateTailwind";
 import { generateBootstrap } from "../scripts/generateBootstrap";
+import { generateCssVariables } from "../scripts/generateCssVariables";
 
 // packages
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
 import js from "react-syntax-highlighter/dist/esm/languages/hljs/javascript";
 import scss from "react-syntax-highlighter/dist/esm/languages/hljs/scss";
+import css from "react-syntax-highlighter/dist/esm/languages/hljs/css";
 import { tomorrowNight } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
@@ -44,6 +46,7 @@ function CodeContent(props) {
 
   SyntaxHighlighter.registerLanguage("javascript", js);
   SyntaxHighlighter.registerLanguage("scss", scss);
+  SyntaxHighlighter.registerLanguage("css", css);
 
   const tailwindCode = (
     <>
@@ -81,6 +84,25 @@ function CodeContent(props) {
     </>
   );
 
+
+  const cssCode = (
+    <>
+      <CopyToClipboard text={generateCssVariables(props.palette)}>
+        <div className="flex justify-end">
+          <span
+            onClick={handleOnClick}
+            className="cursor-pointer font-mono bg-orange-300 rounded text-orange-900 px-1 hover:bg-orange-900 hover:text-orange-300 transition duration-100"
+          >
+            {copyStatus}
+          </span>
+        </div>
+      </CopyToClipboard>
+      <SyntaxHighlighter language="css" style={tomorrowNight}>
+        {generateCssVariables(props.palette)}
+      </SyntaxHighlighter>
+    </>
+  );
+
   /* -------------------------------- Render -------------------------------- */
 
   function renderCode(activeFramework) {
@@ -89,6 +111,8 @@ function CodeContent(props) {
         return tailwindCode;
       case "bootstrap":
         return bootstrapCode;
+      case "css":
+        return cssCode;
       default:
         return "nothing selected";
     }
