@@ -28,7 +28,7 @@ function generateColorVariables(obj) {
 function generateCssColors(obj) {
   let variables = "";
   for (const color in obj) {
-    variables += `$${color}: $${color}-600;\n`;
+    variables += `$${color}: $${color}-500;\n`;
   }
   return variables;
 }

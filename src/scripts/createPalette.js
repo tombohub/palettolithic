@@ -1,5 +1,24 @@
+/**
+ * Create Palette
+ * ==============
+ * 
+ * Module responsible for creating the color palette,
+ * based on one single color,
+ * and produce the 12 color palette with 9 shades of each color.
+ * The colors are in form of HEX codes which are used by specific 
+ * CSS frameworks to generate their own config code.
+ * 
+ * To create palette this module uses chroma.js package.
+ * We need to chose the luminosity of each shade.
+ * Saturation and hue is based on initial base color.
+ */
+
+
 const chroma = require("chroma-js");
 
+/**
+ * Names to give each color
+ */
 const names = [
   "red", // 0
   "orange", // 30
@@ -30,15 +49,15 @@ const hueName = hue => {
 
 /**
  * WHAT: Array of lightness values, for each color shade.
+ * 
  * WHY: Lighntess value is use to create shades. From lighter to darker
  */
-const lights = [0.95, 0.86, 0.78, 0.69, 0.6, 0.51, 0.43, 0.34, 0.25];
+const lights = [0.90, 0.80, 0.70, 0.60, 0.50, 0.40, 0.30, 0.20, 0.10];
 
 // const lums = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 //   .map(n => n + 0.5)
 //   .map(n => n / 10);
 
-// console.log(lums);
 const lums = [0.95, 0.85, 0.75, 0.65, 0.55, 0.45, 0.35, 0.25, 0.15, 0.05];
 
 /**
