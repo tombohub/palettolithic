@@ -1,18 +1,17 @@
 /**
  * Create Palette
  * ==============
- * 
+ *
  * Module responsible for creating the color palette,
  * based on one single color,
  * and produce the 12 color palette with 9 shades of each color.
- * The colors are in form of HEX codes which are used by specific 
+ * The colors are in form of HEX codes which are used by specific
  * CSS frameworks to generate their own config code.
- * 
+ *
  * To create palette this module uses chroma.js package.
  * We need to chose the luminosity of each shade.
  * Saturation and hue is based on initial base color.
  */
-
 
 const chroma = require("chroma-js");
 
@@ -20,19 +19,19 @@ const chroma = require("chroma-js");
  * Names to give each color
  */
 const names = [
-  "red", // 0
-  "orange", // 30
-  "yellow", // 60
-  "lime", // 90
-  "green", // 120
-  "teal", // 150
-  "cyan", // 180
-  "blue", // 210
-  "indigo", // 240
-  "violet", // 270
-  "purple", // 300
-  "pink", // 330
-  "red", // 360
+ "red", // 0
+ "orange", // 30
+ "yellow", // 60
+ "lime", // 90
+ "green", // 120
+ "teal", // 150
+ "cyan", // 180
+ "blue", // 210
+ "indigo", // 240
+ "violet", // 270
+ "purple", // 300
+ "pink", // 330
+ "red", // 360
 ];
 
 /**
@@ -41,18 +40,18 @@ const names = [
  * @param {Number} hue hue value of a color {0..360}
  * @returns {String} name of the color
  */
-const hueName = hue => {
-  const i = Math.round(hue / 30);
-  const name = names[i];
-  return name;
+const hueName = (hue) => {
+ const i = Math.round(hue / 30);
+ const name = names[i];
+ return name;
 };
 
 /**
  * WHAT: Array of lightness values, for each color shade.
- * 
+ *
  * WHY: Lighntess value is use to create shades. From lighter to darker
  */
-const lights = [0.90, 0.80, 0.70, 0.60, 0.50, 0.40, 0.30, 0.20, 0.10];
+const lights = [0.95, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1];
 
 // const lums = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 //   .map(n => n + 0.5)
@@ -64,12 +63,12 @@ const lums = [0.95, 0.85, 0.75, 0.65, 0.55, 0.45, 0.35, 0.25, 0.15, 0.05];
  * Creates an array of integers from 0 to {length} we want
  * @param {Number} length length of array you want to create
  */
-const createArray = length => {
-  const arr = [];
-  for (let i = 0; i < length; i++) {
-    arr.push(i);
-  }
-  return arr;
+const createArray = (length) => {
+ const arr = [];
+ for (let i = 0; i < length; i++) {
+  arr.push(i);
+ }
+ return arr;
 };
 
 /**
@@ -79,16 +78,14 @@ const createArray = length => {
  * @returns {function} function ti create array of hues
  * @returns {array} list of hues to match the base hue
  */
-const createHues = length => {
-  const hueStep = 360 / length;
+const createHues = (length) => {
+ const hueStep = 360 / length;
 
-  return baseHue => {
-    const hues = createArray(length).map(n =>
-      Math.floor((baseHue + n * hueStep) % 360)
-    );
+ return (baseHue) => {
+  const hues = createArray(length).map((n) => Math.floor((baseHue + n * hueStep) % 360));
 
-    return hues;
-  };
+  return hues;
+ };
 };
 
 /**
@@ -96,9 +93,9 @@ const createHues = length => {
  * @param {float} newSaturation new saturation value {0..1}
  * @returns {object} color with new saturation level
  */
-const desat = newSaturation => hex => {
-  const [h, s, l] = chroma(hex).hsl();
-  return chroma.hsl(h, newSaturation, l).hex();
+const desat = (newSaturation) => (hex) => {
+ const [h, s, l] = chroma(hex).hsl();
+ return chroma.hsl(h, newSaturation, l).hex();
 };
 
 /**
@@ -108,9 +105,9 @@ const desat = newSaturation => hex => {
  * @param {string} hex hex value of color
  * @returns {string} hex value of the darkest gray in palette
  */
-const createBlack = hex => {
-  const black = desat(1 / 8)(hex);
-  return chroma(black).luminance(0.05).hex();
+const createBlack = (hex) => {
+ const black = desat(1 / 8)(hex);
+ return chroma(black).luminance(0.05).hex();
 };
 
 /**
@@ -118,11 +115,11 @@ const createBlack = hex => {
  * @param {string} hex hex value of color
  * @returns {Array} shade hex values for given color
  */
-const createShades = hex => {
-  const [hue, saturation, lightness] = chroma(hex).hsl();
-  return lights.map(light => {
-    return chroma.hsl(hue, saturation, light).hex();
-  });
+const createShades = (hex) => {
+ const [hue, saturation, lightness] = chroma(hex).hsl();
+ return lights.map((light) => {
+  return chroma.hsl(hue, saturation, light).hex();
+ });
 };
 
 /**
@@ -142,20 +139,20 @@ const createShades = hex => {
  * @param {string} hex color hex value
  * @returns {string} color name {yellow, blue, etc..}
  */
-const keyword = hex => {
-  const [hue, saturation] = chroma(hex).hsl();
-  // if (saturation < 0.5) {
-  //   return "gray";
-  // }
-  const colorName = hueName(hue);
-  return colorName;
+const keyword = (hex) => {
+ const [hue, saturation] = chroma(hex).hsl();
+ // if (saturation < 0.5) {
+ //   return "gray";
+ // }
+ const colorName = hueName(hue);
+ return colorName;
 };
 
 // Reducer
 const toObj = (a, color) => {
-  const key = a[color.key] ? color.key + "2" : color.key;
-  a[key] = color.value;
-  return a;
+ const key = a[color.key] ? color.key + "2" : color.key;
+ a[key] = color.value;
+ return a;
 };
 
 /* ------------------------------ Main Function ----------------------------- */
@@ -166,41 +163,41 @@ const toObj = (a, color) => {
  * @returns {object} 12 hues with 10 shades each in object {color:[hex,...]}
  */
 function createPalette(hex) {
-  const color = chroma(hex);
-  const colors = [];
-  const [hue, sat, lte] = color.hsl();
+ const color = chroma(hex);
+ const colors = [];
+ const [hue, sat, lte] = color.hsl();
 
-  const hues = createHues(12)(hue);
+ const hues = createHues(12)(hue);
 
-  // // add darkest color to colors[]
-  // colors.push({
-  //   key: "black",
-  //   value: createBlack("" + color.hex()),
-  // });
+ // // add darkest color to colors[]
+ // colors.push({
+ //   key: "black",
+ //   value: createBlack("" + color.hex()),
+ // });
 
-  // add shades of gray to colors[]
-  colors.push({
-    key: "gray",
-    value: createShades(desat(1 / 25)("" + color.hex())),
+ // add shades of gray to colors[]
+ colors.push({
+  key: "gray",
+  value: createShades(desat(1 / 25)("" + color.hex())),
+ });
+
+ //add shades of hues to colors[]
+ // temporary fix in case hue is NaN it will go trough list here and on
+ // the website only gray will be shown
+ if (!isNaN(hue)) {
+  hues.forEach((hue) => {
+   const color = chroma.hsl(hue, sat, lte);
+   const key = keyword(color);
+   colors.push({
+    key,
+    value: createShades("" + color.hex()),
+   });
   });
+ }
+ //  console.log({ colors });
+ const obj = colors.reduce(toObj, {});
 
-  //add shades of hues to colors[]
-  // temporary fix in case hue is NaN it will go trough list here and on
-  // the website only gray will be shown
-  if (!isNaN(hue)) {
-    hues.forEach(hue => {
-      const color = chroma.hsl(hue, sat, lte);
-      const key = keyword(color);
-      colors.push({
-        key,
-        value: createShades("" + color.hex()),
-      });
-    });
-  }
-
-  const obj = colors.reduce(toObj, {});
-
-  return obj;
+ return obj;
 }
 
 /**
@@ -209,25 +206,27 @@ function createPalette(hex) {
  * @param {object} palette color pallete like: {color:[hex,...]}
  */
 function generateFrameworkObject(palette) {
-  const colors = Object.keys(palette);
+ const colors = Object.keys(palette);
 
-  // to assign 100, 200 ... to each shade
-  const assignShades = color => {
-    let i = 100;
-    let shades = {};
-    for (const shade of palette[color]) {
-      shades[parseInt(i)] = shade;
-      i += 100;
-    }
-    return shades;
-  };
-
-  let tailwind = {};
-  for (const color of colors) {
-    tailwind[color] = assignShades(color);
+ // to assign 100, 200 ... to each shade
+ const assignShades = (color) => {
+  let i = 50;
+  let shades = {};
+  for (const shade of palette[color]) {
+   shades[parseInt(i)] = shade;
+   i = i === 50 ? 100 : i + 100;
+   //  i += 100;
   }
 
-  return tailwind;
+  return shades;
+ };
+
+ let tailwind = {};
+ for (const color of colors) {
+  tailwind[color] = assignShades(color);
+ }
+
+ return tailwind;
 }
 
 export { createPalette, generateFrameworkObject };
