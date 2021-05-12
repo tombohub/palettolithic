@@ -10,10 +10,7 @@ function Color(props) {
   if (!Array.isArray(props.shades)) return false;
   return (
     <div className="flex-1 rounded p-1" data-name="color-outer">
-      <div
-        className="grid grid-cols-10 gap-1 h-full rounded"
-        data-name="color-inner"
-      >
+      <div className="grid grid-cols-11 gap-1 h-full rounded" data-name="color-inner">
         <span className="my-auto">{props.color.toUpperCase()}:</span>
         {props.shades.map((shade, i) => (
           <Shade key={i} shade={shade} />

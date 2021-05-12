@@ -1,26 +1,25 @@
 import { generateFrameworkObject } from "./createPalette.js";
 
 function generateTailwind(palette) {
-  const frameworkObject = generateFrameworkObject(palette);
-  const colorObjects = JSON.stringify(frameworkObject, null, 2)
-    .slice(1, -1)
-    .trim()
-    .replace(/"([^"]+)":/g, "$1:");
+ const frameworkObject = generateFrameworkObject(palette);
+ const colorObjects = JSON.stringify(frameworkObject, null, 2)
+  .slice(1, -1)
+  .trim()
+  .replace(/"([^"]+)":/g, "$1:")
+  .replace(/\n/g, "\n    ");
 
-  const tailwindCode = `// tailwind.config.js
+ const tailwindCode = `// tailwind.config.js
 module.exports = {
   theme: {
     colors: {
       transparent: "transparent",
       current: "currentColor",
-    ${colorObjects}
+      ${colorObjects}
     }
   }
 }`;
 
-  return tailwindCode;
+ return tailwindCode;
 }
 
 export { generateTailwind };
-
-
