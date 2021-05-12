@@ -7,6 +7,7 @@ function generateTailwind(palette) {
   .trim()
   .replace(/"([^"]+)":/g, "$1:")
   .replace(/\n/g, "\n    ");
+
  const tailwindCode = `// tailwind.config.js
 module.exports = {
   theme: {
