@@ -5,6 +5,8 @@ import Palette from "./Palette";
 import MenuBox from "./MenuBox";
 import CodeBox from "./CodeBox";
 import Header from "./Header";
+import {useHistory, useParams} from "react-router-dom";
+import Sanitize from "./Sanitize";
 
 // scripts
 import { createPalette } from "../scripts/createPalette.js";
@@ -15,10 +17,20 @@ import { createPalette } from "../scripts/createPalette.js";
  */
 function Main(props) {
   /**
+   * WHAT: color provided in the URL using react-router-dom
+   * WHY: allow a user to provide a color upon starting the page
+   */
+  const { colorParam = "07c"} = useParams();
+  /**
+   * WHAT: enabling the history function from react-router-dom
+   * WHY: allows the URL Parameter to be updated with the color
+   */
+  const history = useHistory();
+  /**
    *WHAT: current color from color picker, or input field
    *WHY: we need it to create palette from. It's in Main so it can be passed to Palette
    */
-  const [color, setColor] = useState("#07c");
+  const [color, setColor] = useState(Sanitize(colorParam));
 
   /**
    * Palette is the collection of shades for each color. Curently 12 colors with 10 shades each.
@@ -31,12 +43,13 @@ function Main(props) {
    * WHY: code will be displayed in CodeBox based on active framework
    */
   const [activeFramework, setActiveFramework] = useState("tailwind");
-
+  
   /**
    * WHAT: renders the initial demo pallete on first page visit
    * WHY: so user can immediately see an example
    */
   useEffect(() => {
+   
     const initialPallete = createPalette(color);
     setPalette(initialPallete);
   }, [color]);
@@ -47,6 +60,7 @@ function Main(props) {
    * @param {string} color color hex code
    */
   function handleOnChange(color) {
+    history.push(color.replace('#',''))
     setColor(color);
     setPalette(createPalette(color));
   }
