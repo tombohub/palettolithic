@@ -8,6 +8,9 @@ import "react-colorful/dist/index.css";
 import "./menu.css";
 
 type Props = {
+    /**
+     * color hex value
+     */
     color: string,
     onColorChange: (newColor: string) => void
 }
