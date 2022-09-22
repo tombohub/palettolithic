@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 // scripts
-import { generateTailwind } from "../scripts/generateTailwind";
+import { generateColorObjectsCode } from "../scripts/generateColorObjects";
 import { generateBootstrap } from "../scripts/generateBootstrap";
 import { generateCssVariables } from "../scripts/generateCssVariables";
 
@@ -50,7 +50,7 @@ function CodeContent(props) {
 
   const tailwindCode = (
     <>
-      <CopyToClipboard text={generateTailwind(props.palette)}>
+      <CopyToClipboard text={generateColorObjectsCode(props.palette)}>
         <div className="flex justify-end">
           <span
             onClick={handleOnClick}
@@ -61,7 +61,7 @@ function CodeContent(props) {
         </div>
       </CopyToClipboard>
       <SyntaxHighlighter language="javascript" style={tomorrowNight}>
-        {generateTailwind(props.palette)}
+        {generateColorObjectsCode(props.palette)}
       </SyntaxHighlighter>
     </>
   );
@@ -107,7 +107,7 @@ function CodeContent(props) {
 
   function renderCode(activeFramework) {
     switch (activeFramework) {
-      case "tailwind":
+      case "objects":
         return tailwindCode;
       case "bootstrap":
         return bootstrapCode;

@@ -1,6 +1,6 @@
 import { generateFrameworkObject } from "./createPalette.js";
 
-function generateTailwind(palette) {
+function generateColorObjectsCode(palette) {
   const frameworkObject = generateFrameworkObject(palette);
   const colorObjects = JSON.stringify(frameworkObject, null, 2)
     .slice(1, -1)
@@ -8,12 +8,10 @@ function generateTailwind(palette) {
     .replace(/"([^"]+)":/g, "$1:")
     .replace(/\n/g, "\n    ");
 
-  const tailwindCode = `//tailwind.config.js
-  colors: {
-      ${colorObjects}
-  }`;
+  const tailwindCode = `
+      ${colorObjects}`;
 
   return tailwindCode;
 }
 
-export { generateTailwind };
+export { generateColorObjectsCode };

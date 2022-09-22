@@ -44,7 +44,7 @@ function Main(props) {
    * WHAT: framework selected in the menu
    * WHY: code will be displayed in CodeBox based on active framework
    */
-  const [activeFramework, setActiveFramework] = useState("tailwind");
+  const [activeFramework, setActiveFramework] = useState("objects");
 
   /**
    * WHAT: renders the initial demo pallete on first page visit

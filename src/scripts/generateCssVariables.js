@@ -18,9 +18,7 @@ function generateCssVariables(palette) {
         }
     }
 
-    const cssCode = `:root {
-                ${variables}
-}`
+    const cssCode = `${variables}`
 
     return cssCode
 }

@@ -12,7 +12,7 @@ function FrameworkList(props) {
   return (
     <ul className="pt-12">
       <FrameworkItem
-        framework="tailwind"
+        framework="objects"
         activeFramework={props.activeFramework}
         setActiveFramework={props.setActiveFramework}
       />

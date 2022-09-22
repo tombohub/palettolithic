@@ -1,5 +1,5 @@
-import { tail } from "lodash";
-import React, { useState } from "react";
+import React from "react";
+
 
 /**
  * WHAT: Menu Item in framework menu. Parent is FrameworkList
@@ -16,8 +16,8 @@ function FrameworkItem(props) {
    */
   const pseudoClasses = (framework, activeFramework) => {
     //
-    // tailwind item classes
-    const tailwind = {
+    // color objects item classes
+    const colorObjects = {
       active: "bg-teal-400 border-teal-400 rounded",
       nonActive:
         "hover:bg-teal-400 hover:rounded border-teal-400 transition duration-200",
@@ -30,8 +30,8 @@ function FrameworkItem(props) {
         "hover:bg-purple-400 hover:rounded border-purple-400 transition duration-200",
     };
 
-    // bootstrap item classes
-    const css = {
+    // css variables item classes
+    const cssVariables = {
       active: "bg-orange-400 border-orange-400 rounded ",
       nonActive:
         "hover:bg-orange-400 hover:rounded border-orange-400 transition duration-200",
@@ -46,12 +46,12 @@ function FrameworkItem(props) {
     };
 
     switch (framework) {
-      case "tailwind":
-        return classes(tailwind);
+      case "objects":
+        return classes(colorObjects);
       case "bootstrap":
         return classes(bootstrap);
       case "css":
-        return classes(css);
+        return classes(cssVariables);
       default:
         return "";
     }
