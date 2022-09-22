@@ -5,7 +5,7 @@ import Palette from "./Palette";
 import MenuBox from "./MenuBox";
 import CodeBox from "./CodeBox";
 import Header from "./Header";
-import {useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import Sanitize from "../scripts/sanitizeColor";
 
 // scripts
@@ -45,13 +45,13 @@ function Main(props) {
    * WHY: code will be displayed in CodeBox based on active framework
    */
   const [activeFramework, setActiveFramework] = useState("tailwind");
-  
+
   /**
    * WHAT: renders the initial demo pallete on first page visit
    * WHY: so user can immediately see an example
    */
   useEffect(() => {
-   
+
     const initialPallete = createPalette(color);
     setPalette(initialPallete);
   }, [color]);
@@ -62,8 +62,8 @@ function Main(props) {
    * @param {string} color color hex code
    */
   function handleOnChange(color) {
-    history.push({
-      search: '?color=' + color.replace('#','')
+    history.replace({
+      search: '?color=' + color.replace('#', '')
     })
     setColor(color);
     setPalette(createPalette(color));
@@ -72,7 +72,7 @@ function Main(props) {
   return (
     <>
       <div
-        className="font-mono text-gray-900 bg-white p-2 h-screen w-screen grid 
+        className="font-mono text-gray-900 bg-white p-2 h-screen w-screen grid
                     grid-cols-12 grid-rows-8 gap-2"
       >
         <Header />
