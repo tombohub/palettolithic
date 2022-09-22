@@ -6,7 +6,7 @@ function App() {
   return (
     <Router>
       <>
-        <Route path='/:colorParam?'>
+        <Route>
           <Main />
         </Route>
       </>

@@ -5,8 +5,8 @@ import Palette from "./Palette";
 import MenuBox from "./MenuBox";
 import CodeBox from "./CodeBox";
 import Header from "./Header";
-import {useHistory, useParams} from "react-router-dom";
-import Sanitize from "./Sanitize";
+import {useHistory, useLocation } from "react-router-dom";
+import Sanitize from "../scripts/sanitizeColor";
 
 // scripts
 import { createPalette } from "../scripts/createPalette.js";
@@ -20,7 +20,9 @@ function Main(props) {
    * WHAT: color provided in the URL using react-router-dom
    * WHY: allow a user to provide a color upon starting the page
    */
-  const { colorParam = "07c"} = useParams();
+  const { search } = useLocation();
+  const searchParams = new URLSearchParams(search);
+  const colorParam = searchParams.get('color') ? searchParams.get('color') : '07c';
   /**
    * WHAT: enabling the history function from react-router-dom
    * WHY: allows the URL Parameter to be updated with the color
@@ -60,7 +62,9 @@ function Main(props) {
    * @param {string} color color hex code
    */
   function handleOnChange(color) {
-    history.push(color.replace('#',''))
+    history.push({
+      search: '?color=' + color.replace('#','')
+    })
     setColor(color);
     setPalette(createPalette(color));
   }
