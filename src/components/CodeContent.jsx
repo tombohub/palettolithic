@@ -38,7 +38,7 @@ function CodeContent(props) {
     setCopyStatus("Copied");
 
     // google analytics event no copy button click
-    gtag('event', 'click-copy-button');
+    window.gtag('event', 'click-copy-button');
   }
 
   /* ------------------------------ Code handle ----------------------------- */
