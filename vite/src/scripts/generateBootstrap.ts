@@ -90,7 +90,4 @@ function generateBootstrap(palette: ColorPalette[]) {
   return bootstrapCode;
 }
 
-const palette = createPalette("#ff3342");
-console.log(generateBootstrap(palette));
-
 export { generateBootstrap };
