@@ -51,6 +51,7 @@ function CodeContent(props) {
   SyntaxHighlighter.registerLanguage("scss", scss);
   SyntaxHighlighter.registerLanguage("css", css);
 
+
   const tailwindCode = (
     <>
       <CopyToClipboard text={generateColorObjectsCode(props.palette)}>

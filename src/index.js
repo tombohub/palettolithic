@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./assets/css/main.css";
 import "fontsource-frijole";
 import "fontsource-schoolbell";
-import App from "./App";
+import App from "../vite/src/App";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(

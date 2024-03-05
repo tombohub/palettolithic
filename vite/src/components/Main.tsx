@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 // components
-import Palette from "./Palette";
-import MenuBox from "./MenuBox";
-import CodeBox from "./CodeBox";
-import Header from "./Header";
+import Palette from "./Palette.jsx";
+import MenuBox from "./MenuBox.jsx";
+import CodeBox from "./CodeBox.jsx";
+import Header from "./Header.jsx";
 import { useHistory, useLocation } from "react-router-dom";
-import Sanitize from "../scripts/sanitizeColor";
+import Sanitize from "../scripts/sanitizeColor.js";
 
 // scripts
 import { createPalette } from "../scripts/createPalette.js";
@@ -22,7 +22,9 @@ function Main(props) {
    */
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
-  const colorParam = searchParams.get('color') ? searchParams.get('color') : '07c';
+  const colorParam = searchParams.get("color")
+    ? searchParams.get("color")
+    : "07c";
   /**
    * WHAT: enabling the history function from react-router-dom
    * WHY: allows the URL Parameter to be updated with the color
@@ -51,7 +53,6 @@ function Main(props) {
    * WHY: so user can immediately see an example
    */
   useEffect(() => {
-
     const initialPallete = createPalette(color);
     setPalette(initialPallete);
   }, [color]);
@@ -63,8 +64,8 @@ function Main(props) {
    */
   function handleOnChange(color) {
     history.replace({
-      search: '?color=' + color.replace('#', '')
-    })
+      search: "?color=" + color.replace("#", ""),
+    });
     setColor(color);
     setPalette(createPalette(color));
   }
@@ -83,10 +84,7 @@ function Main(props) {
           activeFramework={activeFramework}
           setActiveFramework={setActiveFramework}
         />
-        <CodeBox
-          palette={palette}
-          activeFramework={activeFramework}
-        />
+        <CodeBox palette={palette} activeFramework={activeFramework} />
       </div>
     </>
   );
