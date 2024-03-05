@@ -18,7 +18,7 @@ import chroma from "chroma-js";
 /**
  * Names to give each color
  */
-const names = [
+const colorNames = [
   "red", // 0
   "orange", // 30
   "yellow", // 60
@@ -32,19 +32,52 @@ const names = [
   "purple", // 300
   "pink", // 330
   "red", // 360
+] as const;
+
+type ColorName = (typeof colorNames)[number];
+
+/**
+ * Color hue, must be between 0 and 360
+ */
+type Hue = number;
+
+/**
+ * Represents hue range for specific color
+ */
+interface ColorHueRange {
+  colorName: ColorName;
+  min: Hue;
+  max: Hue;
+}
+
+const colorHueRanges: ColorHueRange[] = [
+  { colorName: "red", min: 0, max: 30 },
+  { colorName: "orange", min: 30, max: 60 },
+  { colorName: "yellow", min: 60, max: 90 },
+  { colorName: "lime", min: 90, max: 120 },
+  { colorName: "green", min: 120, max: 150 },
+  { colorName: "teal", min: 150, max: 180 },
+  { colorName: "cyan", min: 180, max: 210 },
+  { colorName: "blue", min: 210, max: 240 },
+  { colorName: "indigo", min: 240, max: 270 },
+  { colorName: "violet", min: 270, max: 300 },
+  { colorName: "purple", min: 300, max: 330 },
+  { colorName: "pink", min: 330, max: 360 },
+  { colorName: "red", min: 360, max: 360 },
 ];
 
 /**
  * What: Get the hue color name from hue number value.
  * Why: to connect the color code with the appropriate color name
- * @param {Number} hue hue value of a color {0..360}
- * @returns {String} name of the color
+ * @param {Hue} hue hue value of a color {0..360}
+ * @returns {ColorName} name of the color
  */
-const hueName = (hue: number): string => {
-  const i = Math.round(hue / 30);
-  const name = names[i];
-  return name;
-};
+export function hueToColorName(hue: Hue): ColorName {
+  const colorHueRange = colorHueRanges.find(
+    color => color.min <= hue && hue < color.max
+  );
+  return colorHueRange!.colorName;
+}
 
 /**
  * WHAT: Array of lightness values, for each color shade.
@@ -63,13 +96,13 @@ const lights = [0.95, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1];
  * Creates an array of integers from 0 to {length} we want
  * @param {Number} length length of array you want to create
  */
-const createArray = (length: number) => {
+function createArray(length: number) {
   const arr = [];
   for (let i = 0; i < length; i++) {
     arr.push(i);
   }
   return arr;
-};
+}
 
 /**
  * Creates the Array of hues (colors) starting from base hue and going
@@ -141,36 +174,35 @@ const createShades = (hex: string): string[] => {
  * @param {string} hex color hex value
  * @returns {string} color name {yellow, blue, etc..}
  */
-const keyword = (hex: string): string => {
+function hexToColorName(hex: string): ColorName {
   const [hue, saturation] = chroma(hex).hsl();
   // if (saturation < 0.5) {
   // return "gray";
   // }
-  const colorName = hueName(hue);
+  const colorName = hueToColorName(hue);
   return colorName;
-};
-
-// Reducer
-const toObj = (
-  a: { [key: string]: string[] },
-  color: { key: string; value: string[] }
-): { [key: string]: string[] } => {
-  const key = a[color.key] ? color.key + "2" : color.key;
-  a[key] = color.value;
-  return a;
-};
+}
 
 /* ------------------------------ Main Function ----------------------------- */
+
+interface ColorPalette {
+  colorName: ColorName | "gray";
+
+  /**
+   * Array of hex values
+   */
+  shades: string[];
+}
 
 /**
  * Creates the whole palette according to one base color
  * @param {string} hex base color hex value
  * @returns {object} 12 hues with 10 shades each in object {color:[hex,...]}
  */
-function createPalette(hex: string): object {
-  const color = chroma(hex);
-  const colors = [];
-  const [hue, sat, lte] = color.hsl();
+function createPalette(hex: string): ColorPalette[] {
+  const chromaColor = chroma(hex);
+  const colorShades: ColorPalette[] = [];
+  const [hue, sat, lte] = chromaColor.hsl();
 
   const hues = createHues(12)(hue);
 
@@ -181,9 +213,9 @@ function createPalette(hex: string): object {
   // });
 
   // add shades of gray to colors[]
-  colors.push({
-    key: "gray",
-    value: createShades(desat(1 / 25)("" + color.hex())),
+  colorShades.push({
+    colorName: "gray",
+    shades: createShades(desat(1 / 25)("" + chromaColor.hex())),
   });
 
   // add shades of hues to colors[]
@@ -191,47 +223,15 @@ function createPalette(hex: string): object {
   // the website only gray will be shown
   if (!isNaN(hue)) {
     hues.forEach(hue => {
-      const color = chroma.hsl(hue, sat, lte);
-      const key = keyword(color.hex());
-      colors.push({
-        key,
-        value: createShades("" + color.hex()),
+      const chromaColor = chroma.hsl(hue, sat, lte);
+      const colorName = hexToColorName(chromaColor.hex());
+      colorShades.push({
+        colorName,
+        shades: createShades("" + chromaColor.hex()),
       });
     });
   }
-  // console.log({ colors });
-  const obj = colors.reduce(toObj, {});
-
-  return obj;
+  return colorShades;
 }
 
-/**
- *WHAT: generates JS object as {color:{100:hex,200:hex...}..}
- *WHY: we will use it to generate framework specific code. It's more friendly
- * @param {object} palette color pallete like: {color:[hex,...]}
- */
-function generateFrameworkObject(palette: { [color: string]: string[] }) {
-  const colors = Object.keys(palette);
-
-  // to assign 100, 200 ... to each shade
-  const assignShades = (color: string) => {
-    let i = 50;
-    const shades: { [shadeNumber: number]: string } = {};
-    for (const shade of palette[color]) {
-      shades[i] = shade;
-      i = i === 50 ? 100 : i + 100;
-      // i += 100;
-    }
-
-    return shades;
-  };
-
-  const tailwind: { [color: string]: { [shadeNumber: number]: string } } = {};
-  for (const color of colors) {
-    tailwind[color] = assignShades(color);
-  }
-
-  return tailwind;
-}
-
-export { createPalette, generateFrameworkObject };
+export { createPalette };
