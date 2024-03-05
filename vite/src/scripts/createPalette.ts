@@ -14,65 +14,23 @@
  */
 
 import chroma from "chroma-js";
-
-/**
- * Names to give each color
- */
-const colorNames = [
-  "red", // 0
-  "orange", // 30
-  "yellow", // 60
-  "lime", // 90
-  "green", // 120
-  "teal", // 150
-  "cyan", // 180
-  "blue", // 210
-  "indigo", // 240
-  "violet", // 270
-  "purple", // 300
-  "pink", // 330
-  "red", // 360
-] as const;
-
-type ColorName = (typeof colorNames)[number];
-
-/**
- * Color hue, must be between 0 and 360
- */
-type Hue = number;
-
-/**
- * Represents hue range for specific color
- */
-interface ColorHueRange {
-  colorName: ColorName;
-  min: Hue;
-  max: Hue;
-}
-
-const colorHueRanges: ColorHueRange[] = [
-  { colorName: "red", min: 0, max: 30 },
-  { colorName: "orange", min: 30, max: 60 },
-  { colorName: "yellow", min: 60, max: 90 },
-  { colorName: "lime", min: 90, max: 120 },
-  { colorName: "green", min: 120, max: 150 },
-  { colorName: "teal", min: 150, max: 180 },
-  { colorName: "cyan", min: 180, max: 210 },
-  { colorName: "blue", min: 210, max: 240 },
-  { colorName: "indigo", min: 240, max: 270 },
-  { colorName: "violet", min: 270, max: 300 },
-  { colorName: "purple", min: 300, max: 330 },
-  { colorName: "pink", min: 330, max: 360 },
-  { colorName: "red", min: 360, max: 360 },
-];
+import {
+  type ColorName,
+  type ColorPalette,
+  colorHueRanges,
+  ColorShade,
+  shadeWeights,
+  ShadeWeight,
+  ShadeLightness,
+} from "./domain";
 
 /**
  * What: Get the hue color name from hue number value.
  * Why: to connect the color code with the appropriate color name
- * @param {Hue} hue hue value of a color {0..360}
+ * @param {number} hue hue value of a color {0..360}
  * @returns {ColorName} name of the color
  */
-export function hueToColorName(hue: Hue): ColorName {
+export function hueToColorName(hue: number): ColorName {
   const colorHueRange = colorHueRanges.find(
     color => color.min <= hue && hue < color.max
   );
@@ -80,11 +38,32 @@ export function hueToColorName(hue: Hue): ColorName {
 }
 
 /**
+ * creates color lightness that corresponds to the specific shade weight.
+ * Lower shades are higher lightness.
+ * @param shade shade weight
+ * @returns color lightness to correspond to the shade weight
+ */
+export function createLightness(shade: ShadeWeight): number {
+  return (1000 - shade) / 1000;
+}
+
+/**
  * WHAT: Array of lightness values, for each color shade.
  *
  * WHY: Lighntess value is use to create shades. From lighter to darker
  */
-const lights = [0.95, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1];
+function createShadeLightValues(): ShadeLightness[] {
+  const mapShadeLight = (shade: ShadeWeight): ShadeLightness => ({
+    shade: shade,
+    lighntess: createLightness(shade),
+  });
+
+  const shadeLights: ShadeLightness[] = shadeWeights.map(shade =>
+    mapShadeLight(shade)
+  );
+
+  return shadeLights;
+}
 
 // const lums = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 // .map(n => n + 0.5)
@@ -146,16 +125,41 @@ const createBlack = (hex: string): string => {
 };
 
 /**
- * Creates shades of single color. Using luminance values.
- * @param {string} hex hex value of color
- * @returns {Array} shade hex values for given color
+ * Adjusts the lightness of a given color.
+ *
+ * @param {string} hex - The hex code of the color to adjust.
+ * @param {number} newLightness - The new lightness value to apply.
+ * @returns {string} The hex code of the color with adjusted lightness with # prefix
  */
-const createShades = (hex: string): string[] => {
-  const [hue, saturation, lightness] = chroma(hex).hsl();
-  return lights.map(light => {
-    return chroma.hsl(hue, saturation, light).hex();
-  });
-};
+export function adjustLighntess(hex: string, newLightness: number) {
+  const [hue, saturation, lighntess] = chroma(hex).hsl();
+  const adjustedHex = chroma.hsl(hue, saturation, newLightness).hex();
+  return adjustedHex;
+}
+
+/**
+ * Maps a hex color to a specific shade by adjusting its lightness.
+ *
+ * @param {string} hex - The hex code of the color to adjust.
+ * @param {ShadeWeight} shade - The weight of the shade to map to.
+ * @returns {string} The hex code of the color adjusted to the specified shade.
+ */
+function mapHexToShade(hex: string, shade: ShadeWeight): ColorShade {
+  const lightness = createLightness(shade);
+  const shadeHex = adjustLighntess(hex, lightness);
+  return { weight: shade, hexValue: shadeHex };
+}
+
+/**
+ * Creates an array of color shades from a single color by adjusting its lightness.
+ *
+ * @param {string} hex - The hex code of the color to create shades from.
+ * @returns {ColorShade[]} An array of ColorShade objects, each representing a different shade of the input color.
+ */
+function createShadeHexValues(hex: string): ColorShade[] {
+  const shades = shadeWeights.map(shade => mapHexToShade(hex, shade));
+  return shades;
+}
 
 /**
  * WHAT: Creates shades of a single color. Using luminosity.
@@ -185,15 +189,6 @@ function hexToColorName(hex: string): ColorName {
 
 /* ------------------------------ Main Function ----------------------------- */
 
-interface ColorPalette {
-  colorName: ColorName | "gray";
-
-  /**
-   * Array of hex values
-   */
-  shades: string[];
-}
-
 /**
  * Creates the whole palette according to one base color
  * @param {string} hex base color hex value
@@ -201,7 +196,7 @@ interface ColorPalette {
  */
 function createPalette(hex: string): ColorPalette[] {
   const chromaColor = chroma(hex);
-  const colorShades: ColorPalette[] = [];
+  const palette: ColorPalette[] = [];
   const [hue, sat, lte] = chromaColor.hsl();
 
   const hues = createHues(12)(hue);
@@ -213,9 +208,9 @@ function createPalette(hex: string): ColorPalette[] {
   // });
 
   // add shades of gray to colors[]
-  colorShades.push({
+  palette.push({
     colorName: "gray",
-    shades: createShades(desat(1 / 25)("" + chromaColor.hex())),
+    shades: createShadeHexValues(desat(1 / 25)("" + chromaColor.hex())),
   });
 
   // add shades of hues to colors[]
@@ -225,13 +220,13 @@ function createPalette(hex: string): ColorPalette[] {
     hues.forEach(hue => {
       const chromaColor = chroma.hsl(hue, sat, lte);
       const colorName = hexToColorName(chromaColor.hex());
-      colorShades.push({
+      palette.push({
         colorName,
-        shades: createShades("" + chromaColor.hex()),
+        shades: createShadeHexValues("" + chromaColor.hex()),
       });
     });
   }
-  return colorShades;
+  return palette;
 }
 
 export { createPalette };
