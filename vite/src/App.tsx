@@ -1,15 +1,13 @@
 import Main from "./components/Main";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <Router>
-      <>
-        <Route>
-          <Main />
-        </Route>
-      </>
-    </Router>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Main />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
