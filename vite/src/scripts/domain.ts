@@ -1,4 +1,4 @@
-export type ColorName =
+export type ChromaticColorName =
   | "red"
   | "orange"
   | "yellow"
@@ -11,6 +11,10 @@ export type ColorName =
   | "violet"
   | "purple"
   | "pink";
+
+type NeutralColorName = "gray";
+
+export type ColorName = ChromaticColorName | NeutralColorName;
 
 export const shadeWeights = [
   50, 100, 200, 300, 400, 500, 600, 700, 800, 900,
@@ -39,17 +43,17 @@ export interface ColorShade {
 }
 
 /**
- * Represents a color palette.
+ * Represents a color scale.
  *
  * @interface
  * @property {ColorName | "gray"} colorName - The name of the color.
  * @property {ColorShade[]} shades - An array of ColorShade objects, each representing a different shade of the color.
  */
-export interface ColorPalette {
+export interface ColorScale {
   /**
    * The name of the color.
    */
-  colorName: ColorName | "gray";
+  colorName: ColorName;
 
   /**
    * An array of ColorShade objects, each representing a different shade of the color.
@@ -64,7 +68,7 @@ interface ColorHueRange {
   /**
    * color name as in red, yellow...
    */
-  colorName: ColorName;
+  colorName: ChromaticColorName;
 
   /**
    * minimum hue value of the color

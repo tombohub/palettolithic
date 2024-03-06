@@ -1,12 +1,21 @@
-import React from "react";
 import Shade from "./Shade";
+import { ColorName } from "../scripts/domain";
+
+interface Props {
+  /**
+   * hex values of each shade
+   */
+  shades: string[];
+
+  color: ColorName;
+}
 
 /**
  * Hold Shades of single Color. It lists all the Shades of the Color passed in props from
  * Pallete component.
  * @param {object} props passed from App->Palette. Single color
  */
-function Color(props) {
+export default function Color(props: Props) {
   if (!Array.isArray(props.shades)) return false;
   return (
     <div className="flex-1 rounded p-1" data-name="color-outer">
@@ -19,5 +28,3 @@ function Color(props) {
     </div>
   );
 }
-
-export default Color;

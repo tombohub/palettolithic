@@ -2,7 +2,7 @@
 /*                 Generating Bootstrap custom code for theming                 */
 /* -------------------------------------------------------------------------- */
 
-import { ColorPalette } from "./domain.js";
+import { ColorScale } from "./domain.js";
 import { createPalette } from "./createPalette.js";
 
 /**
@@ -24,10 +24,10 @@ function generateScssColorVariable(
 /**
  * Generates SCSS variables for a bootstrap color palette.
  *
- * @param {ColorPalette[]} palette - An array of ColorPalette objects, each representing a different color and its shades.
+ * @param {ColorScale[]} palette - An array of ColorPalette objects, each representing a different color and its shades.
  * @returns {string} A string of SCSS variables representing the color palette.
  */
-function generateColorVariables(palette: ColorPalette[]): string {
+function generateColorVariables(palette: ColorScale[]): string {
   let variables = "";
 
   palette.forEach(({ colorName, shades }) => {
@@ -44,7 +44,7 @@ function generateColorVariables(palette: ColorPalette[]): string {
  * WHAT: generates the Bootstrap scss variables for css
  * WHY: Botstrap uses these variables to generate vanilla css variables
  */
-function generateCssColors(palette: ColorPalette[]): string {
+function generateCssColors(palette: ColorScale[]): string {
   let variables = "";
 
   palette.forEach(({ colorName }) => {
@@ -57,9 +57,9 @@ function generateCssColors(palette: ColorPalette[]): string {
 /**
  * WHAT: generates scss theme-colors() map
  * WHY: bootstrap generates classes names from this map
- * @param {ColorPalette[]} palette
+ * @param {ColorScale[]} palette
  */
-function generateThemeMap(palette: ColorPalette[]): string {
+function generateThemeMap(palette: ColorScale[]): string {
   let colors = "";
 
   palette.forEach(({ colorName, shades }) => {
@@ -78,9 +78,9 @@ function generateThemeMap(palette: ColorPalette[]): string {
 /**
  * WHAT: generates complete custom code for Bootstrap
  * WHY: user can copy paste code to theme Bootstrap
- * @param {ColorPalette[]} palette palette object as {color:[hex1, hex2,...]}
+ * @param {ColorScale[]} palette palette object as {color:[hex1, hex2,...]}
  */
-function generateBootstrap(palette: ColorPalette[]) {
+function generateBootstrap(palette: ColorScale[]) {
   const variables = generateColorVariables(palette);
   const cssColors = generateCssColors(palette);
   const map = generateThemeMap(palette);

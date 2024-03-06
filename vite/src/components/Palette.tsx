@@ -1,13 +1,16 @@
 import React from "react";
 import Color from "./Color";
+import { ColorScale } from "../scripts/domain";
+import { getPaletteColors, getColorShadesHexValues } from "../scripts/utils";
+
+interface Props {
+  palette: ColorScale[];
+}
 
 /**
  * Hold the complete Palette. Which consists of Colors, inside Colors are Shades
  */
-function Palette(props) {
-  // get the list of colors from palette
-  const colors = Object.keys(props.palette);
-
+function Palette(props: Props) {
   // render the list of Color components based on colors.map and
   // pass the shades as props to the Color component, which it will use it to render
   // list of Shade component
@@ -20,8 +23,12 @@ function Palette(props) {
         id="palette-inner"
         className="flex flex-col justify-between h-full rounded overflow-hidden"
       >
-        {colors.map((color, i) => (
-          <Color key={i} shades={props.palette[color]} color={color} />
+        {props.palette.map(colorScale => (
+          <Color
+            key={colorScale.colorName}
+            shades={getColorShadesHexValues(colorScale)}
+            color={colorScale.colorName}
+          />
         ))}
       </div>
     </div>

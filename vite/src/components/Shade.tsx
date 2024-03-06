@@ -1,6 +1,4 @@
-import React from "react";
-
-function Shade(props) {
+export default function Shade(props) {
   return (
     <div
       data-name="shade"
@@ -9,5 +7,3 @@ function Shade(props) {
     ></div>
   );
 }
-
-export default Shade;

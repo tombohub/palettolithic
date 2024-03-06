@@ -15,8 +15,8 @@
 
 import chroma from "chroma-js";
 import {
-  type ColorName,
-  type ColorPalette,
+  type ChromaticColorName,
+  type ColorScale,
   colorHueRanges,
   ColorShade,
   shadeWeights,
@@ -28,9 +28,9 @@ import {
  * What: Get the hue color name from hue number value.
  * Why: to connect the color code with the appropriate color name
  * @param {number} hue hue value of a color {0..360}
- * @returns {ColorName} name of the color
+ * @returns {ChromaticColorName} name of the color
  */
-export function hueToColorName(hue: number): ColorName {
+export function hueToColorName(hue: number): ChromaticColorName {
   const colorHueRange = colorHueRanges.find(
     color => color.min <= hue && hue < color.max
   );
@@ -178,7 +178,7 @@ function createShadeHexValues(hex: string): ColorShade[] {
  * @param {string} hex color hex value
  * @returns {string} color name {yellow, blue, etc..}
  */
-function hexToColorName(hex: string): ColorName {
+function hexToColorName(hex: string): ChromaticColorName {
   const [hue, saturation] = chroma(hex).hsl();
   // if (saturation < 0.5) {
   // return "gray";
@@ -194,9 +194,9 @@ function hexToColorName(hex: string): ColorName {
  * @param {string} hex base color hex value
  * @returns {object} 12 hues with 10 shades each in object {color:[hex,...]}
  */
-function createPalette(hex: string): ColorPalette[] {
+function createPalette(hex: string): ColorScale[] {
   const chromaColor = chroma(hex);
-  const palette: ColorPalette[] = [];
+  const palette: ColorScale[] = [];
   const [hue, sat, lte] = chromaColor.hsl();
 
   const hues = createHues(12)(hue);

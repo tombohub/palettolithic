@@ -1,46 +1,41 @@
 import React, { useEffect, useState } from "react";
 
 // components
-import Palette from "./Palette.jsx";
-import MenuBox from "./MenuBox.jsx";
-import CodeBox from "./CodeBox.jsx";
-import Header from "./Header.jsx";
-import { useHistory, useLocation } from "react-router-dom";
-import Sanitize from "../scripts/sanitizeColor.js";
+import Palette from "./Palette";
+import MenuBox from "./MenuBox";
+import CodeBox from "./CodeBox";
+import Header from "./Header";
+import { useSearchParams } from "react-router-dom";
+import sanitize from "../scripts/sanitizeColor";
 
 // scripts
 import { createPalette } from "../scripts/createPalette.js";
+import { ColorScale } from "../scripts/domain.js";
 
 /**
  * Main component that displays the first page with form and palette
- * @param {object} props palette and onSubmit
  */
-function Main(props) {
+function Main() {
   /**
    * WHAT: color provided in the URL using react-router-dom
    * WHY: allow a user to provide a color upon starting the page
    */
-  const { search } = useLocation();
-  const searchParams = new URLSearchParams(search);
-  const colorParam = searchParams.get("color")
-    ? searchParams.get("color")
-    : "07c";
-  /**
-   * WHAT: enabling the history function from react-router-dom
-   * WHY: allows the URL Parameter to be updated with the color
-   */
-  const history = useHistory();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const colorParam = searchParams.get("color") ?? "07c";
+
   /**
    *WHAT: current color from color picker, or input field
    *WHY: we need it to create palette from. It's in Main so it can be passed to Palette
    */
-  const [color, setColor] = useState(Sanitize(colorParam));
+  const [color, setColor] = useState(sanitize(colorParam));
 
   /**
    * Palette is the collection of shades for each color. Curently 12 colors with 10 shades each.
-   * {color:[shades],....}. createPalette function is used to create a collection after form submit
+   * createPalette function is used to create a collection after form submit
    */
-  const [palette, setPalette] = useState({});
+  const [palette, setPalette] = useState<ColorScale[]>(
+    createPalette(colorParam)
+  );
 
   /**
    * WHAT: framework selected in the menu
@@ -62,10 +57,8 @@ function Main(props) {
    * WHY: theres no e.target.value because color pickier component passes color immediately
    * @param {string} color color hex code
    */
-  function handleOnChange(color) {
-    history.replace({
-      search: "?color=" + color.replace("#", ""),
-    });
+  function handleOnChange(color: string) {
+    setSearchParams({ color: color }, { replace: true });
     setColor(color);
     setPalette(createPalette(color));
   }
