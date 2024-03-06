@@ -1,13 +1,16 @@
-import React from "react";
-
 // components
+import { ColorScale, Framework } from "../scripts/domain";
 import CodeContent from "./CodeContent";
 
+interface Props {
+  activeFramework: Framework;
+  palette: ColorScale[];
+}
+
 /**
- * Box in which we will render the code of chosen framework
- *
+ * Box in which we will render the generated code of chosen framework
  */
-function CodeBox(props) {
+function CodeBox(props: Props) {
   return (
     <div
       id="code-area"

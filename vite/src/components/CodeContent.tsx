@@ -1,9 +1,18 @@
+declare global {
+  interface Window {
+    gtag: (
+      type: string,
+      event: string,
+      options?: Record<string, unknown>
+    ) => void;
+  }
+}
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 
 // scripts
-import { generateColorObjectsCode } from "../scripts/generateColorObjects";
+import { generateTailwind } from "../scripts/generateTailwind";
 import { generateBootstrap } from "../scripts/generateBootstrap";
 import { generateCssVariables } from "../scripts/generateCssVariables";
 
@@ -14,13 +23,19 @@ import scss from "react-syntax-highlighter/dist/esm/languages/hljs/scss";
 import css from "react-syntax-highlighter/dist/esm/languages/hljs/css";
 import { tomorrowNight } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { ColorScale, Framework } from "../scripts/domain";
+
+interface Props {
+  palette: ColorScale[];
+  activeFramework: Framework;
+}
 
 /**
  * Actual code of chosen framework. All the frameworks will render here because we
  * want to use syntax highlighter in one place.
  *
  */
-function CodeContent(props) {
+function CodeContent(props: Props) {
   //
   /**
    * WHAT: state if code is copied.
@@ -34,11 +49,11 @@ function CodeContent(props) {
     setCopyStatus("Copy");
   }, [props.palette, props.activeFramework]);
 
-  function handleOnClick(e) {
+  function handleOnClick() {
     setCopyStatus("Copied");
 
     // google analytics event no copy button click
-    window.gtag('event', 'click-copy-button');
+    window.gtag("event", "click-copy-button");
   }
 
   /* ------------------------------ Code handle ----------------------------- */
@@ -51,10 +66,9 @@ function CodeContent(props) {
   SyntaxHighlighter.registerLanguage("scss", scss);
   SyntaxHighlighter.registerLanguage("css", css);
 
-
   const tailwindCode = (
     <>
-      <CopyToClipboard text={generateColorObjectsCode(props.palette)}>
+      <CopyToClipboard text={generateTailwind(props.palette)}>
         <div className="flex justify-end">
           <span
             onClick={handleOnClick}
@@ -65,7 +79,7 @@ function CodeContent(props) {
         </div>
       </CopyToClipboard>
       <SyntaxHighlighter language="javascript" style={tomorrowNight}>
-        {generateColorObjectsCode(props.palette)}
+        {generateTailwind(props.palette)}
       </SyntaxHighlighter>
     </>
   );
@@ -88,7 +102,6 @@ function CodeContent(props) {
     </>
   );
 
-
   const cssCode = (
     <>
       <CopyToClipboard text={generateCssVariables(props.palette)}>
@@ -109,9 +122,9 @@ function CodeContent(props) {
 
   /* -------------------------------- Render -------------------------------- */
 
-  function renderCode(activeFramework) {
+  function renderCode(activeFramework: Framework) {
     switch (activeFramework) {
-      case "objects":
+      case "tailwind":
         return tailwindCode;
       case "bootstrap":
         return bootstrapCode;
