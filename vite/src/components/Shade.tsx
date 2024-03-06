@@ -1,9 +1,13 @@
-export default function Shade(props) {
+interface Props {
+  shadeHexValue: string;
+}
+
+export default function Shade(props: Props) {
   return (
     <div
       data-name="shade"
       className=""
-      style={{ backgroundColor: props.shade }}
+      style={{ backgroundColor: props.shadeHexValue }}
     ></div>
   );
 }
