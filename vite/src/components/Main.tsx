@@ -58,7 +58,7 @@ function Main() {
    * @param {string} hexValue color hex code
    */
   function handleOnChange(hexValue: string) {
-    setSearchParams({ color: hexValue }, { replace: true });
+    setSearchParams({ color: hexValue.replace("#", "") }, { replace: true });
     setHexValue(hexValue);
     setPalette(createPalette(hexValue));
   }
