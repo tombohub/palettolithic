@@ -8,6 +8,7 @@ import "react-colorful/dist/index.css";
 
 // custom css for color picker
 import "./menu.css";
+import { Framework } from "../scripts/domain";
 
 interface Props {
   /**
@@ -20,12 +21,12 @@ interface Props {
    */
   onColorChange: (color: string) => void;
 
-  activeFramework: string;
+  activeFramework: Framework;
 
   /**
    * Change of selected framework event
    */
-  onFrameworkChange: (framework: string) => void;
+  onFrameworkChange: (framework: Framework) => void;
 }
 /**
  * WHAT: menu box to hold color picker and frameworks menu items
@@ -42,7 +43,7 @@ function MenuBox(props: Props) {
 
         <FrameworkList
           activeFramework={props.activeFramework}
-          setActiveFramework={props.onFrameworkChange}
+          onFrameworkChange={props.onFrameworkChange}
         />
 
         <div className="mt-32">

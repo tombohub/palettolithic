@@ -2,30 +2,31 @@ import React from "react";
 
 // components
 import FrameworkItem from "./FrameworkItem";
+import { Framework, frameworks } from "../scripts/domain";
+
+interface Props {
+  activeFramework: Framework;
+  /**
+   * Change of selected framework event
+   */
+  onFrameworkChange: (framework: Framework) => void;
+}
 
 /**
  * WHAT: Menu list of frameworks to choose from.
  * The code will display based on active framework
- * @param {*} props
  */
-function FrameworkList(props) {
+function FrameworkList(props: Props) {
   return (
     <ul className="pt-12">
-      <FrameworkItem
-        framework="objects"
-        activeFramework={props.activeFramework}
-        setActiveFramework={props.setActiveFramework}
-      />
-      <FrameworkItem
-        framework="bootstrap"
-        activeFramework={props.activeFramework}
-        setActiveFramework={props.setActiveFramework}
-      />
-      <FrameworkItem
-        framework="css"
-        activeFramework={props.activeFramework}
-        setActiveFramework={props.setActiveFramework}
-      />
+      {frameworks.map(framework => (
+        <FrameworkItem
+          framework={framework}
+          activeFramework={props.activeFramework}
+          onFrameworkChange={props.onFrameworkChange}
+          key={framework}
+        />
+      ))}
     </ul>
   );
 }

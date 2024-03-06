@@ -96,3 +96,13 @@ export const colorHueRanges: ColorHueRange[] = [
   { colorName: "pink", min: 330, max: 360 },
   { colorName: "red", min: 360, max: 360 },
 ];
+
+/**
+ * List of supported frameworks
+ */
+export const frameworks = ["tailwind", "bootstrap", "css"] as const;
+
+/**
+ * Represents supported framework
+ */
+export type Framework = (typeof frameworks)[number];

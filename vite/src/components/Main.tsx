@@ -10,7 +10,7 @@ import sanitize from "../scripts/sanitizeColor";
 
 // scripts
 import { createPalette } from "../scripts/createPalette.js";
-import { ColorScale } from "../scripts/domain.js";
+import { ColorScale, Framework } from "../scripts/domain.js";
 
 /**
  * Main component that displays the first page with form and palette
@@ -41,7 +41,7 @@ function Main() {
    * WHAT: framework selected in the menu
    * WHY: code will be displayed in CodeBox based on active framework
    */
-  const [activeFramework, setActiveFramework] = useState("objects");
+  const [activeFramework, setActiveFramework] = useState<Framework>("tailwind");
 
   /**
    * WHAT: renders the initial demo pallete on first page visit
