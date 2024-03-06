@@ -10,7 +10,7 @@ function Header() {
         Palettolithic
       </h1>
       <h6 className="font-schoolbell md:text-xl lg:text-2xl text-gray-800 inline-block">
-        So easy caveman can do it.
+        So easy caveman can do it...
       </h6>
     </header>
   );
