@@ -24,10 +24,10 @@ function Main() {
   const colorParam = searchParams.get("color") ?? "07c";
 
   /**
-   *WHAT: current color from color picker, or input field
+   *WHAT: current color  hex value from color picker, or input field
    *WHY: we need it to create palette from. It's in Main so it can be passed to Palette
    */
-  const [color, setColor] = useState(sanitize(colorParam));
+  const [hexValue, setHexValue] = useState(sanitize(colorParam));
 
   /**
    * Palette is the collection of shades for each color. Curently 12 colors with 10 shades each.
@@ -48,19 +48,19 @@ function Main() {
    * WHY: so user can immediately see an example
    */
   useEffect(() => {
-    const initialPallete = createPalette(color);
+    const initialPallete = createPalette(hexValue);
     setPalette(initialPallete);
-  }, [color]);
+  }, [hexValue]);
 
   /**
    * WHAT: handles the onChange of color picker.
    * WHY: theres no e.target.value because color pickier component passes color immediately
-   * @param {string} color color hex code
+   * @param {string} hexValue color hex code
    */
-  function handleOnChange(color: string) {
-    setSearchParams({ color: color }, { replace: true });
-    setColor(color);
-    setPalette(createPalette(color));
+  function handleOnChange(hexValue: string) {
+    setSearchParams({ color: hexValue }, { replace: true });
+    setHexValue(hexValue);
+    setPalette(createPalette(hexValue));
   }
 
   return (
@@ -72,10 +72,10 @@ function Main() {
         <Header />
         <Palette palette={palette} />
         <MenuBox
-          color={color}
+          hexValue={hexValue}
           onColorChange={handleOnChange}
           activeFramework={activeFramework}
-          setActiveFramework={setActiveFramework}
+          onFrameworkChange={setActiveFramework}
         />
         <CodeBox palette={palette} activeFramework={activeFramework} />
       </div>
