@@ -1,9 +1,10 @@
-module.exports = {
+/** @type {import('tailwindcss').Config} */
+export default {
   future: {
     // removeDeprecatedGapUtilities: true,
     // purgeLayersByDefault: true,
   },
-  purge: ["./src/**/*.jsx"],
+  purge: ["./src/**/*.{js,ts,jsx,tsx}"],
   target: "relaxed",
   prefix: "",
   important: false,
@@ -814,3 +815,5 @@ module.exports = {
   corePlugins: {},
   plugins: [],
 };
+
+
