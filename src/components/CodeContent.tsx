@@ -23,10 +23,10 @@ import css from "react-syntax-highlighter/dist/esm/languages/hljs/css";
 import { tomorrowNight } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { ColorScale, Framework } from "../core/domain";
+import { useAppSelector } from "@/hooks/useAppSelector";
 
 interface Props {
   palette: ColorScale[];
-  activeFramework: Framework;
 }
 
 /**
@@ -44,9 +44,13 @@ function CodeContent(props: Props) {
    */
   const [copyStatus, setCopyStatus] = useState("Copy");
 
+  const activeFramework = useAppSelector(
+    state => state.framework.activeFramework
+  );
+
   useEffect(() => {
     setCopyStatus("Copy");
-  }, [props.palette, props.activeFramework]);
+  }, [props.palette, activeFramework]);
 
   function handleOnClick() {
     setCopyStatus("Copied");
@@ -134,7 +138,7 @@ function CodeContent(props: Props) {
     }
   }
 
-  return <>{renderCode(props.activeFramework)}</>;
+  return <>{renderCode(activeFramework)}</>;
 }
 
 export default CodeContent;

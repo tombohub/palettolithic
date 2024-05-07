@@ -1,9 +1,7 @@
-// components
-import { ColorScale, Framework } from "../core/domain";
+import { ColorScale } from "../core/domain";
 import CodeContent from "./CodeContent";
 
 interface Props {
-  activeFramework: Framework;
   palette: ColorScale[];
 }
 
@@ -16,10 +14,7 @@ function CodeBox(props: Props) {
       id="code-area"
       className="col-span-2 row-span-7 bg-gray-900 text-sm text-gray-100 p-2 rounded overflow-auto"
     >
-      <CodeContent
-        activeFramework={props.activeFramework}
-        palette={props.palette}
-      />
+      <CodeContent palette={props.palette} />
     </div>
   );
 }

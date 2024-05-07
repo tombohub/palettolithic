@@ -77,7 +77,7 @@ function Main() {
           activeFramework={activeFramework}
           onFrameworkChange={setActiveFramework}
         />
-        <CodeBox palette={palette} activeFramework={activeFramework} />
+        <CodeBox palette={palette} />
       </div>
     </>
   );

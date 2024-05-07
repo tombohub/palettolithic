@@ -9,7 +9,7 @@ const initialState: InitialState = {
   hexValue: "07c",
 };
 
-export const colorPickSlice = createSlice({
+const colorPickSlice = createSlice({
   name: "color-pick",
   initialState,
   reducers: {
