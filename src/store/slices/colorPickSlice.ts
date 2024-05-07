@@ -1,23 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
+import { createPalette } from "@/core/palette";
+import { ColorScale } from "@/core/domain";
 
 interface InitialState {
-  hexValue: string;
+  pickedHexValue: string;
+  palette: ColorScale[];
 }
 
 const initialState: InitialState = {
-  hexValue: "07c",
+  pickedHexValue: "07c",
+  palette: createPalette("07c"),
 };
 
-const colorPickSlice = createSlice({
-  name: "color-pick",
+const paletteSlice = createSlice({
+  name: "palette",
   initialState,
   reducers: {
     setHexValue: (state, action: PayloadAction<string>) => {
-      state.hexValue = action.payload;
+      state.pickedHexValue = action.payload;
+      state.palette = createPalette(action.payload);
     },
   },
 });
 
-export const colorPickActions = colorPickSlice.actions;
-export default colorPickSlice.reducer;
+export const colorPickActions = paletteSlice.actions;
+export default paletteSlice.reducer;

@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import colorPickReducer from "./slices/colorPickSlice";
+import paletteReducer from "./slices/colorPickSlice";
 import frameworkReducer from "./slices/frameworkSlice";
 
 export const store = configureStore({
   reducer: {
-    colorPick: colorPickReducer,
+    palette: paletteReducer,
     framework: frameworkReducer,
   },
 });

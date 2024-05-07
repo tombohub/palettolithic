@@ -8,7 +8,7 @@ interface Props {
 /**
  * Box in which we will render the generated code of chosen framework
  */
-function CodeBox(props: Props) {
+function ConfigurationCodeBox(props: Props) {
   return (
     <div
       id="code-area"
@@ -19,4 +19,4 @@ function CodeBox(props: Props) {
   );
 }
 
-export default CodeBox;
+export default ConfigurationCodeBox;

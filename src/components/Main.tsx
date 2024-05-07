@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import { useAppSelector } from "@/hooks/useAppSelector.js";
 
 // components
 import Palette from "./Palette";
 import MenuBox from "./MenuBox";
-import CodeBox from "./CodeBox";
+import ConfigurationCodeBox from "./ConfigurationCodeBox.js";
 import Header from "./Header";
 import { useSearchParams } from "react-router-dom";
 import sanitize from "../scripts/sanitizeColor";
@@ -33,35 +34,13 @@ function Main() {
    * Palette is the collection of shades for each color. Curently 12 colors with 10 shades each.
    * createPalette function is used to create a collection after form submit
    */
-  const [palette, setPalette] = useState<ColorScale[]>(
-    createPalette(colorParam)
-  );
+  const palette = useAppSelector(state => state.palette.palette);
 
   /**
    * WHAT: framework selected in the menu
    * WHY: code will be displayed in CodeBox based on active framework
    */
   const [activeFramework, setActiveFramework] = useState<Framework>("tailwind");
-
-  /**
-   * WHAT: renders the initial demo pallete on first page visit
-   * WHY: so user can immediately see an example
-   */
-  useEffect(() => {
-    const initialPallete = createPalette(hexValue);
-    setPalette(initialPallete);
-  }, [hexValue]);
-
-  /**
-   * WHAT: handles the onChange of color picker.
-   * WHY: theres no e.target.value because color pickier component passes color immediately
-   * @param {string} hexValue color hex code
-   */
-  function handleOnChange(hexValue: string) {
-    setSearchParams({ color: hexValue.replace("#", "") }, { replace: true });
-    setHexValue(hexValue);
-    setPalette(createPalette(hexValue));
-  }
 
   return (
     <>
@@ -73,11 +52,10 @@ function Main() {
         <Palette palette={palette} />
         <MenuBox
           hexValue={hexValue}
-          onColorChange={handleOnChange}
           activeFramework={activeFramework}
           onFrameworkChange={setActiveFramework}
         />
-        <CodeBox palette={palette} />
+        <ConfigurationCodeBox palette={palette} />
       </div>
     </>
   );

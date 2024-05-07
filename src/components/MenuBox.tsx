@@ -13,11 +13,6 @@ interface Props {
    */
   hexValue: string;
 
-  /**
-   * when color changes event
-   */
-  onColorChange: (color: string) => void;
-
   activeFramework: Framework;
 
   /**

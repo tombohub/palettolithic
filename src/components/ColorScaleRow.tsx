@@ -7,7 +7,7 @@ interface Props {
    */
   shades: string[];
 
-  color: ColorName;
+  colorName: ColorName;
 }
 
 /**
@@ -15,12 +15,12 @@ interface Props {
  * Pallete component.
  * @param {object} props passed from App->Palette. Single color
  */
-export default function Color(props: Props) {
+export default function ColorScaleRow(props: Props) {
   if (!Array.isArray(props.shades)) return false;
   return (
     <div className="flex-1 rounded p-1" data-name="color-outer">
       <div className="grid grid-cols-11 gap-1 h-full" data-name="color-inner">
-        <span className="my-auto">{props.color.toUpperCase()}:</span>
+        <span className="my-auto">{props.colorName.toUpperCase()}:</span>
         {props.shades.map(shade => (
           <Shade key={shade} shadeHexValue={shade} />
         ))}

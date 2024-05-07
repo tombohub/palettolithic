@@ -1,6 +1,6 @@
 import React from "react";
-import Color from "./Color";
-import { ColorScale } from "../core/domain";
+import ColorScaleRow from "./ColorScaleRow";
+import type { ColorScale } from "../core/domain";
 import { getColorShadesHexValues } from "../core/palette";
 
 interface Props {
@@ -24,10 +24,10 @@ function Palette(props: Props) {
         className="flex flex-col justify-between h-full rounded overflow-hidden"
       >
         {props.palette.map(colorScale => (
-          <Color
+          <ColorScaleRow
             key={colorScale.colorName}
             shades={getColorShadesHexValues(colorScale)}
-            color={colorScale.colorName}
+            colorName={colorScale.colorName}
           />
         ))}
       </div>

@@ -9,7 +9,7 @@ import "./menu.css";
 
 export default function ColorPicker() {
   const dispatch = useAppDispatch();
-  const colorHexValue = useAppSelector(state => state.colorPick.hexValue);
+  const colorHexValue = useAppSelector(state => state.palette.pickedHexValue);
 
   const handleColorChange = useDebouncedCallback((hexValue: string) => {
     dispatch(colorPickActions.setHexValue(hexValue));
