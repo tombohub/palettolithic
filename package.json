@@ -14,6 +14,7 @@
   "dependencies": {
     "@fontsource/frijole": "^5.0.8",
     "@fontsource/schoolbell": "^5.0.8",
+    "@mantine/code-highlight": "^7.9.0",
     "@mantine/core": "^7.9.0",
     "@mantine/hooks": "^7.9.0",
     "@reduxjs/toolkit": "^2.2.3",
