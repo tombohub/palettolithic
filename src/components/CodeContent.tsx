@@ -22,19 +22,15 @@ import scss from "react-syntax-highlighter/dist/esm/languages/hljs/scss";
 import css from "react-syntax-highlighter/dist/esm/languages/hljs/css";
 import { tomorrowNight } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { ColorScale, Framework } from "../core/domain";
+import { Framework } from "../core/domain";
 import { useAppSelector } from "@/hooks/useAppSelector";
-
-interface Props {
-  palette: ColorScale[];
-}
 
 /**
  * Actual code of chosen framework. All the frameworks will render here because we
  * want to use syntax highlighter in one place.
  *
  */
-function CodeContent(props: Props) {
+function CodeContent() {
   //
   /**
    * WHAT: state if code is copied.
@@ -48,9 +44,11 @@ function CodeContent(props: Props) {
     state => state.framework.activeFramework
   );
 
+  const currentPalette = useAppSelector(state => state.palette.currentPalette);
+
   useEffect(() => {
     setCopyStatus("Copy");
-  }, [props.palette, activeFramework]);
+  }, [currentPalette, activeFramework]);
 
   function handleOnClick() {
     setCopyStatus("Copied");
@@ -71,7 +69,7 @@ function CodeContent(props: Props) {
 
   const tailwindCode = (
     <>
-      <CopyToClipboard text={generateTailwind(props.palette)}>
+      <CopyToClipboard text={generateTailwind(currentPalette)}>
         <div className="flex justify-end">
           <span
             onClick={handleOnClick}
@@ -82,14 +80,14 @@ function CodeContent(props: Props) {
         </div>
       </CopyToClipboard>
       <SyntaxHighlighter language="javascript" style={tomorrowNight}>
-        {generateTailwind(props.palette)}
+        {generateTailwind(currentPalette)}
       </SyntaxHighlighter>
     </>
   );
 
   const bootstrapCode = (
     <>
-      <CopyToClipboard text={generateBootstrap(props.palette)}>
+      <CopyToClipboard text={generateBootstrap(currentPalette)}>
         <div className="flex justify-end">
           <span
             onClick={handleOnClick}
@@ -100,14 +98,14 @@ function CodeContent(props: Props) {
         </div>
       </CopyToClipboard>
       <SyntaxHighlighter language="scss" style={tomorrowNight}>
-        {generateBootstrap(props.palette)}
+        {generateBootstrap(currentPalette)}
       </SyntaxHighlighter>
     </>
   );
 
   const cssCode = (
     <>
-      <CopyToClipboard text={generateCssVariables(props.palette)}>
+      <CopyToClipboard text={generateCssVariables(currentPalette)}>
         <div className="flex justify-end">
           <span
             onClick={handleOnClick}
@@ -118,7 +116,7 @@ function CodeContent(props: Props) {
         </div>
       </CopyToClipboard>
       <SyntaxHighlighter language="css" style={tomorrowNight}>
-        {generateCssVariables(props.palette)}
+        {generateCssVariables(currentPalette)}
       </SyntaxHighlighter>
     </>
   );

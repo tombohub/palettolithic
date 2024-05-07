@@ -5,12 +5,12 @@ import { ColorScale } from "@/core/domain";
 
 interface InitialState {
   pickedHexValue: string;
-  palette: ColorScale[];
+  currentPalette: ColorScale[];
 }
 
 const initialState: InitialState = {
   pickedHexValue: "07c",
-  palette: createPalette("07c"),
+  currentPalette: createPalette("07c"),
 };
 
 const paletteSlice = createSlice({
@@ -19,7 +19,7 @@ const paletteSlice = createSlice({
   reducers: {
     setHexValue: (state, action: PayloadAction<string>) => {
       state.pickedHexValue = action.payload;
-      state.palette = createPalette(action.payload);
+      state.currentPalette = createPalette(action.payload);
     },
   },
 });

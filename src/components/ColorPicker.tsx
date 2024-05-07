@@ -1,7 +1,7 @@
 import { HexColorInput, HexColorPicker } from "react-colorful";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
 import { useAppSelector } from "@/hooks/useAppSelector";
-import { colorPickActions } from "@/store/slices/colorPickSlice";
+import { colorPickActions } from "@/store/slices/paletteSlice";
 import { useDebouncedCallback } from "@mantine/hooks";
 import { useSearchParams } from "react-router-dom";
 

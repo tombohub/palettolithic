@@ -1,16 +1,14 @@
 import React from "react";
 import ColorScaleRow from "./ColorScaleRow";
-import type { ColorScale } from "../core/domain";
 import { getColorShadesHexValues } from "../core/palette";
-
-interface Props {
-  palette: ColorScale[];
-}
+import { useAppSelector } from "@/hooks/useAppSelector";
 
 /**
  * Hold the complete Palette. Which consists of Colors, inside Colors are Shades
  */
-function Palette(props: Props) {
+function Palette() {
+  const palette = useAppSelector(state => state.palette.currentPalette);
+
   // render the list of Color components based on colors.map and
   // pass the shades as props to the Color component, which it will use it to render
   // list of Shade component
@@ -23,7 +21,7 @@ function Palette(props: Props) {
         id="palette-inner"
         className="flex flex-col justify-between h-full rounded overflow-hidden"
       >
-        {props.palette.map(colorScale => (
+        {palette.map(colorScale => (
           <ColorScaleRow
             key={colorScale.colorName}
             shades={getColorShadesHexValues(colorScale)}

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useAppSelector } from "@/hooks/useAppSelector.js";
 
 // components
 import Palette from "./Palette";
@@ -14,8 +13,6 @@ import { Framework } from "../core/domain.js";
  * Main component that displays the first page with form and palette
  */
 function Main() {
-  const palette = useAppSelector(state => state.palette.palette);
-
   /**
    * WHAT: framework selected in the menu
    * WHY: code will be displayed in CodeBox based on active framework
@@ -29,12 +26,12 @@ function Main() {
                     grid-cols-12 grid-rows-8 gap-2"
       >
         <Header />
-        <Palette palette={palette} />
+        <Palette />
         <MenuBox
           activeFramework={activeFramework}
           onFrameworkChange={setActiveFramework}
         />
-        <ConfigurationCodeBox palette={palette} />
+        <ConfigurationCodeBox />
       </div>
     </>
   );
