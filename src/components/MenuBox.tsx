@@ -8,11 +8,6 @@ import "./menu.css";
 import { Framework } from "../core/domain";
 
 interface Props {
-  /**
-   * active color hex value
-   */
-  hexValue: string;
-
   activeFramework: Framework;
 
   /**
