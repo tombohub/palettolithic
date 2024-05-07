@@ -24,6 +24,7 @@ import {
   ShadeLightness,
   colorHueRanges,
 } from "./domain";
+import { createArray } from "./utils";
 
 /**
  * What: Get the hue color name from hue number value.
@@ -74,18 +75,6 @@ function createShadeLightValues(): ShadeLightness[] {
 // .map(n => n / 10);
 
 // const lums = [0.95, 0.85, 0.75, 0.65, 0.55, 0.45, 0.35, 0.25, 0.15, 0.05];
-
-/**
- * Creates an array of integers from 0 to {length} we want
- * @param {Number} length length of array you want to create
- */
-function createArray(length: number) {
-  const arr = [];
-  for (let i = 0; i < length; i++) {
-    arr.push(i);
-  }
-  return arr;
-}
 
 /**
  * Creates the Array of hues (colors) starting from base hue and going
@@ -198,7 +187,7 @@ function hexToColorName(hex: string): ChromaticColorName {
  * @param {string} hex base color hex value
  * @returns {object} 12 hues with 10 shades each in object {color:[hex,...]}
  */
-function createPalette(hex: string): ColorScale[] {
+export function createPalette(hex: string): ColorScale[] {
   const chromaColor = chroma(hex);
   const palette: ColorScale[] = [];
   const [hue, sat, lte] = chromaColor.hsl();
@@ -233,4 +222,12 @@ function createPalette(hex: string): ColorScale[] {
   return palette;
 }
 
-export { createPalette };
+/**
+ * Returns an array of hex values for the shades in a color scale.
+ * @param colorScale - The color scale object.
+ * @returns An array of hex values for the shades in the color scale.
+ */
+export function getColorShadesHexValues(colorScale: ColorScale): string[] {
+  const hexValues = colorScale.shades.map(shade => shade.hexValue);
+  return hexValues;
+}

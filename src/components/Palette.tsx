@@ -1,7 +1,7 @@
 import React from "react";
 import Color from "./Color";
 import { ColorScale } from "../core/domain";
-import { getColorShadesHexValues } from "../scripts/utils";
+import { getColorShadesHexValues } from "../core/palette";
 
 interface Props {
   palette: ColorScale[];

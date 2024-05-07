@@ -16,17 +16,22 @@ type NeutralColorName = "gray";
 
 export type ColorName = ChromaticColorName | NeutralColorName;
 
+//TODO: this goes to the frameworks layer
 export const shadeWeights = [
   50, 100, 200, 300, 400, 500, 600, 700, 800, 900,
 ] as const;
 
 export type ShadeWeight = (typeof shadeWeights)[number];
 
+//TODO: this is coupled to the color theory and frameworks
 export interface ShadeLightness {
   shade: ShadeWeight;
   lighntess: number;
 }
 
+export type HexColorCode = string;
+
+//TODO: coupled color theory <> framework
 /**
  * Represents hex value for the corresponding shade weight
  */
@@ -34,7 +39,7 @@ export interface ColorShade {
   /**
    * hex string color value
    */
-  hexValue: string;
+  hexValue: HexColorCode;
 
   /**
    * shade weight number -> 100, 200...

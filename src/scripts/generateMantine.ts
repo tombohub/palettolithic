@@ -1,5 +1,5 @@
 import { ColorName, ColorScale } from "../core/domain";
-import { getColorShadesHexValues } from "./utils";
+import { getColorShadesHexValues } from "../core/palette";
 
 type MantineColors = {
   [K in ColorName]: string[];
