@@ -33,10 +33,7 @@ function MenuBox(props: Props) {
   return (
     <>
       <div className="col-span-2 row-span-7">
-        <ColorPicker
-          color={props.hexValue}
-          onColorChange={props.onColorChange}
-        />
+        <ColorPicker />
 
         <FrameworkList
           activeFramework={props.activeFramework}
