@@ -1,8 +1,9 @@
 // components
 import Palette from "./Palette";
 import MenuBox from "./MenuBox";
-import ConfigurationCodeBox from "./ConfigurationCodeBox.js";
 import Header from "./Header";
+import CodeContent from "./CodeContent.js";
+import { Box } from "@mantine/core";
 
 /**
  * Main component that displays the first page with form and palette
@@ -10,15 +11,38 @@ import Header from "./Header";
 function Main() {
   return (
     <>
-      <div
-        className="font-mono text-gray-900 bg-white p-2 h-screen w-screen grid
-                    grid-cols-12 grid-rows-8 gap-2"
+      <Box
+        style={theme => ({
+          height: "100vh",
+          display: "grid",
+          gridTemplateColumns: "repeat(12, minmax(0, 1fr))",
+          gridTemplateRows: "repeat(8, minmax(0, 1fr))",
+          fontFamily: theme.fontFamilyMonospace,
+        })}
       >
-        <Header />
-        <Palette />
-        <MenuBox />
-        <ConfigurationCodeBox />
-      </div>
+        <Box component="header" style={{ gridColumn: "span 4" }}>
+          <Header />
+        </Box>
+
+        <Box style={{ gridColumn: "span 8", gridRow: "span 8" }}>
+          <Palette />
+        </Box>
+
+        <Box style={{ gridColumn: "span 2", gridRow: "span 7" }}>
+          <MenuBox />
+        </Box>
+
+        <Box
+          style={theme => ({
+            backgroundColor: theme.colors.dark,
+            gridColumn: "span 2",
+            gridRow: "span 7",
+            overflow: "auto",
+          })}
+        >
+          <CodeContent />
+        </Box>
+      </Box>
     </>
   );
 }

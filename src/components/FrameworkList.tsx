@@ -9,7 +9,7 @@ import { useAppSelector } from "@/hooks/useAppSelector";
 function FrameworkList() {
   const frameworks = useAppSelector(state => state.app.frameworks);
   return (
-    <ul className="pt-12">
+    <ul>
       {frameworks.map(framework => (
         <FrameworkItem framework={framework} key={framework} />
       ))}

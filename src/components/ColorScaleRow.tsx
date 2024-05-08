@@ -1,5 +1,6 @@
 import Shade from "./Shade";
 import { ColorName } from "../core/domain";
+import { Box, SimpleGrid } from "@mantine/core";
 
 interface Props {
   /**
@@ -18,13 +19,13 @@ interface Props {
 export default function ColorScaleRow(props: Props) {
   if (!Array.isArray(props.shades)) return false;
   return (
-    <div className="flex-1 rounded p-1" data-name="color-outer">
-      <div className="grid grid-cols-11 gap-1 h-full" data-name="color-inner">
-        <span className="my-auto">{props.colorName.toUpperCase()}:</span>
-        {props.shades.map(shade => (
-          <Shade key={shade} shadeHexValue={shade} />
-        ))}
-      </div>
-    </div>
+    <SimpleGrid cols={11} h={"100%"} spacing={"xs"}>
+      <Box component="span" style={{ alignSelf: "center" }}>
+        {props.colorName.toUpperCase()}:
+      </Box>
+      {props.shades.map(shade => (
+        <Shade key={shade} shadeHexValue={shade} />
+      ))}
+    </SimpleGrid>
   );
 }

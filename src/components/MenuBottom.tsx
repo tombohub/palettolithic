@@ -4,8 +4,8 @@ export default function MenuBottom() {
   return (
     <>
       <br />
-      <a href="https://github.com/tombohub/palettolithic" className="underline">
-        <AiFillGithub className="inline" />{" "}
+      <a href="https://github.com/tombohub/palettolithic">
+        <AiFillGithub />
       </a>
     </>
   );

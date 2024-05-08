@@ -12,15 +12,11 @@ import "./menu.css";
 function MenuBox() {
   return (
     <>
-      <div className="col-span-2 row-span-7">
-        <ColorPicker />
+      <ColorPicker />
 
-        <FrameworkList />
+      <FrameworkList />
 
-        <div className="mt-32">
-          <MenuBottom />
-        </div>
-      </div>
+      <MenuBottom />
     </>
   );
 }

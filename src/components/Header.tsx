@@ -1,16 +1,26 @@
+import { Title } from "@mantine/core";
+
 /**
  * WHAT: holds the title of the website
  */
 function Header() {
   return (
-    <header className="col-span-4 rounded shadow">
-      <h1 className="lg:text-4xl md:text-3xl text-gray-900 font-frijole inline-block">
+    <>
+      <Title
+        style={{
+          fontFamily: "Frijole",
+          fontWeight: "normal",
+        }}
+      >
         Palettolithic
-      </h1>
-      <h6 className="font-schoolbell md:text-xl lg:text-2xl text-gray-800 inline-block">
+      </Title>
+      <Title
+        order={3}
+        style={{ fontWeight: "normal", fontFamily: "Schoolbell" }}
+      >
         So easy caveman can do it...
-      </h6>
-    </header>
+      </Title>
+    </>
   );
 }
 

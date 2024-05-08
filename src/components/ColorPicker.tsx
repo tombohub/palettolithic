@@ -29,7 +29,6 @@ export default function ColorPicker() {
         placeholder={"HEX code"}
         color={colorHexValue}
         onChange={handleColorChange}
-        className="bg-gray-200 rounded p-2 border w-full"
       />
     </>
   );

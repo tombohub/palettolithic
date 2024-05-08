@@ -1,6 +1,7 @@
 import { useAppSelector } from "@/hooks/useAppSelector";
 import CopyCodeButton from "./CopyCodeButton";
 import { CodeHighlight } from "@mantine/code-highlight";
+import { Box } from "@mantine/core";
 
 /**
  * Actual code of chosen framework. All the frameworks will render here because we
@@ -15,8 +16,15 @@ function CodeContent() {
 
   return (
     <>
-      <CopyCodeButton />
-      <CodeHighlight code={configurationCode} language={codeLanguage} />
+      <Box bg={"dark"}>
+        <CopyCodeButton />
+        <CodeHighlight
+          code={configurationCode}
+          language={codeLanguage}
+          withCopyButton={false}
+          bg={"dark"}
+        />
+      </Box>
     </>
   );
 }

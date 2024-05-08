@@ -5,10 +5,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { store } from "./store";
 import { Provider as ReduxProvider } from "react-redux";
 import { MantineProvider } from "@mantine/core";
+import { theme } from "./theme";
 
 function App() {
   return (
-    <MantineProvider>
+    <MantineProvider forceColorScheme="light" theme={theme}>
       <ReduxProvider store={store}>
         <BrowserRouter>
           <Routes>

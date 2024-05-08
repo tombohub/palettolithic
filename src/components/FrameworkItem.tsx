@@ -16,14 +16,7 @@ function FrameworkItem(props: Props) {
   function handleClick() {
     dispatch(appActions.setActiveFramework(props.framework));
   }
-  return (
-    <li
-      className="cursor-pointer p-2 capitalize text-lg mt-2 border-l-4"
-      onClick={handleClick}
-    >
-      {props.framework}
-    </li>
-  );
+  return <li onClick={handleClick}>{props.framework}</li>;
 }
 
 export default FrameworkItem;
