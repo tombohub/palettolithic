@@ -11,11 +11,12 @@ function CodeContent() {
   const configurationCode = useAppSelector(
     state => state.app.configurationCode
   );
+  const codeLanguage = useAppSelector(state => state.app.codeLanguage);
 
   return (
     <>
       <CopyCodeButton />
-      <CodeHighlight code={configurationCode} language="javascript" />
+      <CodeHighlight code={configurationCode} language={codeLanguage} />
     </>
   );
 }

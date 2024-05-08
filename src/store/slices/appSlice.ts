@@ -13,6 +13,7 @@ import {
   INITAL_PALETTE,
   INITIAL_FRAMEWORK,
   INITIAL_CONFIGURATION_CODE,
+  INITIAL_CODE_LANGUAGE,
 } from "./initializeStates";
 
 interface InitialState {
@@ -40,6 +41,11 @@ interface InitialState {
    * generated configuration code for the framework
    */
   configurationCode: string;
+
+  /**
+   * language of the generated code
+   */
+  codeLanguage: "javascript" | "css" | "scss";
 }
 
 const initialState: InitialState = {
@@ -48,6 +54,7 @@ const initialState: InitialState = {
   frameworks: frameworks,
   activeFramework: INITIAL_FRAMEWORK,
   configurationCode: INITIAL_CONFIGURATION_CODE,
+  codeLanguage: INITIAL_CODE_LANGUAGE,
 };
 
 const appSlice = createSlice({
@@ -60,12 +67,15 @@ const appSlice = createSlice({
       switch (state.activeFramework) {
         case "tailwind":
           state.configurationCode = generateTailwind(state.currentPalette);
+          state.codeLanguage = "javascript";
           break;
         case "bootstrap 4":
           state.configurationCode = generateBootstrap(state.currentPalette);
+          state.codeLanguage = "scss";
           break;
         case "css":
           state.configurationCode = generateCssVariables(state.currentPalette);
+          state.codeLanguage = "css";
           break;
       }
     },
@@ -74,12 +84,15 @@ const appSlice = createSlice({
       switch (action.payload) {
         case "tailwind":
           state.configurationCode = generateTailwind(state.currentPalette);
+          state.codeLanguage = "javascript";
           break;
         case "bootstrap 4":
           state.configurationCode = generateBootstrap(state.currentPalette);
+          state.codeLanguage = "scss";
           break;
         case "css":
           state.configurationCode = generateCssVariables(state.currentPalette);
+          state.codeLanguage = "css";
           break;
       }
     },
