@@ -1,24 +1,13 @@
-import { useState } from "react";
-
 // components
 import Palette from "./Palette";
 import MenuBox from "./MenuBox";
 import ConfigurationCodeBox from "./ConfigurationCodeBox.js";
 import Header from "./Header";
 
-// scripts
-import { Framework } from "../core/domain.js";
-
 /**
  * Main component that displays the first page with form and palette
  */
 function Main() {
-  /**
-   * WHAT: framework selected in the menu
-   * WHY: code will be displayed in CodeBox based on active framework
-   */
-  const [activeFramework, setActiveFramework] = useState<Framework>("tailwind");
-
   return (
     <>
       <div
@@ -27,10 +16,7 @@ function Main() {
       >
         <Header />
         <Palette />
-        <MenuBox
-          activeFramework={activeFramework}
-          onFrameworkChange={setActiveFramework}
-        />
+        <MenuBox />
         <ConfigurationCodeBox />
       </div>
     </>

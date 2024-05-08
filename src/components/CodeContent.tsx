@@ -9,7 +9,7 @@ import { CodeHighlight } from "@mantine/code-highlight";
  */
 function CodeContent() {
   const configurationCode = useAppSelector(
-    state => state.framework.configurationCode
+    state => state.app.configurationCode
   );
 
   return (

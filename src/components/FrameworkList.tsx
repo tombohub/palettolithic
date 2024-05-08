@@ -1,29 +1,17 @@
 // components
 import FrameworkItem from "./FrameworkItem";
-import { Framework, frameworks } from "../core/domain";
-
-interface Props {
-  activeFramework: Framework;
-  /**
-   * Change of selected framework event
-   */
-  onFrameworkChange: (framework: Framework) => void;
-}
+import { useAppSelector } from "@/hooks/useAppSelector";
 
 /**
  * WHAT: Menu list of frameworks to choose from.
  * The code will display based on active framework
  */
-function FrameworkList(props: Props) {
+function FrameworkList() {
+  const frameworks = useAppSelector(state => state.app.frameworks);
   return (
     <ul className="pt-12">
       {frameworks.map(framework => (
-        <FrameworkItem
-          framework={framework}
-          activeFramework={props.activeFramework}
-          onFrameworkChange={props.onFrameworkChange}
-          key={framework}
-        />
+        <FrameworkItem framework={framework} key={framework} />
       ))}
     </ul>
   );

@@ -8,14 +8,14 @@ declare global {
   }
 }
 
-import { CopyButton, Button } from "@mantine/core";
+import { Button } from "@mantine/core";
 import { useAppSelector } from "@/hooks/useAppSelector";
 import { useClipboard } from "@mantine/hooks";
 
 export default function CopyCodeButton() {
   const clipboard = useClipboard();
   const configurationCode = useAppSelector(
-    state => state.framework.configurationCode
+    state => state.app.configurationCode
   );
 
   function handleClick() {

@@ -1,4 +1,3 @@
-import React from "react";
 import ColorScaleRow from "./ColorScaleRow";
 import { getColorShadesHexValues } from "../core/palette";
 import { useAppSelector } from "@/hooks/useAppSelector";
@@ -7,7 +6,7 @@ import { useAppSelector } from "@/hooks/useAppSelector";
  * Hold the complete Palette. Which consists of Colors, inside Colors are Shades
  */
 function Palette() {
-  const palette = useAppSelector(state => state.palette.currentPalette);
+  const palette = useAppSelector(state => state.app.currentPalette);
 
   // render the list of Color components based on colors.map and
   // pass the shades as props to the Color component, which it will use it to render
