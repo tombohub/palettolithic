@@ -1,29 +1,27 @@
+import { ColorInput as MantineColorInput } from "@mantine/core";
+import { useSearchParams } from "react-router-dom";
+
 import { useAppDispatch } from "@/hooks/useAppDispatch";
 import { useAppSelector } from "@/hooks/useAppSelector";
 import { appActions } from "@/store/slices/appSlice";
-import { useDebouncedCallback } from "@mantine/hooks";
-import { useSearchParams } from "react-router-dom";
-import { ColorPicker as MantineColorPicker, ColorInput } from "@mantine/core";
 
-export default function ColorPicker() {
+export default function ColorInput() {
   const dispatch = useAppDispatch();
   const colorHexValue = useAppSelector(state => state.app.pickedHexValue);
-  /**
-   * WHAT: color provided in the URL using react-router-dom
-   * WHY: allow a user to provide a color upon starting the page
-   */
+  const isValidHex = useAppSelector(state => state.app.isValidHex);
   const [, setSearchParams] = useSearchParams();
-  const handleColorChange = useDebouncedCallback((hexValue: string) => {
+
+  function handleColorChange(hexValue: string) {
     dispatch(appActions.setHexValue(hexValue));
     setSearchParams({ color: hexValue.replace("#", "") }, { replace: true });
-  }, 300);
-
+  }
   return (
     <>
-      <MantineColorPicker
+      <MantineColorInput
         value={colorHexValue}
         onChange={handleColorChange}
-        fullWidth
+        withPicker={false}
+        error={!isValidHex}
       />
     </>
   );
