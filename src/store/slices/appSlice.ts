@@ -3,9 +3,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { createPalette } from "@/core/palette";
 import { frameworks, type Framework } from "@/core/domain";
 
-import { generateTailwind } from "@/scripts/generateTailwind";
-import { generateBootstrap } from "@/scripts/generateBootstrap";
-import { generateCssVariables } from "@/scripts/generateCssVariables";
+import { generateCode } from "@/core/code";
 import { validateHexColorValue } from "@/core/validators";
 
 import { ColorScale } from "@/core/domain";
@@ -76,15 +74,22 @@ const appSlice = createSlice({
         state.currentPalette = createPalette(action.payload);
         switch (state.activeFramework) {
           case "tailwind":
-            state.configurationCode = generateTailwind(state.currentPalette);
+            state.configurationCode = generateCode(
+              state.activeFramework,
+              state.currentPalette
+            );
             state.codeLanguage = "javascript";
             break;
           case "bootstrap 4":
-            state.configurationCode = generateBootstrap(state.currentPalette);
+            state.configurationCode = generateCode(
+              state.activeFramework,
+              state.currentPalette
+            );
             state.codeLanguage = "scss";
             break;
           case "css":
-            state.configurationCode = generateCssVariables(
+            state.configurationCode = generateCode(
+              state.activeFramework,
               state.currentPalette
             );
             state.codeLanguage = "css";
@@ -98,15 +103,24 @@ const appSlice = createSlice({
       state.activeFramework = action.payload;
       switch (action.payload) {
         case "tailwind":
-          state.configurationCode = generateTailwind(state.currentPalette);
+          state.configurationCode = generateCode(
+            state.activeFramework,
+            state.currentPalette
+          );
           state.codeLanguage = "javascript";
           break;
         case "bootstrap 4":
-          state.configurationCode = generateBootstrap(state.currentPalette);
+          state.configurationCode = generateCode(
+            state.activeFramework,
+            state.currentPalette
+          );
           state.codeLanguage = "scss";
           break;
         case "css":
-          state.configurationCode = generateCssVariables(state.currentPalette);
+          state.configurationCode = generateCode(
+            state.activeFramework,
+            state.currentPalette
+          );
           state.codeLanguage = "css";
           break;
       }

@@ -2,7 +2,7 @@
 /*                 Generating Bootstrap custom code for theming                 */
 /* -------------------------------------------------------------------------- */
 
-import { ColorScale } from "../core/domain.js";
+import { ColorScale } from "../domain";
 
 /**
  * Generates a SCSS variable for a specific color shade.
@@ -79,7 +79,7 @@ function generateThemeMap(palette: ColorScale[]): string {
  * WHY: user can copy paste code to theme Bootstrap
  * @param {ColorScale[]} palette palette object as {color:[hex1, hex2,...]}
  */
-function generateBootstrap(palette: ColorScale[]) {
+export function generateBootstrap4(palette: ColorScale[]) {
   const variables = generateColorVariables(palette);
   const cssColors = generateCssColors(palette);
   const map = generateThemeMap(palette);
@@ -88,5 +88,3 @@ function generateBootstrap(palette: ColorScale[]) {
 
   return bootstrapCode;
 }
-
-export { generateBootstrap };
