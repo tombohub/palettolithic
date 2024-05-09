@@ -6,6 +6,7 @@ import { frameworks, type Framework } from "@/core/domain";
 import { generateTailwind } from "@/scripts/generateTailwind";
 import { generateBootstrap } from "@/scripts/generateBootstrap";
 import { generateCssVariables } from "@/scripts/generateCssVariables";
+import { validateHexColorValue } from "@/core/validators";
 
 import { ColorScale } from "@/core/domain";
 import {
@@ -21,6 +22,11 @@ interface InitialState {
    * hex value picked by user
    */
   pickedHexValue: string;
+
+  /**
+   * True if hex code is valid according to the domain rules
+   */
+  isValidHex: boolean;
 
   /**
    * current color palette generated from picked hex value
@@ -50,6 +56,7 @@ interface InitialState {
 
 const initialState: InitialState = {
   pickedHexValue: INITIAL_HEX_VALUE,
+  isValidHex: true,
   currentPalette: INITAL_PALETTE,
   frameworks: frameworks,
   activeFramework: INITIAL_FRAMEWORK,
@@ -63,20 +70,28 @@ const appSlice = createSlice({
   reducers: {
     setHexValue: (state, action: PayloadAction<string>) => {
       state.pickedHexValue = action.payload;
-      state.currentPalette = createPalette(action.payload);
-      switch (state.activeFramework) {
-        case "tailwind":
-          state.configurationCode = generateTailwind(state.currentPalette);
-          state.codeLanguage = "javascript";
-          break;
-        case "bootstrap 4":
-          state.configurationCode = generateBootstrap(state.currentPalette);
-          state.codeLanguage = "scss";
-          break;
-        case "css":
-          state.configurationCode = generateCssVariables(state.currentPalette);
-          state.codeLanguage = "css";
-          break;
+
+      if (validateHexColorValue(action.payload)) {
+        state.isValidHex = true;
+        state.currentPalette = createPalette(action.payload);
+        switch (state.activeFramework) {
+          case "tailwind":
+            state.configurationCode = generateTailwind(state.currentPalette);
+            state.codeLanguage = "javascript";
+            break;
+          case "bootstrap 4":
+            state.configurationCode = generateBootstrap(state.currentPalette);
+            state.codeLanguage = "scss";
+            break;
+          case "css":
+            state.configurationCode = generateCssVariables(
+              state.currentPalette
+            );
+            state.codeLanguage = "css";
+            break;
+        }
+      } else {
+        state.isValidHex = false;
       }
     },
     setActiveFramework: (state, action: PayloadAction<Framework>) => {
