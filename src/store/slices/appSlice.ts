@@ -5,6 +5,7 @@ import { frameworks, type Framework } from "@/core/domain";
 
 import { generateCode } from "@/core/code";
 import { validateHexColorValue } from "@/core/validators";
+import { genCode } from "@/core/main";
 
 import { ColorScale } from "@/core/domain";
 import {
@@ -15,7 +16,7 @@ import {
   INITIAL_CODE_LANGUAGE,
 } from "./initializeStates";
 
-interface InitialState {
+interface SliceState {
   /**
    * hex value picked by user
    */
@@ -52,7 +53,7 @@ interface InitialState {
   codeLanguage: "javascript" | "css" | "scss";
 }
 
-const initialState: InitialState = {
+const initialState: SliceState = {
   pickedHexValue: INITIAL_HEX_VALUE,
   isValidHex: true,
   currentPalette: INITAL_PALETTE,
@@ -68,65 +69,18 @@ const appSlice = createSlice({
   reducers: {
     setHexValue: (state, action: PayloadAction<string>) => {
       state.pickedHexValue = action.payload;
-
-      if (validateHexColorValue(action.payload)) {
-        state.isValidHex = true;
-        state.currentPalette = createPalette(action.payload);
-        switch (state.activeFramework) {
-          case "tailwind":
-            state.configurationCode = generateCode(
-              state.activeFramework,
-              state.currentPalette
-            );
-            state.codeLanguage = "javascript";
-            break;
-          case "bootstrap 4":
-            state.configurationCode = generateCode(
-              state.activeFramework,
-              state.currentPalette
-            );
-            state.codeLanguage = "scss";
-            break;
-          case "css":
-            state.configurationCode = generateCode(
-              state.activeFramework,
-              state.currentPalette
-            );
-            state.codeLanguage = "css";
-            break;
-        }
-      } else {
-        state.isValidHex = false;
-      }
+      state.configurationCode = newCofigurationCode(state);
     },
     setActiveFramework: (state, action: PayloadAction<Framework>) => {
       state.activeFramework = action.payload;
-      switch (action.payload) {
-        case "tailwind":
-          state.configurationCode = generateCode(
-            state.activeFramework,
-            state.currentPalette
-          );
-          state.codeLanguage = "javascript";
-          break;
-        case "bootstrap 4":
-          state.configurationCode = generateCode(
-            state.activeFramework,
-            state.currentPalette
-          );
-          state.codeLanguage = "scss";
-          break;
-        case "css":
-          state.configurationCode = generateCode(
-            state.activeFramework,
-            state.currentPalette
-          );
-          state.codeLanguage = "css";
-          break;
-      }
+      state.configurationCode = newCofigurationCode(state);
     },
   },
 });
+
+function newCofigurationCode(state: SliceState) {
+  return genCode(state.pickedHexValue, state.activeFramework);
+}
 
 export const appActions = appSlice.actions;
 export default appSlice.reducer;
