@@ -1,3 +1,8 @@
+import chroma from "chroma-js";
+
+import { HSL, Hex, Hue, Luminosity, Saturation } from "./valueObjects";
+import { hexToHsl } from "./transformations";
+
 export type ChromaticColorName =
   | "red"
   | "orange"
@@ -29,6 +34,9 @@ export interface ShadeLightness {
   lighntess: number;
 }
 
+/**
+ * hex color code
+ */
 export type HexColorCode = string;
 
 //TODO: coupled color theory <> framework
@@ -76,30 +84,31 @@ export interface ColorHueRange {
   colorName: ChromaticColorName;
 
   /**
-   * minimum hue value of the color
+   * starting hue value of the color
    */
-  min: number;
+  start: number;
 
   /**
-   * maximum hue value of the color
+   * ending hue value of the color
    */
-  max: number;
+  end: number;
 }
 
 export const colorHueRanges: ColorHueRange[] = [
-  { colorName: "red", min: 0, max: 30 },
-  { colorName: "orange", min: 30, max: 60 },
-  { colorName: "yellow", min: 60, max: 90 },
-  { colorName: "lime", min: 90, max: 120 },
-  { colorName: "green", min: 120, max: 150 },
-  { colorName: "teal", min: 150, max: 180 },
-  { colorName: "cyan", min: 180, max: 210 },
-  { colorName: "blue", min: 210, max: 240 },
-  { colorName: "indigo", min: 240, max: 270 },
-  { colorName: "violet", min: 270, max: 300 },
-  { colorName: "purple", min: 300, max: 330 },
-  { colorName: "pink", min: 330, max: 360 },
-  { colorName: "red", min: 360, max: 360 },
+  // 360 is same as 0
+  { colorName: "red", start: 360, end: 360 },
+  { colorName: "red", start: 0, end: 29 },
+  { colorName: "orange", start: 30, end: 59 },
+  { colorName: "yellow", start: 60, end: 89 },
+  { colorName: "lime", start: 90, end: 119 },
+  { colorName: "green", start: 120, end: 149 },
+  { colorName: "teal", start: 150, end: 179 },
+  { colorName: "cyan", start: 180, end: 209 },
+  { colorName: "blue", start: 210, end: 239 },
+  { colorName: "indigo", start: 240, end: 269 },
+  { colorName: "violet", start: 270, end: 299 },
+  { colorName: "purple", start: 300, end: 329 },
+  { colorName: "pink", start: 330, end: 359 },
 ];
 
 /**
@@ -116,3 +125,20 @@ export const frameworks = [
  * Represents supported framework
  */
 export type Framework = (typeof frameworks)[number];
+
+// export interface Color {
+//   name: string;
+//   hex: string;
+//   hue: number;
+//   saturation: number;
+//   luminosity: number;
+// }
+
+export interface ColorScale2 {
+  colorName: string;
+  shades: Hex[];
+}
+
+export interface ColorPalette {
+  colorScales: ColorScale2[];
+}

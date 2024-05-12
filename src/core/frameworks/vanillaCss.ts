@@ -1,4 +1,5 @@
-import { ColorScale } from "../domain";
+import { ColorPalette, ColorScale, ColorScale2 } from "../domain";
+import { Hex } from "../valueObjects";
 
 /**
  * Generates CSS color variables template
@@ -16,3 +17,27 @@ export function generateCssVariables(palette: ColorScale[]): string {
 
   return variables.trim(); // Remove the trailing newline for clean output
 }
+
+const colorNames = [
+  "gray",
+  "cyan",
+  "blue",
+  "indigo",
+  "violet",
+  "purple",
+  "pink",
+  "red",
+  "orange",
+  "yellow",
+  "lime",
+  "green",
+  "teal",
+] as const;
+
+const colorCentralHueMap = {
+  red: 0,
+  blue: 240,
+  green: 120,
+} as const;
+
+const luminosities = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9] as const;

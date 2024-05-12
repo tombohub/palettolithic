@@ -1,37 +1,22 @@
 import { expect, test, describe } from "vitest";
-import { type ColorHueRange } from "../../src/core/domain";
+import { type ColorHueRange, colorHueRanges } from "../../src/core/domain";
 import {
-  adjustLighntess,
+  modifyLuminosity,
   createLightness,
   hueToColorName,
+  modifySaturation,
 } from "../../src/core/palette";
-
-export const testColorHueRanges: ColorHueRange[] = [
-  { colorName: "red", min: 0, max: 30 },
-  { colorName: "orange", min: 30, max: 60 },
-  { colorName: "yellow", min: 60, max: 90 },
-  { colorName: "lime", min: 90, max: 120 },
-  { colorName: "green", min: 120, max: 150 },
-  { colorName: "teal", min: 150, max: 180 },
-  { colorName: "cyan", min: 180, max: 210 },
-  { colorName: "blue", min: 210, max: 240 },
-  { colorName: "indigo", min: 240, max: 270 },
-  { colorName: "violet", min: 270, max: 300 },
-  { colorName: "purple", min: 300, max: 330 },
-  { colorName: "pink", min: 330, max: 360 },
-  { colorName: "red", min: 360, max: 360 },
-];
 
 // Testing hueToColorName
 describe("hueToColorName function", () => {
   test("hue 29 should be color red", () => {
-    expect(hueToColorName(29, testColorHueRanges)).toBe("red");
+    expect(hueToColorName(29, colorHueRanges)).toBe("red");
   });
   test("hue 30 should be color orange", () => {
-    expect(hueToColorName(30, testColorHueRanges)).toBe("orange");
+    expect(hueToColorName(30, colorHueRanges)).toBe("orange");
   });
   test("hue 0 should be color red", () => {
-    expect(hueToColorName(0, testColorHueRanges)).toBe("red");
+    expect(hueToColorName(0, colorHueRanges)).toBe("red");
   });
 });
 
@@ -42,9 +27,60 @@ describe("createLightness function", () => {
   });
 });
 
-// Testing adjustLighntess
-describe("adjustLighntess function", () => {
+describe("applying new luminosity to hex color", () => {
   test("hex value 4D7CFF should give 0036cc for new lightness 0.4", () => {
-    expect(adjustLighntess("4D7CFF", 0.4)).toBe("#0036cc");
+    expect(modifyLuminosity("4D7CFF", 0.4)).toBe("#0036cc");
+  });
+  test("hex value 4D7CFF should give #ffffff for new lightness 1.1", () => {
+    const newHex = modifyLuminosity("4D7CFF", 1.1);
+    expect(newHex).toBe("#ffffff");
+  });
+  test("hex value 4D7CFF should give #000000 for new lightness -0.5", () => {
+    const newHex = modifyLuminosity("4D7CFF", -0.5);
+    expect(newHex).toBe("#000000");
+  });
+});
+
+// test saturation modify
+describe("modify saturation", () => {
+  test("should modify saturation of #ff5733 to 0.5", () => {
+    const modifiedHex = modifySaturation("#ff5733", 0.5);
+    expect(modifiedHex).toBe("#cc7866");
+  });
+
+  test("should modify saturation of #000000 (black) to any value (still black)", () => {
+    const hex = "#000000";
+    const newSaturation = 0.5;
+    const modifiedHex = modifySaturation(hex, newSaturation);
+    expect(modifiedHex).toBe("#000000");
+  });
+
+  test("should modify saturation of #ffffff (white) to any value (still white)", () => {
+    const hex = "#ffffff";
+    const newSaturation = 0.5;
+    const modifiedHex = modifySaturation(hex, newSaturation);
+    expect(modifiedHex).toBe("#ffffff");
+  });
+
+  test("should modify saturation of #123456 to 0 (gray scale)", () => {
+    const modifiedHex = modifySaturation("#385573", 0);
+    expect(modifiedHex).toBe("#565656");
+  });
+
+  test("should modify saturation of #385573 to 1 (full saturation)", () => {
+    const modifiedHex = modifySaturation("#385573", 1);
+    expect(modifiedHex).toBe("#0054ab");
+  });
+
+  test("should throw an error for invalid hex code", () => {
+    const invalidHex = "invalid-hex";
+    const newSaturation = 0.5;
+    expect(() => modifySaturation(invalidHex, newSaturation)).toThrow();
+  });
+
+  test("should throw an error for invalid saturation value", () => {
+    const hex = "#ff5733";
+    const invalidSaturation = 2;
+    expect(() => modifySaturation(hex, invalidSaturation)).toThrow();
   });
 });

@@ -1,3 +1,5 @@
+import chroma from "chroma-js";
+
 /**
  * Creates an array of integers from 0 to {length} we want
  * @param {Number} length length of array you want to create

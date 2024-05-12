@@ -21,10 +21,14 @@ import {
   ColorShade,
   shadeWeights,
   ShadeWeight,
-  ShadeLightness,
   colorHueRanges,
 } from "./domain";
 import { createArray } from "./utils";
+import {
+  validateHexColorValue,
+  validateLuminosity,
+  validateSaturation,
+} from "./validators";
 
 /**
  * What: Get the hue color name from hue number value.
@@ -37,7 +41,7 @@ export function hueToColorName(
   colorHueRanges: ColorHueRange[]
 ): ChromaticColorName {
   const colorHueRange = colorHueRanges.find(
-    color => color.min <= hue && hue < color.max
+    color => color.start <= hue && hue <= color.end
   );
   return colorHueRange!.colorName;
 }
@@ -46,35 +50,21 @@ export function hueToColorName(
  * creates color lightness that corresponds to the specific shade weight.
  * Lower shades are higher lightness.
  * @param shade shade weight
- * @returns color lightness to correspond to the shade weight
+ * @returns color lightness to correspond to the shade weight, between 0-1
  */
 export function createLightness(shade: ShadeWeight): number {
   return (1000 - shade) / 1000;
 }
 
-/**
- * WHAT: Array of lightness values, for each color shade.
- *
- * WHY: Lighntess value is use to create shades. From lighter to darker
- */
-function createShadeLightValues(): ShadeLightness[] {
-  const mapShadeLight = (shade: ShadeWeight): ShadeLightness => ({
-    shade: shade,
-    lighntess: createLightness(shade),
-  });
+// export function createShades(color: Color, luminosities: number[]): Color[] {
+//   const hexShades = luminosities.map(lum => {
+//     const newHex = modifyLuminosity(color.hex, lum);
+//     const modifiedColor: Color = Color.fromHex(newHex);
+//     return modifiedColor;
+//   });
 
-  const shadeLights: ShadeLightness[] = shadeWeights.map(shade =>
-    mapShadeLight(shade)
-  );
-
-  return shadeLights;
-}
-
-// const lums = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-// .map(n => n + 0.5)
-// .map(n => n / 10);
-
-// const lums = [0.95, 0.85, 0.75, 0.65, 0.55, 0.45, 0.35, 0.25, 0.15, 0.05];
+//   return hexShades;
+// }
 
 /**
  * Creates the Array of hues (colors) starting from base hue and going
@@ -83,7 +73,7 @@ function createShadeLightValues(): ShadeLightness[] {
  * @returns {function} function ti create array of hues
  * @returns {array} list of hues to match the base hue
  */
-const createHues = (length: number) => {
+function createHues(length: number) {
   const hueStep = 360 / length;
 
   return (baseHue: number) => {
@@ -93,41 +83,52 @@ const createHues = (length: number) => {
 
     return hues;
   };
-};
+}
 
 /**
  * Modifies the saturation of a given hex color
- * @param {float} newSaturation new saturation value {0..1}
+ *
+ * Saturation is S from HSL color code
+ *
+ * @param {string} hex hex color code on which to change saturation
+ * @param {number} newSaturation new saturation value {0..1}
  * @returns {function} color with new saturation level
  */
-const desat = (newSaturation: number) => (hex: string) => {
-  const [h, _, l] = chroma(hex).hsl();
-  return chroma.hsl(h, newSaturation, l).hex();
-};
+export function modifySaturation(hex: string, newSaturation: number): string {
+  if (!validateHexColorValue(hex)) {
+    throw new Error(`Invalid hex value: ${hex}`);
+  }
+  if (!validateSaturation(newSaturation)) {
+    throw new Error(`Invalid saturation value: ${newSaturation}`);
+  }
+
+  const [hue, _, luminosity] = chroma(hex).hsl();
+  const newHex = chroma.hsl(hue, newSaturation, luminosity).hex();
+  return newHex;
+}
 
 /**
- * Creates a darkest gray color in pallete from the base color.
- * First desaturate to {1/8} of base color saturation then returns it with {0.05} luminance.
- * Those values we can change later on.
- * @param {string} hex hex value of color
- * @returns {string} hex value of the darkest gray in palette
- */
-const createBlack = (hex: string): string => {
-  const black = desat(1 / 8)(hex);
-  return chroma(black).luminance(0.05).hex();
-};
-
-/**
- * Adjusts the lightness of a given color.
+ * Apply luminosity to the hexcode and get new hex code.
  *
- * @param {string} hex - The hex code of the color to adjust.
- * @param {number} newLightness - The new lightness value to apply.
+ * Luminosity is L from HSL
+ *
+ * @param {string} hexCode - The hex code of the color to adjust.
+ * @param {number} newLuminosity - The new luminosity value to apply {0..1}
  * @returns {string} The hex code of the color with adjusted lightness with # prefix
  */
-export function adjustLighntess(hex: string, newLightness: number) {
-  const [hue, saturation, lighntess] = chroma(hex).hsl();
-  const adjustedHex = chroma.hsl(hue, saturation, newLightness).hex();
-  return adjustedHex;
+export function modifyLuminosity(
+  hexCode: string,
+  newLuminosity: number
+): string {
+  if (!validateHexColorValue(hexCode)) {
+    throw new Error(`Invalid hex code: ${hexCode}`);
+  }
+  if (!validateLuminosity(newLuminosity)) {
+    throw new Error(`Invalid luminosity ${newLuminosity}`);
+  }
+  const [hue, saturation] = chroma(hexCode).hsl();
+  const newHex = chroma.hsl(hue, saturation, newLuminosity).hex();
+  return newHex;
 }
 
 /**
@@ -139,7 +140,7 @@ export function adjustLighntess(hex: string, newLightness: number) {
  */
 function mapHexToShade(hex: string, shade: ShadeWeight): ColorShade {
   const lightness = createLightness(shade);
-  const shadeHex = adjustLighntess(hex, lightness);
+  const shadeHex = modifyLuminosity(hex, lightness);
   return { weight: shade, hexValue: shadeHex };
 }
 
@@ -155,27 +156,12 @@ function createShadeHexValues(hex: string): ColorShade[] {
 }
 
 /**
- * WHAT: Creates shades of a single color. Using luminosity.
- * WHY: We need shades to create palette.
- * NOTE: Original code from palx package.
- * @param {string} hex color hex cod
- */
-// const createShades = hex => {
-// return lums.map(lum => {
-//     return chroma(hex).luminance(lum).hex();
-// });
-// };
-
-/**
  * Gets the color name from hex value
  * @param {string} hex color hex value
  * @returns {string} color name {yellow, blue, etc..}
  */
 function hexToColorName(hex: string): ChromaticColorName {
   const [hue, saturation] = chroma(hex).hsl();
-  // if (saturation < 0.5) {
-  // return "gray";
-  // }
   const colorName = hueToColorName(hue, colorHueRanges);
   return colorName;
 }
@@ -194,16 +180,10 @@ export function createPalette(hex: string): ColorScale[] {
 
   const hues = createHues(12)(hue);
 
-  // // add darkest color to colors[]
-  // colors.push({
-  // key: "black",
-  // value: createBlack("" + color.hex()),
-  // });
-
   // add shades of gray to colors[]
   palette.push({
     colorName: "gray",
-    shades: createShadeHexValues(desat(1 / 25)("" + chromaColor.hex())),
+    shades: createShadeHexValues(modifySaturation(chromaColor.hex(), 1 / 25)),
   });
 
   // add shades of hues to colors[]
