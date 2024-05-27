@@ -1,4 +1,4 @@
-import { HexColorCode } from "../domain";
+import { HexColorCode } from "../domain/domain";
 
 /**
  * Represents Bootstrap 5 sass variables to customize colors.

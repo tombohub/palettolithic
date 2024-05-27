@@ -1,4 +1,4 @@
-import { Framework } from "../core/domain";
+import { Framework } from "../core/domain/domain";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
 import { appActions } from "@/store/slices/appSlice";
 

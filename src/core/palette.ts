@@ -22,13 +22,24 @@ import {
   shadeWeights,
   ShadeWeight,
   colorHueRanges,
-} from "./domain";
-import { createArray } from "./utils";
+} from "./domain/domain";
+import { createArray } from "./utils.ts";
 import {
   validateHexColorValue,
   validateLuminosity,
   validateSaturation,
 } from "./validators";
+
+/**
+ * Extracts a hue value from hex code.
+ *
+ * @param {string} hex - hex code.
+ * @returns {number} The hue value of the hex color.
+ */
+export function hueFromHex(hex: string): number {
+  const [hue] = chroma(hex).hsl();
+  return hue;
+}
 
 /**
  * What: Get the hue color name from hue number value.

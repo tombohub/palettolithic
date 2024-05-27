@@ -1,4 +1,4 @@
-import { ColorScale } from "../domain";
+import { ColorScale } from "../domain/domain";
 
 /**
  * Generates a Tailwind CSS configuration string for a color palette.

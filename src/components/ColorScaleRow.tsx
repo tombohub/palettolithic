@@ -1,5 +1,5 @@
 import Shade from "./Shade";
-import { ColorName } from "../core/domain";
+import { ColorName } from "../core/domain/domain";
 import { Box, SimpleGrid } from "@mantine/core";
 
 interface Props {

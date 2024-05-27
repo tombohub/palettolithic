@@ -1,5 +1,5 @@
 import { expect, test, describe } from "vitest";
-import { type ColorHueRange, colorHueRanges } from "../../src/core/domain";
+import { colorHueRanges } from "../../src/core/domain/domain";
 import {
   modifyLuminosity,
   createLightness,
@@ -31,13 +31,11 @@ describe("applying new luminosity to hex color", () => {
   test("hex value 4D7CFF should give 0036cc for new lightness 0.4", () => {
     expect(modifyLuminosity("4D7CFF", 0.4)).toBe("#0036cc");
   });
-  test("hex value 4D7CFF should give #ffffff for new lightness 1.1", () => {
-    const newHex = modifyLuminosity("4D7CFF", 1.1);
-    expect(newHex).toBe("#ffffff");
+  test("should throw an error when lightness is greater than 1", () => {
+    expect(() => modifyLuminosity("4D7CFF", 1.1)).toThrow();
   });
-  test("hex value 4D7CFF should give #000000 for new lightness -0.5", () => {
-    const newHex = modifyLuminosity("4D7CFF", -0.5);
-    expect(newHex).toBe("#000000");
+  test("should throw an error when lightness is less than 0", () => {
+    expect(() => modifyLuminosity("4D7CFF", -0.5)).toThrow();
   });
 });
 

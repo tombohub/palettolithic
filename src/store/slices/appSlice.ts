@@ -1,20 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { createPalette } from "@/core/palette";
-import { frameworks, type Framework } from "@/core/domain";
-
-import { generateCode } from "@/core/code";
-import { validateHexColorValue } from "@/core/validators";
-import { genCode } from "@/core/main";
-
-import { ColorScale } from "@/core/domain";
+import { type Framework } from "@/core/domain/domain";
 import {
-  INITIAL_HEX_VALUE,
-  INITAL_PALETTE,
-  INITIAL_FRAMEWORK,
-  INITIAL_CONFIGURATION_CODE,
-  INITIAL_CODE_LANGUAGE,
-} from "./initializeStates";
+  type InputDto,
+  generatePalette,
+  initializeState,
+  type ColorScale,
+} from "@/core/appService";
 
 interface SliceState {
   /**
@@ -35,12 +27,12 @@ interface SliceState {
   /**
    * available frameworks choices
    */
-  frameworks: typeof frameworks;
+  frameworks: string[];
 
   /**
    * currently selected framework by user
    */
-  activeFramework: Framework;
+  activeFramework: string;
 
   /**
    * generated configuration code for the framework
@@ -54,13 +46,13 @@ interface SliceState {
 }
 
 const initialState: SliceState = {
-  pickedHexValue: INITIAL_HEX_VALUE,
+  pickedHexValue: initializeState().hexCode,
   isValidHex: true,
-  currentPalette: INITAL_PALETTE,
-  frameworks: frameworks,
-  activeFramework: INITIAL_FRAMEWORK,
-  configurationCode: INITIAL_CONFIGURATION_CODE,
-  codeLanguage: INITIAL_CODE_LANGUAGE,
+  currentPalette: initializeState().paletteData,
+  frameworks: initializeState().frameworksList,
+  activeFramework: initializeState().framework,
+  configurationCode: initializeState().code,
+  codeLanguage: "javascript",
 };
 
 const appSlice = createSlice({
@@ -69,17 +61,27 @@ const appSlice = createSlice({
   reducers: {
     setHexValue: (state, action: PayloadAction<string>) => {
       state.pickedHexValue = action.payload;
-      state.configurationCode = newCofigurationCode(state);
+      state.configurationCode = newConfigurationCode(state);
     },
     setActiveFramework: (state, action: PayloadAction<Framework>) => {
       state.activeFramework = action.payload;
-      state.configurationCode = newCofigurationCode(state);
+      state.configurationCode = newConfigurationCode(state);
     },
   },
 });
 
-function newCofigurationCode(state: SliceState) {
-  return genCode(state.pickedHexValue, state.activeFramework);
+/**
+ * Call to generate framework configuration code based on current slice state.
+ * @param state current slice state
+ * @returns framework configuration code based on current state
+ */
+function newConfigurationCode(state: SliceState) {
+  const inputDto: InputDto = {
+    hexCode: state.pickedHexValue,
+    framework: state.activeFramework,
+  };
+  const code = generatePalette(inputDto).code;
+  return code;
 }
 
 export const appActions = appSlice.actions;

@@ -2,7 +2,8 @@
 /*                 Generating Bootstrap custom code for theming                 */
 /* -------------------------------------------------------------------------- */
 
-import { ColorScale } from "../domain";
+import { ColorScale } from "../domain/domain";
+import { Hex } from "../domain/types";
 
 /**
  * Generates a SCSS variable for a specific color shade.
@@ -87,4 +88,8 @@ export function generateBootstrap4(palette: ColorScale[]) {
   const bootstrapCode = `${variables}\n\n${cssColors}\n\n${map}`;
 
   return bootstrapCode;
+}
+
+export function generateCode(hex: Hex): string {
+  return "bootstrapo inside code";
 }

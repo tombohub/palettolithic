@@ -1,4 +1,4 @@
-import { ColorName, ColorScale } from "../domain";
+import { ColorName, ColorScale } from "../domain/domain";
 import { getColorShadesHexValues } from "../palette";
 
 type MantineColors = {

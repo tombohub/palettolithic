@@ -1,7 +1,4 @@
-import chroma from "chroma-js";
-
-import { HSL, Hex, Hue, Luminosity, Saturation } from "./valueObjects";
-import { hexToHsl } from "./transformations";
+import { Hex } from "./types";
 
 export type ChromaticColorName =
   | "red"

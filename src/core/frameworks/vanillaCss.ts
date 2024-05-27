@@ -1,5 +1,7 @@
-import { ColorPalette, ColorScale, ColorScale2 } from "../domain";
-import { Hex } from "../valueObjects";
+import { ColorScale } from "../domain/domain";
+import { getHue, makeHex } from "../domain/hex";
+import { makeHue } from "../domain/hue";
+import { ColoredHue } from "../domain/types";
 
 /**
  * Generates CSS color variables template
@@ -18,26 +20,15 @@ export function generateCssVariables(palette: ColorScale[]): string {
   return variables.trim(); // Remove the trailing newline for clean output
 }
 
-const colorNames = [
-  "gray",
-  "cyan",
-  "blue",
-  "indigo",
-  "violet",
-  "purple",
-  "pink",
-  "red",
-  "orange",
-  "yellow",
-  "lime",
-  "green",
-  "teal",
-] as const;
+const coloredHues: ColoredHue[] = [
+  { colorName: "red", hue: makeHue(0) },
+  { colorName: "green", hue: makeHue(120) },
+  { colorName: "blue", hue: makeHue(240) },
+];
 
-const colorCentralHueMap = {
-  red: 0,
-  blue: 240,
-  green: 120,
-} as const;
-
-const luminosities = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9] as const;
+export function generateCode(hexCode: string): string {
+  // get hue
+  const hex = makeHex(hexCode);
+  const hue = getHue(hex);
+  return hexCode;
+}
