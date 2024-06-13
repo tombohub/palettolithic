@@ -1,0 +1,34 @@
+{
+  "name": "@palettolithic/core",
+  "version": "1.0.0",
+  "description": "Core for palettolithic tool",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tombohub/palettolithic.git"
+  },
+  "keywords": [
+    "color",
+    "palette",
+    "palette",
+    "tailwind",
+    "tailwindcss",
+    "bootstrap",
+    "css",
+    "variables",
+    "palette",
+    "generator"
+  ],
+  "author": "tomo",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/tombohub/palettolithic/issues"
+  },
+  "homepage": "https://github.com/tombohub/palettolithic#readme"
+}
