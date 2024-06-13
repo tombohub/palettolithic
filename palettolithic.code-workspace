@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "core"
+		},
+		{
+			"path": "ui"
+		}
+	],
+	"settings": {}
+}
