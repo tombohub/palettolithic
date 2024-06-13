@@ -1,7 +1,0 @@
-{
-    "python.linting.flake8Enabled": false,
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true,
-    "python.pythonPath": "/home/tomo/.local/share/virtualenvs/palettolithic-tw5A12cg/bin/python",
-    "typescript.tsdk": "node_modules\\typescript\\lib"
-}

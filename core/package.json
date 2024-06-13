@@ -2,12 +2,14 @@
   "name": "@palettolithic/core",
   "version": "1.0.0",
   "description": "Core for palettolithic tool",
-  "main": "index.js",
+  "main": "dist/index.js",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "build": "tsup",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -30,5 +32,9 @@
   "bugs": {
     "url": "https://github.com/tombohub/palettolithic/issues"
   },
-  "homepage": "https://github.com/tombohub/palettolithic#readme"
+  "homepage": "https://github.com/tombohub/palettolithic#readme",
+  "devDependencies": {
+    "tsup": "^8.1.0",
+    "typescript": "^5.4.5"
+  }
 }
