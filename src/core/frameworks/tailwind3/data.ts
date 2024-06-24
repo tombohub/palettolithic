@@ -1,11 +1,12 @@
 `
 Tailwind 3 specific data
 `;
-import { type ColorScale } from "../types";
+import { type ColorScale } from "../../domain/types";
 
-export const palette: ColorScale[] = [
+export const neutralPalette: ColorScale[] = [
   {
     colorName: "slate",
+    order: 1,
     shades: [
       { weight: 50, hexCode: "#f8fafc" },
       { weight: 100, hexCode: "#f1f5f9" },
@@ -22,6 +23,7 @@ export const palette: ColorScale[] = [
   },
   {
     colorName: "gray",
+    order: 2,
     shades: [
       { weight: 50, hexCode: "#f9fafb" },
       { weight: 100, hexCode: "#f3f4f6" },
@@ -38,6 +40,7 @@ export const palette: ColorScale[] = [
   },
   {
     colorName: "zinc",
+    order: 3,
     shades: [
       { weight: 50, hexCode: "#fafafa" },
       { weight: 100, hexCode: "#f4f4f5" },
@@ -54,6 +57,7 @@ export const palette: ColorScale[] = [
   },
   {
     colorName: "neutral",
+    order: 4,
     shades: [
       { weight: 50, hexCode: "#fafafa" },
       { weight: 100, hexCode: "#f5f5f5" },
@@ -70,6 +74,7 @@ export const palette: ColorScale[] = [
   },
   {
     colorName: "stone",
+    order: 5,
     shades: [
       { weight: 50, hexCode: "#fafaf9" },
       { weight: 100, hexCode: "#f5f5f4" },
@@ -84,8 +89,17 @@ export const palette: ColorScale[] = [
       { weight: 950, hexCode: "#0c0a09" },
     ],
   },
+];
+
+/**
+ * Palette which includes only chromatic colors.
+ *
+ * Not neutrals. Neutrals are treated separately.
+ */
+export const chromaticPalette: ColorScale[] = [
   {
     colorName: "red",
+    order: 6,
     shades: [
       { weight: 50, hexCode: "#fef2f2" },
       { weight: 100, hexCode: "#fee2e2" },
@@ -102,6 +116,7 @@ export const palette: ColorScale[] = [
   },
   {
     colorName: "orange",
+    order: 7,
     shades: [
       { weight: 50, hexCode: "#fff7ed" },
       { weight: 100, hexCode: "#ffedd5" },
@@ -118,6 +133,7 @@ export const palette: ColorScale[] = [
   },
   {
     colorName: "amber",
+    order: 8,
     shades: [
       { weight: 50, hexCode: "#fffbeb" },
       { weight: 100, hexCode: "#fef3c7" },
@@ -134,6 +150,7 @@ export const palette: ColorScale[] = [
   },
   {
     colorName: "yellow",
+    order: 9,
     shades: [
       { weight: 50, hexCode: "#fefce8" },
       { weight: 100, hexCode: "#fef9c3" },
@@ -150,6 +167,7 @@ export const palette: ColorScale[] = [
   },
   {
     colorName: "lime",
+    order: 10,
     shades: [
       { weight: 50, hexCode: "#f7fee7" },
       { weight: 100, hexCode: "#ecfccb" },
@@ -166,6 +184,7 @@ export const palette: ColorScale[] = [
   },
   {
     colorName: "green",
+    order: 11,
     shades: [
       { weight: 50, hexCode: "#f0fdf4" },
       { weight: 100, hexCode: "#dcfce7" },
@@ -182,6 +201,7 @@ export const palette: ColorScale[] = [
   },
   {
     colorName: "emerald",
+    order: 12,
     shades: [
       { weight: 50, hexCode: "#ecfdf5" },
       { weight: 100, hexCode: "#d1fae5" },
@@ -198,6 +218,7 @@ export const palette: ColorScale[] = [
   },
   {
     colorName: "teal",
+    order: 13,
     shades: [
       { weight: 50, hexCode: "#f0fdfa" },
       { weight: 100, hexCode: "#ccfbf1" },
@@ -214,6 +235,7 @@ export const palette: ColorScale[] = [
   },
   {
     colorName: "cyan",
+    order: 14,
     shades: [
       { weight: 50, hexCode: "#ecfeff" },
       { weight: 100, hexCode: "#cffafe" },
@@ -230,6 +252,7 @@ export const palette: ColorScale[] = [
   },
   {
     colorName: "sky",
+    order: 15,
     shades: [
       { weight: 50, hexCode: "#f0f9ff" },
       { weight: 100, hexCode: "#e0f2fe" },
@@ -246,6 +269,7 @@ export const palette: ColorScale[] = [
   },
   {
     colorName: "blue",
+    order: 16,
     shades: [
       { weight: 50, hexCode: "#eff6ff" },
       { weight: 100, hexCode: "#dbeafe" },
@@ -262,6 +286,7 @@ export const palette: ColorScale[] = [
   },
   {
     colorName: "indigo",
+    order: 17,
     shades: [
       { weight: 50, hexCode: "#eef2ff" },
       { weight: 100, hexCode: "#e0e7ff" },
@@ -278,6 +303,7 @@ export const palette: ColorScale[] = [
   },
   {
     colorName: "violet",
+    order: 18,
     shades: [
       { weight: 50, hexCode: "#f5f3ff" },
       { weight: 100, hexCode: "#ede9fe" },
@@ -294,6 +320,7 @@ export const palette: ColorScale[] = [
   },
   {
     colorName: "purple",
+    order: 19,
     shades: [
       { weight: 50, hexCode: "#faf5ff" },
       { weight: 100, hexCode: "#f3e8ff" },
@@ -310,6 +337,7 @@ export const palette: ColorScale[] = [
   },
   {
     colorName: "fuchsia",
+    order: 20,
     shades: [
       { weight: 50, hexCode: "#fdf4ff" },
       { weight: 100, hexCode: "#fae8ff" },
@@ -326,6 +354,7 @@ export const palette: ColorScale[] = [
   },
   {
     colorName: "pink",
+    order: 21,
     shades: [
       { weight: 50, hexCode: "#fdf2f8" },
       { weight: 100, hexCode: "#fce7f3" },
@@ -342,6 +371,7 @@ export const palette: ColorScale[] = [
   },
   {
     colorName: "rose",
+    order: 22,
     shades: [
       { weight: 50, hexCode: "#fff1f2" },
       { weight: 100, hexCode: "#ffe4e6" },

@@ -4,7 +4,7 @@ import {
   validateHue,
   validateLuminosity,
   validateSaturation,
-} from "../src/validators";
+} from "../src/core/validators";
 
 describe("hex pattern validator", () => {
   test("hex code #fff should be valid", () => {

@@ -6,7 +6,7 @@ import {
   createHueRanges,
   _createHueRangesFromMidpoints,
   _subtractHues,
-} from "../src/domain/math";
+} from "../src/core/domain/math";
 
 describe("subtractCircleDegrees", () => {
   it("should return correct result for basic subtraction within range", () => {

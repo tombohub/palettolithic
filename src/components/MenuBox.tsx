@@ -1,8 +1,8 @@
-// components
 import FrameworkList from "./FrameworkList";
+import HueModSlider from "./HueModSlider";
 import MenuBottom from "./MenuBottom";
-import ColorPicker from "./ColorPicker";
-import ColorInput from "./ColorInput";
+import ModPicker from "./ModPicker";
+import SatModSlider from "./SatModSlider";
 
 /**
  * WHAT: menu box to hold color picker and frameworks menu items
@@ -10,8 +10,9 @@ import ColorInput from "./ColorInput";
 function MenuBox() {
   return (
     <>
-      <ColorPicker />
-      <ColorInput />
+      {/* <ModPicker /> */}
+      <HueModSlider />
+      <SatModSlider />
       <FrameworkList />
 
       <MenuBottom />

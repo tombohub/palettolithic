@@ -1,1 +1,5 @@
-export { generateConfigurationCode, getOriginalPalette } from "./api";
+export {
+  generateConfigurationCode,
+  getChromaticPalette,
+  getNeutralPalette,
+} from "./api";

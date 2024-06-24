@@ -1,13 +1,14 @@
 import Shade from "./Shade";
 import { Box, SimpleGrid } from "@mantine/core";
+import { type ColorScale } from "@/core";
 
 interface Props {
   /**
    * hex values of each shade
    */
-  shades: string[];
+  shades: ColorScale["shades"];
 
-  colorName: ColorName;
+  colorName: string;
 }
 
 /**
@@ -16,14 +17,14 @@ interface Props {
  * @param {object} props passed from App->Palette. Single color
  */
 export default function ColorScaleRow(props: Props) {
-  if (!Array.isArray(props.shades)) return false;
   return (
-    <SimpleGrid cols={11} h={"100%"} spacing={"xs"}>
+    // grid is shades.count + 1 for shades + color name
+    <SimpleGrid cols={props.shades.length + 1} h={"100%"} spacing={"xs"}>
       <Box component="span" style={{ alignSelf: "center" }}>
         {props.colorName.toUpperCase()}:
       </Box>
       {props.shades.map(shade => (
-        <Shade key={shade} shadeHexValue={shade} />
+        <Shade key={shade.weight} shadeHexValue={shade.hexCode} />
       ))}
     </SimpleGrid>
   );

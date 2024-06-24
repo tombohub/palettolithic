@@ -11,6 +11,7 @@ function Palette() {
   // render the list of Color components based on colors.map and
   // pass the shades as props to the Color component, which it will use it to render
   // list of Shade component
+  console.dir(palette);
   return (
     <Stack gap={"xs"} h={"100%"}>
       {palette.map(colorScale => (

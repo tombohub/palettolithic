@@ -1,5 +1,6 @@
 import { type Framework } from "../domain/types";
 import { type ColorScale } from "../domain/types";
+import { frameworksList } from "../domain/constants";
 
 /**
  * Input for create palette service
@@ -43,7 +44,7 @@ type InitialStateDto = {
   /**
    * list of supported frameworks
    */
-  frameworksList: string[];
+  frameworksList: typeof frameworksList;
 
   /**
    * initial saturation mod

@@ -3,46 +3,77 @@ Domain logic and rules used in creating color palette
 `;
 
 import { hslFromHex, hexFromHsl } from "./palette";
-import { saturationRange } from "./constants";
 import { ModFactor, Range } from "./types";
-import { calculateClockwiseMidpoint } from "./math";
+import { calculateClockwiseMidpoint, _subtractHues, _addHues } from "./math";
 
 /**
- * Modify the color attribute value (hue, saturation)
+ * Modify the color saturation attribute value
  *
  * Current formula is based on original attribute value, possible attribute value range
- * and modification factor chosen by user. Saturation attribute can be between 0 and 1.
- * Hue attribute range depends on framework original color palette and it's color name
+ * and modification factor chosen by user.
+ * Saturation attribute is presumed to be between 0 and 1.
  *
- * @param originalAttributeValue
- * @param minAttributeValue minimum possible value for this attribute
- * @param maxAttributeValue maximum possible value for this attribute
- * @param modFactor modification factor
+ * @param originalSaturationValue
+ * @param satModFactor modification factor
  * @returns new attribute value
  */
-function modifyColorAttribute(
-  originalAttributeValue: number,
-  minAttributeValue: number,
-  maxAttributeValue: number,
-  modFactor: number
+export function _modifySaturationAttribute(
+  originalSaturationValue: number,
+  satModFactor: number
 ): number {
-  let newValue: number;
+  let newSaturation: number;
 
-  if (modFactor === 0) {
-    newValue = originalAttributeValue;
-  } else if (modFactor < 0) {
-    newValue =
-      originalAttributeValue -
-      (originalAttributeValue - minAttributeValue) * Math.abs(modFactor);
-  } else if (modFactor > 0) {
-    newValue =
-      originalAttributeValue +
-      (maxAttributeValue - originalAttributeValue) * modFactor;
-  } else {
-    throw new Error(`invalid modification factor ${modFactor}`);
+  if (originalSaturationValue < 0 || originalSaturationValue > 1) {
+    throw new Error(
+      `original saturation value ${originalSaturationValue} is not between 0 and 1`
+    );
   }
 
-  return newValue;
+  if (satModFactor === 0) {
+    newSaturation = originalSaturationValue;
+  } else if (satModFactor < 0) {
+    newSaturation =
+      originalSaturationValue -
+      (originalSaturationValue - 0) * Math.abs(satModFactor);
+  } else if (satModFactor > 0) {
+    newSaturation =
+      originalSaturationValue + (1 - originalSaturationValue) * satModFactor;
+  } else {
+    throw new Error(`invalid modification factor ${satModFactor}`);
+  }
+
+  return newSaturation;
+}
+
+/**
+ * Modifies the hue attribute of a color.
+ *
+ * New hue has to be in specific range which is dependant
+ * on colors and their hues in original framework palette
+ *
+ * @param {number} originalHue - The original hue value.
+ * @param {number} minHue - The minimum hue value.
+ * @param {number} maxHue - The maximum hue value.
+ * @param {number} hueModFactor - The modification factor. If it's 0, the original hue is returned. If it's negative, the hue is decreased. If it's positive, the hue is increased.
+ * @returns {number} The new hue value.
+ */
+export function _modifyHueAttribute(
+  originalHue: number,
+  minHue: number,
+  maxHue: number,
+  hueModFactor: number
+): number {
+  let newHue: number;
+
+  if (hueModFactor < 0) {
+    const delta = _subtractHues(originalHue, minHue) * Math.abs(hueModFactor);
+    newHue = _subtractHues(originalHue, delta);
+  } else if (hueModFactor > 0) {
+    const delta = _subtractHues(maxHue, originalHue) * hueModFactor;
+    newHue = _addHues(originalHue, delta);
+  } else newHue = originalHue;
+
+  return newHue;
 }
 
 /**
@@ -66,17 +97,10 @@ export function modifyHex(
   const hsl = hslFromHex(hexCode);
 
   // modify hue and sat
-  const newHue = modifyColorAttribute(
-    hsl.hue,
-    minHue,
-    maxHue,
-    modFactor.hueMod
-  );
+  const newHue = _modifyHueAttribute(hsl.hue, minHue, maxHue, modFactor.hueMod);
 
-  const newSaturation = modifyColorAttribute(
+  const newSaturation = _modifySaturationAttribute(
     hsl.saturation,
-    saturationRange.min,
-    saturationRange.max,
     modFactor.satMod
   );
 

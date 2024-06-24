@@ -1,1 +1,1 @@
-import { type IFramework, type ColorScale } from "./types";
+import { type IFramework, type ChromaticColorScale } from "./types";

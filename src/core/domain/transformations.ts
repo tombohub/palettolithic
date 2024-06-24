@@ -15,6 +15,7 @@ export function flatten(palette: ColorScale[]): FlattenedColorScale[] {
   return palette.flatMap(color =>
     color.shades.map(shade => ({
       colorName: color.colorName,
+      order: color.order,
       hexCode: shade.hexCode,
       weight: shade.weight,
     }))
@@ -156,8 +157,9 @@ export function addModifiedHex(
 }
 
 export function transformToColorScale(data: WithModifiedHex[]): ColorScale[] {
-  const resultMap: { [key: string]: { weight: number; hexCode: string }[] } =
-    {};
+  const resultMap: {
+    [key: string]: { weight: number; hexCode: string; order: number }[];
+  } = {};
 
   data.forEach(item => {
     if (!resultMap[item.colorName]) {
@@ -166,17 +168,29 @@ export function transformToColorScale(data: WithModifiedHex[]): ColorScale[] {
     resultMap[item.colorName].push({
       weight: item.weight,
       hexCode: item.modifiedHex,
+      order: item.order,
     });
   });
 
-  return Object.keys(resultMap).map(colorName => ({
-    colorName,
-    shades: resultMap[colorName].sort((a, b) => a.weight - b.weight),
-  }));
+  return Object.keys(resultMap).map(colorName => {
+    const shades = resultMap[colorName].sort((a, b) => a.weight - b.weight);
+    const order = resultMap[colorName][0].order; // Assume order is the same for all shades of the same color
+
+    return {
+      _tag: "ChromaticColorScale",
+      colorName,
+      order,
+      shades: shades.map(shade => ({
+        weight: shade.weight,
+        hexCode: shade.hexCode,
+      })),
+    };
+  });
 }
 
 export type FlattenedColorScale = {
   colorName: string;
+  order: number;
   weight: number;
   hexCode: string;
 };

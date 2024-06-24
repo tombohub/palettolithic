@@ -16,11 +16,19 @@ export type PaletteShade = {
   weight: number;
 };
 
+/**
+ * Color scale
+ */
 export type ColorScale = {
   /**
    * name of the color
    */
   colorName: string;
+
+  /**
+   * order in which color appears in original palette
+   */
+  order: number;
 
   /**
    * list of hex color codes which represent shades for the

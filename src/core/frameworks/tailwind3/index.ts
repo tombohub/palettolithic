@@ -1,8 +1,4 @@
-import { IFramework, type ColorScale } from "../types";
-import { palette } from "./data";
+export { chromaticPalette, neutralPalette } from "./data";
 import { generateConfigCode } from "./generator";
 
-export {
-  generateConfigCode as generateCodeTailwind,
-  palette as tailwindPalette,
-};
+export { generateConfigCode as generateCodeTailwind };

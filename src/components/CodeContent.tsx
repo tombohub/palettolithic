@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/ui/hooks/useAppSelector";
+import { useAppSelector } from "@/hooks/useAppSelector";
 import CopyCodeButton from "./CopyCodeButton";
 import { CodeHighlight } from "@mantine/code-highlight";
 import { Box } from "@mantine/core";

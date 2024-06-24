@@ -6,7 +6,11 @@ import {
 import { type Framework, type ModFactor } from "../domain/types";
 import { frameworksList } from "../domain/constants";
 import { domainModule } from "../domain";
-import { generateConfigurationCode, getOriginalPalette } from "../frameworks";
+import {
+  generateConfigurationCode,
+  getChromaticPalette,
+  getNeutralPalette,
+} from "../frameworks";
 
 /**
  * Generate palette from user inputs
@@ -17,13 +21,22 @@ export function createPalette(
   input: CreatePalleteInputDto
 ): CreatePaletteOutputDto {
   // collect framework setup data
-  const originalPalette = getOriginalPalette(input.framework);
+  const chromaticPalette = getChromaticPalette(input.framework);
+  const neutralPalette = getNeutralPalette(input.framework);
 
   const modFactor: ModFactor = {
     hueMod: input.hueMod,
     satMod: input.saturationMod,
   };
-  const newPalette = domainModule.modifyPallete(originalPalette, modFactor);
+  const modifiedPalette = domainModule.modifyPallete(
+    chromaticPalette,
+    modFactor
+  );
+
+  const newPalette: CreatePaletteOutputDto["palette"] = [
+    ...neutralPalette,
+    ...modifiedPalette,
+  ];
 
   const code = generateConfigurationCode(input.framework, newPalette);
 

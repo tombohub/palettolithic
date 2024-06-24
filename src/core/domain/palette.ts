@@ -1,18 +1,3 @@
-/**
- * Create Palette
- * ==============
- *
- * Module responsible for creating the color palette,
- * based on one single color,
- * and produce the 12 color palette with 9 shades of each color.
- * The colors are in form of HEX codes which are used by specific
- * CSS frameworks to generate their own config code.
- *
- * To create palette this module uses chroma.js package.
- * We need to chose the luminosity of each shade.
- * Saturation and hue is based on initial base color.
- */
-
 import chroma from "chroma-js";
 import { type HSL } from "./types";
 
@@ -25,7 +10,7 @@ import { type HSL } from "./types";
 export function hslFromHex(hexCode: string): HSL {
   const [hue, sat, lum] = chroma(hexCode).hsl();
   return {
-    hue: Math.round(hue),
+    hue: hue,
     saturation: sat,
     luminosity: lum,
   };

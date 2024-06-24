@@ -24,14 +24,16 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
     "paths": {
       "@/*": [
-        "./src"
+        "./src/*"
       ]
     }
   },
   "include": [
-    "./src",
+    "src",
+    "tests"
   ],
   "references": [
     {

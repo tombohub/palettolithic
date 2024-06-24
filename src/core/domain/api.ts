@@ -1,4 +1,3 @@
-import { type IDomainModuleApi } from "../appService/interfaces";
 import { type ColorScale, type ModFactor } from "./types";
 import {
   WithAdjancentHues,
@@ -13,7 +12,7 @@ import {
   transformToColorScale,
 } from "./transformations";
 
-export const domainModule: IDomainModuleApi = {
+export const domainModule = {
   modifyPallete: (palette: ColorScale[], modFactor: ModFactor) => {
     const flattened = flatten(palette);
     const weights = getDistinctWeights(flattened);
@@ -23,6 +22,12 @@ export const domainModule: IDomainModuleApi = {
       const addedHues = addHue(filteredByWeight);
       const sortedByHue = sortByHue(addedHues);
       const addedAdjancentHues = addAdjancentHues(sortedByHue);
+
+      console.dir(
+        addedHues.filter(x => x.weight === 600),
+        { depth: null }
+      );
+
       return addedAdjancentHues;
     });
 

@@ -1,6 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
-import {} from "palettolithic-core";
+import {
+  createPalette,
+  initializeState,
+  type CreatePalleteInputDto,
+  type CreatePaletteOutputDto,
+  type InitialStateDto,
+  type Framework,
+  frameworksList,
+} from "@/core";
 
 interface SliceState {
   /**
@@ -16,17 +24,17 @@ interface SliceState {
   /**
    * current color palette generated from picked hex value
    */
-  currentPalette: ColorScale[];
+  currentPalette: CreatePaletteOutputDto["palette"];
 
   /**
    * available frameworks choices
    */
-  frameworks: string[];
+  frameworks: typeof frameworksList;
 
   /**
    * currently selected framework by user
    */
-  activeFramework: Framework;
+  activeFramework: InitialStateDto["framework"];
 
   /**
    * generated configuration code for the framework
@@ -35,12 +43,12 @@ interface SliceState {
 }
 
 const initialState: SliceState = {
-  saturationMod: appService.initializeState().saturationMod,
-  hueMod: appService.initializeState().hueMod,
-  currentPalette: appService.initializeState().paletteData,
-  frameworks: appService.initializeState().frameworksList,
-  activeFramework: appService.initializeState().framework,
-  configurationCode: appService.initializeState().code,
+  saturationMod: initializeState().saturationMod,
+  hueMod: initializeState().hueMod,
+  currentPalette: initializeState().paletteData,
+  frameworks: initializeState().frameworksList,
+  activeFramework: initializeState().framework,
+  configurationCode: initializeState().code,
 };
 
 const appSlice = createSlice({
@@ -49,7 +57,24 @@ const appSlice = createSlice({
   reducers: {
     setActiveFramework: (state, action: PayloadAction<Framework>) => {
       state.activeFramework = action.payload;
-      state.configurationCode = newConfigurationCode(state);
+      state.configurationCode = newPaletteAndCode(state).code;
+      state.currentPalette = newPaletteAndCode(state).palette.sort(
+        (a, b) => a.order - b.order
+      );
+    },
+    setHueMod: (state, action: PayloadAction<number>) => {
+      state.hueMod = action.payload;
+      state.configurationCode = newPaletteAndCode(state).code;
+      state.currentPalette = newPaletteAndCode(state).palette.sort(
+        (a, b) => a.order - b.order
+      );
+    },
+    setSatMod: (state, action: PayloadAction<number>) => {
+      state.saturationMod = action.payload;
+      state.configurationCode = newPaletteAndCode(state).code;
+      state.currentPalette = newPaletteAndCode(state).palette.sort(
+        (a, b) => a.order - b.order
+      );
     },
   },
 });
@@ -59,14 +84,15 @@ const appSlice = createSlice({
  * @param state current slice state
  * @returns framework configuration code based on current state
  */
-function newConfigurationCode(state: SliceState) {
+function newPaletteAndCode(state: SliceState) {
   const inputDto: CreatePalleteInputDto = {
     saturationMod: state.saturationMod,
     hueMod: state.hueMod,
     framework: state.activeFramework,
   };
-  const code = appService.createPalette(inputDto).code;
-  return code;
+  const palette = createPalette(inputDto).palette;
+  const code = createPalette(inputDto).code;
+  return { palette, code };
 }
 
 export const appActions = appSlice.actions;

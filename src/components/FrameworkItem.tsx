@@ -1,6 +1,6 @@
-import { Framework } from "../core/domain/domain";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
 import { appActions } from "@/store/slices/appSlice";
+import { type Framework } from "@/core";
 
 interface Props {
   framework: Framework;

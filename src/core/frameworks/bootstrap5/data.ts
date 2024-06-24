@@ -1,9 +1,9 @@
 `
 Boostrap 5 specific data
 `;
-import { type ColorScale } from "../types";
+import { type ChromaticColorScale } from "../types";
 
-export const palette: ColorScale[] = [
+export const palette: ChromaticColorScale[] = [
   { colorName: "blue", shades: [{ hexCode: "#0d6efd", weight: 500 }] },
   { colorName: "indigo", shades: [{ hexCode: "#6610f2", weight: 500 }] },
   { colorName: "purple", shades: [{ hexCode: "#6f42c1", weight: 500 }] },
