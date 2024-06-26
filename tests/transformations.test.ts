@@ -29,7 +29,6 @@ describe("flatten function", () => {
   test("should return an array with one FlattenedColorScale object when input contains one ColorScale object with one shade", () => {
     const input: ColorScale[] = [
       {
-        _tag: "ChromaticColorScale",
         colorName: "red",
         order: 1,
         shades: [{ hexCode: "#ff0000", weight: 1 }],
@@ -44,7 +43,6 @@ describe("flatten function", () => {
   test("should return an array with multiple FlattenedColorScale objects when input contains one ColorScale object with multiple shades", () => {
     const input: ColorScale[] = [
       {
-        _tag: "ChromaticColorScale",
         colorName: "red",
         order: 1,
         shades: [
@@ -63,7 +61,6 @@ describe("flatten function", () => {
   test("should return an array with FlattenedColorScale objects corresponding to each shade of each ColorScale object when input contains multiple ColorScale objects with multiple shades", () => {
     const input: ColorScale[] = [
       {
-        _tag: "ChromaticColorScale",
         colorName: "red",
         order: 1,
         shades: [
@@ -72,7 +69,6 @@ describe("flatten function", () => {
         ],
       },
       {
-        _tag: "ChromaticColorScale",
         colorName: "blue",
         order: 2,
         shades: [
