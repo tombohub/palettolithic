@@ -1,6 +1,8 @@
 import { useAppDispatch } from "@/hooks/useAppDispatch";
+import { useAppSelector } from "@/hooks/useAppSelector";
 import { appActions } from "@/store/slices/appSlice";
 import { type Framework } from "@/core";
+import { NavLink } from "@mantine/core";
 
 interface Props {
   framework: Framework;
@@ -12,11 +14,16 @@ interface Props {
  */
 function FrameworkItem(props: Props) {
   const dispatch = useAppDispatch();
+  const activeFramework = useAppSelector(state => state.app.activeFramework);
+
+  const isActive = activeFramework === props.framework;
 
   function handleClick() {
     dispatch(appActions.setActiveFramework(props.framework));
   }
-  return <li onClick={handleClick}>{props.framework}</li>;
+  return (
+    <NavLink onClick={handleClick} label={props.framework} active={isActive} />
+  );
 }
 
 export default FrameworkItem;

@@ -11,7 +11,9 @@ function MenuBox() {
   return (
     <>
       {/* <ModPicker /> */}
-      <HueModSlider />
+
+      {/* NOTE: don't use until figure out how to modifiy hues */}
+      {/* <HueModSlider /> */}
       <SatModSlider />
       <FrameworkList />
 

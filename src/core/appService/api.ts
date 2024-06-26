@@ -34,8 +34,8 @@ export function createPalette(
   );
 
   const newPalette: CreatePaletteOutputDto["palette"] = [
-    ...neutralPalette,
     ...modifiedPalette,
+    ...neutralPalette,
   ];
 
   const code = generateConfigurationCode(input.framework, newPalette);

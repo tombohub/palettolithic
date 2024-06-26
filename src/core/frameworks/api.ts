@@ -3,6 +3,11 @@ import {
   chromaticPalette,
   neutralPalette,
 } from "./tailwind3";
+import {
+  generateConfigCode as generateCodeBootstrap5,
+  chromaticPalette as chromaticPaletteBootstrap5,
+  neutralPalette as neutralPaletteBootstrap5,
+} from "./bootstrap5";
 import { type Framework, type ColorScale } from "../appService";
 
 function generateConfigurationCode(
@@ -11,7 +16,7 @@ function generateConfigurationCode(
 ): string {
   switch (framework) {
     case "bootstrap5":
-      throw new Error("not implemented");
+      return generateCodeBootstrap5(palette);
     case "tailwind":
       return generateCodeTailwind(palette);
     case "css":
@@ -26,7 +31,7 @@ function generateConfigurationCode(
 function getChromaticPalette(framework: Framework) {
   switch (framework) {
     case "bootstrap5":
-      throw new Error("not implemented");
+      return chromaticPaletteBootstrap5;
     case "tailwind":
       return chromaticPalette;
     case "css":
@@ -41,7 +46,7 @@ function getChromaticPalette(framework: Framework) {
 export function getNeutralPalette(framework: Framework) {
   switch (framework) {
     case "bootstrap5":
-      throw new Error("not implemented");
+      return neutralPaletteBootstrap5;
     case "tailwind":
       return neutralPalette;
     case "css":

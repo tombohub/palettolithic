@@ -4,8 +4,8 @@
 export const frameworksList = [
   "tailwind",
   "bootstrap5",
-  "css",
-  "mantine",
+  // "css",
+  // "mantine",
 ] as const;
 
 /**
